@@ -16,7 +16,7 @@ public class Game implements Runnable{
         this.width = width;
         this.height = height;
         this.title = title;
-        System.out.println("gay");
+        System.out.println("homo");
         
         Display frame = new Display(width, height, title);
     }
