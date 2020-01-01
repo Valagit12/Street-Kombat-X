@@ -1,4 +1,6 @@
-
+//Brian Cho, Valareza Arezehgar
+//Jan. 13, 2020
+//Culminating Performance Task
 package streetkombatx;
 
 import display.Display;
@@ -9,8 +11,12 @@ import display.Display;
  */
 public class Game implements Runnable{
     
-    private int width, height;
-    private String title;
+    private int width, height; //width and height of the JFrame
+    private String title; //title of the JFrame
+    
+    private boolean running = false; //boolean that determines whether the thread is running
+    
+    private Thread main; //main Thread
     
     public Game(int width, int height, String title) {
         this.width = width;
@@ -33,15 +39,25 @@ public class Game implements Runnable{
     }
     
     public void run() {
-        
+        initialize();
     }
     
     public void start() {
-        
+        if (running)
+            return;
+        running = true;
+        main = new Thread(this);
     }
     
     public void stop() {
-        
+        if (!running)
+            return;
+        running = false;
+        try {
+            main.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
     
     public static void main(String[] args) {
