@@ -8,6 +8,7 @@ package display;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import javax.swing.JFrame;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 /**
  *
@@ -16,8 +17,32 @@ import javax.swing.JFrame;
 public class Display extends JFrame {
     
     private Canvas canvas;
+    private int width;
+    private int height;
+    private String title;
+    
+    public Display(){
+        this.width = 0;
+        this.height = 0;
+        this.title = null;
+        createDisplay();
+    }
     
     public Display(int width, int height, String title) {
+        this.width = width;
+        this.height = height;
+        this.title = title;
+        createDisplay();
+    }
+    
+    public Display(Display d){
+        this.width = d.width;
+        this.height = d.height;
+        this.title = d.title;
+        createDisplay();
+    }
+    
+    private void createDisplay(){
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(width, height);

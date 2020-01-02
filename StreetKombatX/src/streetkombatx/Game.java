@@ -26,10 +26,28 @@ public class Game implements Runnable{
     private BufferStrategy bs;
     private Graphics g;
     
+    public Game (){
+        this.width = 0;
+        this.height = 0;
+        this.title = null;
+        
+        frame = new Display(width, height, title);
+        start();
+        
+    }
     public Game(int width, int height, String title) {
         this.width = width; 
         this.height = height;
         this.title = title;
+        
+        frame = new Display(width, height, title);
+        start();
+    }
+    
+    public Game(Game g){
+        this.width = g.width; 
+        this.height = g.height;
+        this.title = g.title;
         
         frame = new Display(width, height, title);
         start();
