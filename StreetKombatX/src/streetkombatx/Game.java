@@ -4,6 +4,10 @@
 package streetkombatx;
 
 import display.Display;
+import gfx.ImageLoader;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -17,17 +21,22 @@ public class Game implements Runnable{
     private boolean running = false; //boolean that determines whether the thread is running
     
     private Thread main; //main Thread
+    private Display frame;
+    private BufferedImage background;
+    private BufferStrategy bs;
+    private Graphics g;
     
     public Game(int width, int height, String title) {
-        this.width = width;
+        this.width = width; 
         this.height = height;
         this.title = title;
         
-        Display frame = new Display(width, height, title);
+        frame = new Display(width, height, title);
+        start();
     }
     
     public void initialize() {
-        
+        background = ImageLoader.loadImage("res/backgrounds/FireTemple.gif");
     }
     
     public void tick() {
@@ -35,11 +44,58 @@ public class Game implements Runnable{
     }
     
     public void render() {
+        bs = frame.getCanvas().getBufferStrategy();
+        if (bs == null){
+            frame.getCanvas().createBufferStrategy(3);
+            return;
+        }
         
+        g = bs.getDrawGraphics();
+        
+        g.clearRect(0, 0, width, height);
+        
+        g.drawImage(background, 0 , 0, null);
+        
+        bs.show();
+        g.dispose();
     }
     
     public void run() {
         initialize();
+        
+        int ticks = 0; //counts the numbers of ticks that happened
+        int updates = 0; //counts the number of times the screen updates
+        long endTime; //measure the time when loop begins
+        long startTime = System.nanoTime(); //measure the time when the previous loops has ended
+        long timer = 0; //measures the time passed
+        double nanoConversion = 1000000000/60; //converts nanoseconds to 1/60th of a second
+        double changeInTime = 0; //the change in time between each ticks
+        
+        
+        while (running){
+            endTime = System.nanoTime();
+            changeInTime += (endTime - startTime) / nanoConversion;
+            timer += changeInTime;
+            startTime = endTime;
+            
+            if (changeInTime >= 1){
+                tick();
+                ticks++;
+                changeInTime--;
+            }
+            
+            if (timer >= 60){
+                System.out.println("Ticks: " + ticks);
+                System.out.println("FPS: " + updates);
+                ticks = 0;
+                updates = 0;
+                timer = 0;
+            }
+            
+            render();
+            updates++;
+        }
+        
     }
     
     public void start() {
@@ -47,6 +103,7 @@ public class Game implements Runnable{
             return;
         running = true;
         main = new Thread(this);
+        main.start();
     }
     
     public void stop() {
@@ -60,7 +117,39 @@ public class Game implements Runnable{
         }
     }
     
+    public int getWidth() {
+        return width;
+    }
+    
+    public int getHeight() {
+        return height;
+    }
+    
+    public String getTitle() {
+        return title;
+    }
+    
+    public boolean getRunning() {
+        return running;
+    }
+    
+    public void setWidth(int width) {
+        this.width = width;
+    }
+    
+    public void setHeight(int height) {
+        this.height = height;
+    }
+    
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
+    
     public static void main(String[] args) {
-        new Game (1920, 1080, "Street Kombat X"); //creates an instance of the main thread Game and starts the program
+        new Game (1280, 720, "Street Kombat X"); //creates an instance of the main thread Game and starts the program
     }
 }
