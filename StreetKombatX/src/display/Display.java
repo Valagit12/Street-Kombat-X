@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 /**
  *
  * @author h9113
- */
+ */ 
 public class Display extends JFrame {
     
     private Canvas canvas;
