@@ -3,12 +3,18 @@
 //Culminating Performance Task
 package streetkombatx;
 
+import players.Player;
 import display.Display;
 import gfx.Assets;
 import gfx.ImageLoader;
+import input.KeyManager;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import players.Kasai;
+import states.GameState;
+import states.MenuState;
+import states.State;
 
 /**
  *
@@ -26,6 +32,9 @@ public class Game implements Runnable{
     private BufferedImage background;
     private BufferStrategy bs;
     private Graphics g;
+    private Player player;
+    private State state;
+    private KeyManager keyManager;
     
     /**
      * Method: This method overwrites java's default constructor method for the Game object
@@ -71,12 +80,21 @@ public class Game implements Runnable{
     }
     
     public void initialize() {
+        keyManager = new KeyManager();
+        frame.getFrame().addKeyListener(keyManager);
+        player = new Kasai(this, 100, 100);
+        
+        GameState gameState = new GameState(this, player);
+        MenuState menuState = new MenuState(this);
+        state.setState(gameState);
+        
         Assets.init();
         background = ImageLoader.loadImage("res/backgrounds/FireTemple.gif");
     }
     
     public void tick() {
-        
+        keyManager.tick();
+        state.getState().tick();
     }
     
     public void render() {
@@ -91,6 +109,7 @@ public class Game implements Runnable{
         g.clearRect(0, 0, width, height);
         
         g.drawImage(background, 0 , 0, null);
+        state.getState().render(g);
         
         bs.show();
         g.dispose();
@@ -151,6 +170,10 @@ public class Game implements Runnable{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    
+    public KeyManager getKeyManager() {
+        return keyManager;
     }
     
     public int getWidth() {

@@ -77,6 +77,7 @@ public class Display extends JFrame {
         canvas.setPreferredSize(new Dimension(width, height));
         canvas.setMaximumSize(new Dimension(width, height));
         canvas.setMinimumSize(new Dimension(width, height));
+        canvas.setFocusable(false);
         
         add(canvas);
         pack();
@@ -90,5 +91,9 @@ public class Display extends JFrame {
      */
     public Canvas getCanvas() {
         return canvas;
+    }
+    
+    public JFrame getFrame() {
+        return this;
     }
 }

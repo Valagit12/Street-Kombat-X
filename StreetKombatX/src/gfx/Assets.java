@@ -13,9 +13,12 @@ import java.awt.image.BufferedImage;
  */
 public class Assets {
     
+    public static BufferedImage test;
     
     public static void init() {
         SpriteSheet kasai = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Kasai/Kasai_SpriteSheet.png"));
+        
+        test = kasai.crop(0);
     }
     
 }

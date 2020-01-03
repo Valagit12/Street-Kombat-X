@@ -7,7 +7,7 @@ package states;
 
 import java.awt.Graphics;
 import streetkombatx.Game;
-import streetkombatx.Player;
+import players.Player;
 
 /**
  *
@@ -16,16 +16,17 @@ import streetkombatx.Player;
 public class GameState extends State {
     private Player player;
     
-    public GameState(Game game){
+    public GameState(Game game, Player player){
         super(game);
+        this.player = player;
     }
     @Override
     public void tick() {
-        
+        player.tick();
     }
 
     @Override
     public void render(Graphics gState) {
-        
+        player.render(gState);
     }
 }
