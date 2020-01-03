@@ -82,7 +82,7 @@ public class Game implements Runnable{
     public void initialize() {
         keyManager = new KeyManager();
         frame.getFrame().addKeyListener(keyManager);
-        player = new Kasai(this, 100, 100);
+        player = new Kasai(this, 1000, 450, 125,250);
         
         GameState gameState = new GameState(this, player);
         MenuState menuState = new MenuState(this);

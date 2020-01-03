@@ -15,13 +15,16 @@ import streetkombatx.Game;
 public abstract class Player {
     
     protected float x, y;
+    protected int height, width;
     protected int health = 100;
     protected Game game;
     
-    public Player(Game game, float x, float y) {
+    public Player(Game game, float x, float y, int width, int height) {
         this.x = x;
         this.y = y;
         this.game = game;
+        this.width = width;
+        this.height = height;
     }
     
     public abstract void tick();

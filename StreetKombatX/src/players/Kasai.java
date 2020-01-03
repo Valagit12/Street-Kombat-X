@@ -15,18 +15,12 @@ import streetkombatx.Game;
  */
 public class Kasai extends Player{
     
-    public Kasai(Game game, float x, float y) {
-        super(game, x, y);
+    public Kasai(Game game, float x, float y, int width,int height) {
+        super(game, x, y, width, height);
     }
 
     @Override
     public void tick() {
-        if (game.getKeyManager().up){
-            y -= 3;
-        }
-        if (game.getKeyManager().down){
-            y += 3;
-        }
         if (game.getKeyManager().right){
             x += 3;
         }
@@ -37,7 +31,7 @@ public class Kasai extends Player{
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.test, (int) x, (int) y, null);
+        g.drawImage(Assets.test, (int) x, (int) y, width, height, null);
     }
     
 }
