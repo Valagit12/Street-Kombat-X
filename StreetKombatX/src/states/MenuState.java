@@ -38,7 +38,8 @@ public class MenuState extends State{
     }
     
     public static void menuNavigator(){
-        
+        int x =0;
+        x++;
     }
     
 }
