@@ -13,9 +13,9 @@ import java.awt.image.BufferedImage;
  */
 public class SpriteSheet {
     
-    private final int width = 64;
+    private final int width = 32;
     private final int height = 64;
-    private final int numRow = 10;
+    private final int numRow = 14;
     
     private BufferedImage b;
     
@@ -27,6 +27,7 @@ public class SpriteSheet {
         int x = tileNum%numRow;
         int y = tileNum/numRow;
         
-        return b.getSubimage(64*x, 64*y, 64, 64);
+        
+        return b.getSubimage(32*x, 64*y, 32, 64);
     }
 }

@@ -5,14 +5,17 @@
  */
 package gfx;
 
+import java.awt.image.BufferedImage;
+
 /**
  *
  * @author h9113
  */
 public class Assets {
     
+    
     public static void init() {
-        
+        SpriteSheet kasai = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Kasai/Kasai_SpriteSheet.png"));
     }
     
 }

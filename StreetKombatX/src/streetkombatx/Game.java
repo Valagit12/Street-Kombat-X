@@ -4,6 +4,7 @@
 package streetkombatx;
 
 import display.Display;
+import gfx.Assets;
 import gfx.ImageLoader;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -70,6 +71,7 @@ public class Game implements Runnable{
     }
     
     public void initialize() {
+        Assets.init();
         background = ImageLoader.loadImage("res/backgrounds/FireTemple.gif");
     }
     
