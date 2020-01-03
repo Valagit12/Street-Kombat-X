@@ -26,11 +26,45 @@ public class Game implements Runnable{
     private BufferStrategy bs;
     private Graphics g;
     
+    /**
+     * Method: This method overwrites java's default constructor method for the Game object
+     * Precondition: height and width need to be proper int values, title needs to be a proper string
+     * Post condition: The game object is created and the thread is started
+     */
+    public Game (){
+        this.width = 0;
+        this.height = 0;
+        this.title = null;
+        frame = new Display(width, height, title);
+        start();
+    }
+    
+    /**
+     * Method: This constructor method uses the parameter values to create a game object and thread
+     * Precondition: height and width need to be proper int values, title needs to be a proper string
+     * Post condition: The game object is created and the thread is started
+     * @param width: an int value representing the width of the canvas in pixels
+     * @param height: an int value representing the height of the canvas in pixels
+     * @param title: an String that holds the title of the game
+     */
     public Game(int width, int height, String title) {
         this.width = width; 
         this.height = height;
         this.title = title;
-        
+        frame = new Display(width, height, title);
+        start();
+    }
+    
+    /**
+     * Method: This constructor method uses the parameter game to create a game object and thread
+     * Precondition: height and width need to be proper int values, title needs to be a proper string
+     * Post condition: The game object is created and the thread is started
+     * @param g: A game object that will be used to populate the fields of the game object that is calling an instance of this method
+     */
+    public Game(Game g){
+        this.width = g.width; 
+        this.height = g.height;
+        this.title = g.title;
         frame = new Display(width, height, title);
         start();
     }
