@@ -13,14 +13,17 @@ import java.awt.image.BufferedImage;
  */
 public class SpriteSheet {
     
-    private final int width = 32;
-    private final int height = 64;
-    private final int numRow = 14;
+    private int width;
+    private int height;
+    private final int numRow;
     
     private BufferedImage b;
     
-    public SpriteSheet(BufferedImage b){
+    public SpriteSheet(BufferedImage b, int width, int height, int numRow){
         this.b = b;
+        this.width = width;
+        this.height = height;
+        this.numRow = numRow;
     }
     
     public BufferedImage crop (int tileNum){
@@ -28,6 +31,6 @@ public class SpriteSheet {
         int y = tileNum/numRow;
         
         
-        return b.getSubimage(32*x, 64*y, 32, 64);
+        return b.getSubimage(width*x, height*y, width, height);
     }
 }

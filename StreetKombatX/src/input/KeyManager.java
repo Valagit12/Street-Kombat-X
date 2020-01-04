@@ -15,17 +15,33 @@ import java.awt.event.KeyListener;
 public class KeyManager implements KeyListener{
     
     private boolean[] keys;
-    public boolean up, down, left, right;
+    public boolean player1_jump, player1_crouch, player1_left, player1_right;
+    public boolean player1_block, player1_1, player1_2;
+    public boolean player2_jump, player2_crouch, player2_left, player2_right;
+    public boolean player2_block, player2_1, player2_2;
     
     public KeyManager() {
         keys = new boolean[256];
     }
     
     public void tick() {
-        up = keys[KeyEvent.VK_W];
-        down = keys[KeyEvent.VK_S];
-        right = keys[KeyEvent.VK_D];
-        left = keys[KeyEvent.VK_A];
+        //player 1 input
+        player1_jump = keys[KeyEvent.VK_W];
+        player1_crouch = keys[KeyEvent.VK_S];
+        player1_right = keys[KeyEvent.VK_D];
+        player1_left = keys[KeyEvent.VK_A];
+        player1_block = keys[KeyEvent.VK_Y];
+        player1_1 = keys[KeyEvent.VK_R];
+        player1_2 = keys[KeyEvent.VK_T];
+        
+        //player 2 input
+        player2_jump = keys[KeyEvent.VK_UP];
+        player2_crouch = keys[KeyEvent.VK_DOWN];
+        player2_right = keys[KeyEvent.VK_RIGHT];
+        player2_left = keys[KeyEvent.VK_LEFT];
+        player2_block = keys[KeyEvent.VK_M];
+        player2_1 = keys[KeyEvent.VK_PERIOD];
+        player2_2 = keys[KeyEvent.VK_COMMA];
     }
 
     @Override

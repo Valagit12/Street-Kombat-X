@@ -13,32 +13,71 @@ import java.awt.image.BufferedImage;
  */
 public class Assets {
     
-    public static BufferedImage[] kasai_stance, kasai_walk_left, kasai_walk_right, kasai_block, kasai_crouch;
+    //Backgrounds
+    public static BufferedImage[] fireTemple;
+    
+    //Animations
+    public static BufferedImage[] kasai_stance_player1, kasai_walk_left_player1, kasai_walk_right_player1, kasai_block_player1, kasai_crouch_player1;
+    public static BufferedImage[] kasai_stance_player2, kasai_walk_left_player2, kasai_walk_right_player2, kasai_block_player2, kasai_crouch_player2;
     
     public static void init() {
-        SpriteSheet kasai = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Kasai/Kasai_SpriteSheet.png"));
+        SpriteSheet kasai_sheet_player1 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Kasai/Player1/Kasai_SpriteSheet.png"), 32, 64, 14);
+        SpriteSheet kasai_sheet_player2 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Kasai/Player2/Kasai_SpriteSheet.png"), 32, 64, 14);
+        SpriteSheet fireTemple_sheet = new SpriteSheet(ImageLoader.loadImage("res/backgrounds/FireTemple.png"), 1280, 720, 3);
         
-        kasai_stance = new BufferedImage[8];
-        kasai_walk_left = new BufferedImage[10];
-        kasai_walk_right = new BufferedImage[10];
-        kasai_block = new BufferedImage[7];
-        kasai_crouch = new BufferedImage[8];
+        //Backgrounds
+        fireTemple = new BufferedImage[8];
         
-        for (int i = 0; i < kasai_stance.length; i++){
-            kasai_stance[i] = kasai.crop(i);
+        for (int i = 0; i < fireTemple.length; i++){
+            fireTemple[i] = fireTemple_sheet.crop(i);
         }
         
-        for (int i = 0; i < kasai_walk_left.length; i++){
-            kasai_walk_left[i] = kasai.crop(i+14);
-            kasai_walk_right[kasai_walk_right.length - 1 - i] = kasai_walk_left[i];
+        //Kasai Player1
+        kasai_stance_player1 = new BufferedImage[8];
+        kasai_walk_left_player1 = new BufferedImage[10];
+        kasai_walk_right_player1 = new BufferedImage[10];
+        kasai_block_player1 = new BufferedImage[7];
+        kasai_crouch_player1 = new BufferedImage[8];
+        
+        for (int i = 0; i < kasai_stance_player1.length; i++){
+            kasai_stance_player1[i] = kasai_sheet_player1.crop(i);
         }
         
-        for (int i = 0; i < kasai_block.length; i++){
-            kasai_block[i] = kasai.crop(i+14*2);
+        for (int i = 0; i < kasai_walk_left_player1.length; i++){
+            kasai_walk_right_player1[i] = kasai_sheet_player1.crop(i+14);
+            kasai_walk_left_player1[kasai_walk_left_player1.length - 1 - i] = kasai_walk_right_player1[i];
         }
         
-        for (int i = 0; i < kasai_crouch.length; i++){
-            kasai_crouch[i] = kasai.crop(i+14*3);
+        for (int i = 0; i < kasai_block_player1.length; i++){
+            kasai_block_player1[i] = kasai_sheet_player1.crop(i+14*2);
+        }
+        
+        for (int i = 0; i < kasai_crouch_player1.length; i++){
+            kasai_crouch_player1[i] = kasai_sheet_player1.crop(i+14*3);
+        }
+        
+        //Kasai Player2
+        kasai_stance_player2 = new BufferedImage[8];
+        kasai_walk_left_player2 = new BufferedImage[10];
+        kasai_walk_right_player2 = new BufferedImage[10];
+        kasai_block_player2 = new BufferedImage[7];
+        kasai_crouch_player2 = new BufferedImage[8];
+        
+        for (int i = 0; i < kasai_stance_player2.length; i++){
+            kasai_stance_player2[i] = kasai_sheet_player2.crop(i);
+        }
+        
+        for (int i = 0; i < kasai_walk_left_player2.length; i++){
+            kasai_walk_left_player2[i] = kasai_sheet_player2.crop(i+14);
+            kasai_walk_right_player2[kasai_walk_right_player2.length - 1 - i] = kasai_walk_left_player2[i];
+        }
+        
+        for (int i = 0; i < kasai_block_player2.length; i++){
+            kasai_block_player2[i] = kasai_sheet_player2.crop(i+14*2);
+        }
+        
+        for (int i = 0; i < kasai_crouch_player2.length; i++){
+            kasai_crouch_player2[i] = kasai_sheet_player2.crop(i+14*3);
         }
     }
     

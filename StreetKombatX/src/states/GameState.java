@@ -5,6 +5,8 @@
  */
 package states;
 
+import gfx.Animation;
+import gfx.Assets;
 import java.awt.Graphics;
 import streetkombatx.Game;
 import players.Player;
@@ -14,19 +16,29 @@ import players.Player;
  * @author Valareza
  */
 public class GameState extends State {
-    private Player player;
+    private Player player1;
+    private Player player2;
     
-    public GameState(Game game, Player player){
+    private Animation background;
+    
+    public GameState(Game game, Player player1, Player player2){
         super(game);
-        this.player = player;
+        this.player1 = player1;
+        this.player2 = player2;
+        
+        background = new Animation(60, Assets.fireTemple);
     }
     @Override
     public void tick() {
-        player.tick();
+        background.tick();
+        player1.tick();
+        player2.tick();
     }
 
     @Override
-    public void render(Graphics gState) {
-        player.render(gState);
+    public void render(Graphics g) {
+        g.drawImage(background.getCurrentFrame(), 0, 0, null);
+        player1.render(g);
+        player2.render(g);
     }
 }

@@ -14,6 +14,7 @@ import streetkombatx.Game;
  */
 public abstract class Player {
     
+    protected float playerNum;
     protected float x, y;
     protected int height, width;
     protected int health = 100;
@@ -23,7 +24,8 @@ public abstract class Player {
     protected boolean isBlocking = false;
     protected boolean isCrouching = false;
     
-    public Player(Game game, float x, float y, int width, int height) {
+    public Player(Game game, float x, float y, int width, int height, int playerNum) {
+        this.playerNum = playerNum;
         this.x = x;
         this.y = y;
         this.game = game;

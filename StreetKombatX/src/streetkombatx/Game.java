@@ -29,10 +29,10 @@ public class Game implements Runnable{
     
     private Thread main; //main Thread
     private Display frame;
-    private BufferedImage background;
     private BufferStrategy bs;
     private Graphics g;
-    private Player player;
+    private Player player1;
+    private Player player2;
     private State state;
     private KeyManager keyManager;
     
@@ -83,13 +83,15 @@ public class Game implements Runnable{
         Assets.init();
         keyManager = new KeyManager();
         frame.getFrame().addKeyListener(keyManager);
-        player = new Kasai(this, 1000, 450, 125,250);
         
-        GameState gameState = new GameState(this, player);
+        //temporary
+        player1 = new Kasai(this, 200, 460, 125, 250, 1);
+        player2 = new Kasai(this, 1000, 460, 125, 250, 2);
+        
+        GameState gameState = new GameState(this, player1, player2);
         MenuState menuState = new MenuState(this);
         state.setState(gameState);
         
-        background = ImageLoader.loadImage("res/backgrounds/FireTemple.gif");
     }
     
     public void tick() {
@@ -108,7 +110,6 @@ public class Game implements Runnable{
         
         g.clearRect(0, 0, width, height);
         
-        g.drawImage(background, 0 , 0, null);
         state.getState().render(g);
         
         bs.show();

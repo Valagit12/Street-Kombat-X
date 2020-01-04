@@ -17,14 +17,27 @@ import streetkombatx.Game;
  */
 public class Kasai extends Player{
     
+    private boolean left, right, up, down;
+    
     private Animation stance, walk_left, walk_right, block, crouch;
     
-    public Kasai(Game game, float x, float y, int width,int height) {
-        super(game, x, y, width, height);
+    public Kasai(Game game, float x, float y, int width, int height, int playerNum) {
+        super(game, x, y, width, height, playerNum);
         
-        stance = new Animation(66.668, Assets.kasai_stance);
-        walk_left = new Animation(50.001, Assets.kasai_walk_left);
-        walk_right = new Animation(50.001, Assets.kasai_walk_right);
+        if (playerNum == 1){
+            stance = new Animation(66.668, Assets.kasai_stance_player1);
+            walk_left = new Animation(50.001, Assets.kasai_walk_left_player1);
+            walk_right = new Animation(50.001, Assets.kasai_walk_right_player1);
+            block = new Animation(50.001, Assets.kasai_block_player1);
+            crouch = new Animation(50.001, Assets.kasai_crouch_player1);
+        }
+        else if (playerNum == 2){
+            stance = new Animation(66.668, Assets.kasai_stance_player2);
+            walk_left = new Animation(50.001, Assets.kasai_walk_left_player2);
+            walk_right = new Animation(50.001, Assets.kasai_walk_right_player2);
+            block = new Animation(50.001, Assets.kasai_block_player2);
+            crouch = new Animation(50.001, Assets.kasai_crouch_player2);
+        }
     }
 
     @Override
@@ -32,7 +45,21 @@ public class Kasai extends Player{
         stance.tick();
         walk_left.tick();
         walk_right.tick();
-        if (game.getKeyManager().right){
+        
+        if (playerNum == 1){
+            up = game.getKeyManager().player1_jump;
+            down = game.getKeyManager().player1_crouch;
+            right = game.getKeyManager().player1_right;
+            left = game.getKeyManager().player1_left;
+        }
+        else if (playerNum == 2){
+            up = game.getKeyManager().player2_jump;
+            down = game.getKeyManager().player2_crouch;
+            right = game.getKeyManager().player2_right;
+            left = game.getKeyManager().player2_left;
+        }
+        
+        if (right){
             x += 3;
             if (x > 1160){
                 x = 1160;
@@ -40,7 +67,7 @@ public class Kasai extends Player{
             isWalkingRight = true;
             isWalkingLeft = false;
         }
-        else if (game.getKeyManager().left){
+        else if (left){
             x -= 3;
             if (x < 0){
                 x = 0;
@@ -52,8 +79,6 @@ public class Kasai extends Player{
             isWalkingLeft = false;
             isWalkingRight = false;
         }
-        System.out.println(x);
-        System.out.println(y);
     }
 
     @Override
