@@ -72,6 +72,7 @@ public class Display extends JFrame {
         setSize(width, height);
         setTitle(title);
         setLocationRelativeTo(null);
+        setResizable(false);
         
         canvas = new Canvas();
         canvas.setPreferredSize(new Dimension(width, height));

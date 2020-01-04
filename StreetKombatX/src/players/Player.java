@@ -18,6 +18,10 @@ public abstract class Player {
     protected int height, width;
     protected int health = 100;
     protected Game game;
+    protected boolean isWalkingLeft = false;
+    protected boolean isWalkingRight = false;
+    protected boolean isBlocking = false;
+    protected boolean isCrouching = false;
     
     public Player(Game game, float x, float y, int width, int height) {
         this.x = x;

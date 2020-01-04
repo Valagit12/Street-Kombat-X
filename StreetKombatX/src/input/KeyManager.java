@@ -35,7 +35,6 @@ public class KeyManager implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("Pressed");
         keys[e.getKeyCode()] = true;
     }
 

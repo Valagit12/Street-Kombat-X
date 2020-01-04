@@ -80,6 +80,7 @@ public class Game implements Runnable{
     }
     
     public void initialize() {
+        Assets.init();
         keyManager = new KeyManager();
         frame.getFrame().addKeyListener(keyManager);
         player = new Kasai(this, 1000, 450, 125,250);
@@ -88,7 +89,6 @@ public class Game implements Runnable{
         MenuState menuState = new MenuState(this);
         state.setState(gameState);
         
-        Assets.init();
         background = ImageLoader.loadImage("res/backgrounds/FireTemple.gif");
     }
     
