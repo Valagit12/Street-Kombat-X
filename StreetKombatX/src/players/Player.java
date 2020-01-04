@@ -23,6 +23,8 @@ public abstract class Player {
     protected boolean isWalkingRight = false;
     protected boolean isBlocking = false;
     protected boolean isCrouching = false;
+    protected boolean isJumping = false;
+    protected boolean isLanding = false;
     
     public Player(Game game, float x, float y, int width, int height, int playerNum) {
         this.playerNum = playerNum;
@@ -31,6 +33,10 @@ public abstract class Player {
         this.game = game;
         this.width = width;
         this.height = height;
+    }
+    
+    public float getX(){
+        return x;
     }
     
     public abstract void tick();

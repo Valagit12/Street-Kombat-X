@@ -21,6 +21,9 @@ public class GameState extends State {
     
     private Animation background;
     
+    float posOne;
+    float posTwo;
+    
     public GameState(Game game, Player player1, Player player2){
         super(game);
         this.player1 = player1;
@@ -33,6 +36,9 @@ public class GameState extends State {
         background.tick();
         player1.tick();
         player2.tick();
+        
+        posOne = player1.getX();
+        posTwo = player2.getX();
     }
 
     @Override
@@ -40,5 +46,13 @@ public class GameState extends State {
         g.drawImage(background.getCurrentFrame(), 0, 0, null);
         player1.render(g);
         player2.render(g);
+    }
+    
+    public float getPositionOne(){
+        return posOne;
+    }
+    
+    public float getPositionTwo(){
+        return posTwo;
     }
 }

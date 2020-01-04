@@ -17,8 +17,8 @@ public class Assets {
     public static BufferedImage[] fireTemple;
     
     //Animations
-    public static BufferedImage[] kasai_stance_player1, kasai_walk_left_player1, kasai_walk_right_player1, kasai_block_player1, kasai_crouch_player1;
-    public static BufferedImage[] kasai_stance_player2, kasai_walk_left_player2, kasai_walk_right_player2, kasai_block_player2, kasai_crouch_player2;
+    public static BufferedImage[] kasai_stance_player1, kasai_walk_left_player1, kasai_walk_right_player1, kasai_block_player1, kasai_crouch_player1, kasai_jumpUp_player1, kasai_midAir_player1, kasai_landing_player1;
+    public static BufferedImage[] kasai_stance_player2, kasai_walk_left_player2, kasai_walk_right_player2, kasai_block_player2, kasai_crouch_player2, kasai_jumpUp_player2, kasai_midAir_player2, kasai_landing_player2;
     
     public static void init() {
         SpriteSheet kasai_sheet_player1 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Kasai/Player1/Kasai_SpriteSheet.png"), 32, 64, 14);
@@ -38,6 +38,9 @@ public class Assets {
         kasai_walk_right_player1 = new BufferedImage[10];
         kasai_block_player1 = new BufferedImage[7];
         kasai_crouch_player1 = new BufferedImage[8];
+        kasai_jumpUp_player1 = new BufferedImage[3];
+        kasai_midAir_player1 = new BufferedImage[1];
+        kasai_landing_player1 = new BufferedImage[4];
         
         for (int i = 0; i < kasai_stance_player1.length; i++){
             kasai_stance_player1[i] = kasai_sheet_player1.crop(i);
@@ -55,6 +58,15 @@ public class Assets {
         for (int i = 0; i < kasai_crouch_player1.length; i++){
             kasai_crouch_player1[i] = kasai_sheet_player1.crop(i+14*3);
         }
+        
+        for (int i = 0; i < kasai_jumpUp_player1.length; i++){
+            kasai_jumpUp_player1[i] = kasai_sheet_player1.crop(i+14*5);
+        }
+        kasai_midAir_player1[0] = kasai_sheet_player1.crop(2+14*5);
+        for (int i = 3; i< kasai_landing_player1.length; i++){
+            kasai_landing_player1[i] = kasai_sheet_player1.crop(i+14*5);
+        }
+        
         
         //Kasai Player2
         kasai_stance_player2 = new BufferedImage[8];
