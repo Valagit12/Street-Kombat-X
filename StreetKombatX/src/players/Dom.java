@@ -60,6 +60,7 @@ public class Dom extends Player{
             left = game.getKeyManager().player1_left;
             blocking = game.getKeyManager().player1_block;
             one = game.getKeyManager().player1_1;
+            two = game.getKeyManager().player1_2;
         } else if (playerNum == 2) {
             if (isAbleToPress){
                 up = game.getKeyManager().player2_jump;
@@ -69,6 +70,7 @@ public class Dom extends Player{
             left = game.getKeyManager().player2_left;
             blocking = game.getKeyManager().player2_block;
             one = game.getKeyManager().player2_1;
+            two = game.getKeyManager().player2_2;
         }
             
         if (y < 460){
@@ -80,28 +82,35 @@ public class Dom extends Player{
         }
         else if (y == 460) {
             isAbleToPress = true;
+            isJumpingOne = false;
+            isJumpingTwo = false;
+            jump1.setIndex(0);
             jumpAttackIndex = 0;
         }
         
         if (isJumping) {
             if (jump.getCurrentIndex() < 4){
-                y -= 25;
+                y -= 20;
             }
             else if (jump.getCurrentIndex() == 6){
                 isJumping = false;
                 isJumpingOne = false;
                 jump.setIndex(0);
             }
-            if (isJumpingOne && jumpAttackIndex < 1){
+            jump.tick();
+        }
+        
+        if (!isAbleToPress){
+            if (isJumpingOne){
                 if (jump1.getCurrentIndex() == 5){
                     isJumpingOne = false;
                     jump1.setIndex(0);
+                    jumpAttackIndex++;
                 }
                 else {
                     jump1.tick();
                 }
             }
-            jump.tick();
         }
         
         if (isBlocking) {
@@ -163,9 +172,14 @@ public class Dom extends Player{
         }
         
         if (one && !isAbleToPress){
-            isJumpingOne = true;
-            jumpAttackIndex++;
+            if (jumpAttackIndex < 1)
+                isJumpingOne = true;
         }
+        else if (two && !isAbleToPress){
+            if (jumpAttackIndex < 1)
+                isJumpingTwo = true;
+        }
+       
         
         if (right) {
             x += 3;
@@ -193,6 +207,10 @@ public class Dom extends Player{
     }
 
     private BufferedImage getCurrentAnimationState() {
+        if (isJumpingTwo){
+            return jump2.getCurrentFrame();
+        }
+        
         if (isJumpingOne){
             return jump1.getCurrentFrame();
         }
@@ -218,5 +236,4 @@ public class Dom extends Player{
         }
     }
 
-    
 }

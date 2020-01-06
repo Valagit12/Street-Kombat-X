@@ -32,6 +32,7 @@ public class Kasai extends Player {
             jump1 = new Animation(60, Assets.kasai_jump1_player1);
             jump2 = new Animation(50.001, Assets.kasai_jump2_player1);
             hit = new Animation(50.001, Assets.kasai_hit_player1);
+            down1 = new Animation(50.001, Assets.kasai_down1_player1);
         } else if (playerNum == 2) {
             stance = new Animation(66.668, Assets.kasai_stance_player2);
             walk_left = new Animation(50.001, Assets.kasai_walk_left_player2);
@@ -42,6 +43,7 @@ public class Kasai extends Player {
             jump1 = new Animation(50.001, Assets.kasai_jump1_player2);
             jump2 = new Animation(50.001, Assets.kasai_jump2_player2);
             hit = new Animation(50.001, Assets.kasai_hit_player2);
+            down1 = new Animation(50.001, Assets.kasai_down1_player2);
         }
         
     }
@@ -128,7 +130,9 @@ public class Kasai extends Player {
                     block.tick();
                 }
                 else {
+                    isDownOne = false;
                     block.setIndex(0);
+                    down1.setIndex(0);
                 }
             }
         }
@@ -140,6 +144,15 @@ public class Kasai extends Player {
             if (down) {
                 if (crouch.getCurrentIndex() < 5){
                     crouch.tick();
+                }
+                if (isDownOne){
+                    if (down1.getCurrentIndex() != 7){
+                        down1.tick();
+                    }
+                    else {
+                        down1.setIndex(0);
+                        isDownOne = false;
+                    }
                 }
             }
             else {
@@ -176,6 +189,9 @@ public class Kasai extends Player {
             if (jumpAttackIndex < 1)
                 isJumpingOne = true;
         }
+        else if (one && isCrouching){
+            isDownOne = true;
+        }
         else if (two && !isAbleToPress){
             if (jumpAttackIndex < 1)
                 isJumpingTwo = true;
@@ -208,6 +224,10 @@ public class Kasai extends Player {
     }
 
     private BufferedImage getCurrentAnimationState() {
+        if (isDownOne) {
+            return down1.getCurrentFrame();
+        }
+        
         if (isJumpingTwo){
             return jump2.getCurrentFrame();
         }

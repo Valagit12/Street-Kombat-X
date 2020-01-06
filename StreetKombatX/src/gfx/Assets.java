@@ -18,7 +18,9 @@ public class Assets {
     
     //Animations
     public static BufferedImage[] kasai_stance_player1, kasai_walk_left_player1, kasai_walk_right_player1, kasai_block_player1, kasai_crouch_player1, kasai_jump_player1, kasai_hit_player1, kasai_jump2_player1, kasai_jump1_player1;
+    public static BufferedImage[] kasai_down1_player1;
     public static BufferedImage[] kasai_stance_player2, kasai_walk_left_player2, kasai_walk_right_player2, kasai_block_player2, kasai_crouch_player2, kasai_jump_player2, kasai_hit_player2, kasai_jump2_player2, kasai_jump1_player2;
+    public static BufferedImage[] kasai_down1_player2;
     
     public static BufferedImage[] dom_stance_player1, dom_walk_left_player1, dom_walk_right_player1, dom_block_player1, dom_crouch_player1, dom_jump_player1, dom_hit_player1, dom_jump2_player1, dom_jump1_player1;
     public static BufferedImage[] dom_stance_player2, dom_walk_left_player2, dom_walk_right_player2, dom_block_player2, dom_crouch_player2, dom_jump_player2, dom_hit_player2, dom_jump2_player2, dom_jump1_player2;
@@ -47,6 +49,7 @@ public class Assets {
         kasai_hit_player1 = new BufferedImage[7];
         kasai_jump2_player1 = new BufferedImage[1];
         kasai_jump1_player1 = new BufferedImage[6];
+        kasai_down1_player1 = new BufferedImage[8];
         
         for (int i = 0; i < kasai_stance_player1.length; i++){
             kasai_stance_player1[i] = kasai_sheet_player1.crop(i);
@@ -79,6 +82,10 @@ public class Assets {
             kasai_jump1_player1[i] = kasai_sheet_player1.crop(i + 2 + 14*6);
         }
         
+        for (int i = 0; i < kasai_down1_player1.length; i++){
+            kasai_down1_player1[i] = kasai_sheet_player1.crop(i + 14*7);
+        }
+        
         //Kasai Player2
         kasai_stance_player2 = new BufferedImage[8];
         kasai_walk_left_player2 = new BufferedImage[10];
@@ -89,6 +96,7 @@ public class Assets {
         kasai_hit_player2 = new BufferedImage[7];
         kasai_jump2_player2 = new BufferedImage[1];
         kasai_jump1_player2 = new BufferedImage[6];
+        kasai_down1_player2 = new BufferedImage[8];
         
         for (int i = 0; i < kasai_stance_player2.length; i++){
             kasai_stance_player2[i] = kasai_sheet_player2.crop(i);
@@ -121,6 +129,10 @@ public class Assets {
             kasai_jump1_player2[i] = kasai_sheet_player2.crop(i + 2 + 14*6);
         }
         
+        for (int i = 0; i < kasai_down1_player2.length; i++){
+            kasai_down1_player2[i] = kasai_sheet_player2.crop(i + 14*7);
+        }
+        
         
         //Dom player 1
         dom_stance_player1 = new BufferedImage[8];
@@ -132,6 +144,7 @@ public class Assets {
         dom_hit_player1 = new BufferedImage[7];
         dom_jump2_player1 = new BufferedImage[1];
         dom_jump1_player1 = new BufferedImage[6];
+        
         
         for (int i = 0; i < dom_stance_player1.length; i++){
             dom_stance_player1[i] = dom_sheet_player1.crop(i);
