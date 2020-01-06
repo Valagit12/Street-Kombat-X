@@ -130,9 +130,7 @@ public class Kasai extends Player {
                     block.tick();
                 }
                 else {
-                    isDownOne = false;
                     block.setIndex(0);
-                    down1.setIndex(0);
                 }
             }
         }
@@ -160,7 +158,9 @@ public class Kasai extends Player {
                     crouch.tick();
                 }
                 else {
-                    crouch.tick();
+                    isDownOne = false;
+                    crouch.setIndex(0);
+                    down1.setIndex(0);
                 }
             }
         }
