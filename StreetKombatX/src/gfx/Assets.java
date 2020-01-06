@@ -28,8 +28,8 @@ public class Assets {
     public static void init() {
         SpriteSheet kasai_sheet_player1 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Kasai/Player1/Kasai_SpriteSheet.png"), 32, 64, 14);
         SpriteSheet kasai_sheet_player2 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Kasai/Player2/Kasai_SpriteSheet.png"), 32, 64, 14);
-        SpriteSheet dom_sheet_player1 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Dom/Ding Dong SpriteSheet.png"), 32, 64, 14);
-        //SpriteSheet dom_sheet_player2 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Dom/Player2/Dom_SpriteSheet.png"), 32, 64, 14);
+        SpriteSheet dom_sheet_player2 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Dom/Player2/Dom_SpriteSheet.png"), 32, 64, 14);
+        SpriteSheet dom_sheet_player1 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Dom/Player1/Dom_SpriteSheet.png"), 32, 64, 14);
         //Backgrounds
         SpriteSheet fireTemple_sheet = new SpriteSheet(ImageLoader.loadImage("res/backgrounds/FireTemple.png"), 1280, 720, 3);
         
