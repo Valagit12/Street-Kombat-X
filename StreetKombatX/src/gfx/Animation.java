@@ -41,4 +41,12 @@ public class Animation {
     public BufferedImage getCurrentFrame() {
         return frames[index];
     }
+    
+    public void setIndex(int index) {
+        this.index = index;
+    }
+    
+    public int getCurrentIndex() {
+        return index;
+    }
 }

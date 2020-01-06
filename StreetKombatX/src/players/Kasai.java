@@ -17,9 +17,7 @@ import streetkombatx.Game;
  */
 public class Kasai extends Player {
 
-    private boolean left, right, up, down;
-    private boolean isAbleToPress = true;
-    private Animation stance, walk_left, walk_right, block, crouch, jump, land;
+    private Animation stance, walk_left, walk_right, block, crouch, jump;
 
     public Kasai(Game game, float x, float y, int width, int height, int playerNum) {
         super(game, x, y, width, height, playerNum);
@@ -30,15 +28,16 @@ public class Kasai extends Player {
             walk_right = new Animation(50.001, Assets.kasai_walk_right_player1);
             block = new Animation(50.001, Assets.kasai_block_player1);
             crouch = new Animation(50.001, Assets.kasai_crouch_player1);
-            jump = new Animation(50.001, Assets.kasai_jumpUp_player1);
-            land = new Animation(50.001, Assets.kasai_landing_player1);
+            jump = new Animation(50.001, Assets.kasai_jump_player1);
         } else if (playerNum == 2) {
             stance = new Animation(66.668, Assets.kasai_stance_player2);
             walk_left = new Animation(50.001, Assets.kasai_walk_left_player2);
             walk_right = new Animation(50.001, Assets.kasai_walk_right_player2);
             block = new Animation(50.001, Assets.kasai_block_player2);
             crouch = new Animation(50.001, Assets.kasai_crouch_player2);
+            jump = new Animation(50.001, Assets.kasai_jump_player2);
         }
+        
     }
 
     @Override
@@ -47,37 +46,80 @@ public class Kasai extends Player {
         walk_left.tick();
         walk_right.tick();
         
-            if (playerNum == 1) {
-                if (isAbleToPress){
-                up = game.getKeyManager().player1_jump;}
+        if (playerNum == 1) {
+            if (!isBlocking){
+            if (isAbleToPress){
+                up = game.getKeyManager().player1_jump;
                 down = game.getKeyManager().player1_crouch;
-                right = game.getKeyManager().player1_right;
-                left = game.getKeyManager().player1_left;
-            } else if (playerNum == 2) {
+            }
+            right = game.getKeyManager().player1_right;
+            left = game.getKeyManager().player1_left;
+            }
+            blocking = game.getKeyManager().player1_block;
+        } else if (playerNum == 2) {
+            if (isAbleToPress){
                 up = game.getKeyManager().player2_jump;
                 down = game.getKeyManager().player2_crouch;
-                right = game.getKeyManager().player2_right;
-                left = game.getKeyManager().player2_left;
             }
+            right = game.getKeyManager().player2_right;
+            left = game.getKeyManager().player2_left;
+            blocking = game.getKeyManager().player2_block;
+        }
+            
+        if (y < 460){
+            isAbleToPress = false;
+            y += 10;
+            if (y > 460){
+                y = 460;
+            }
+        }
+        else if (y == 460) {
+            isAbleToPress = true;
+        }
         
-       
         if (isJumping) {
-            y -= 12;
-            if (y < 350) {
-                isJumping = false;
-                isLanding = true;
+             if (jump.getCurrentIndex() < 4){
+                 y -= 20;
+             }
+             else if (jump.getCurrentIndex() == 6){
+                 isJumping = false;
+                 jump.setIndex(0);
+             }
+             jump.tick();
+        }
+        
+        if (isBlocking) {
+            right = false;
+            left = false;
+            up = false;
+            if (blocking){
+                if (block.getCurrentIndex() < 4) {
+                    block.tick();
+                }
+            }
+            else {
+                if (block.getCurrentIndex() != 6){
+                    block.tick();
+                }
+                else {
+                    block.setIndex(0);
+                }
             }
         }
-        if (isLanding) {
-            y += 12;
-            if (y > 450) {
-                isLanding = false;
-                isAbleToPress = true;
-            }
-        }
-         if (up) {
+        
+        if (up) {
             isJumping = true;
+            isAbleToPress = false;
+            up = false;
         }
+        
+        if (blocking || block.getCurrentIndex() != 0) {
+            isBlocking = true;
+        }
+        else {
+            isBlocking = false;
+        }
+        
         if (right) {
             x += 3;
             if (x > 1160) {
@@ -107,6 +149,11 @@ public class Kasai extends Player {
         if (isJumping) {
             return jump.getCurrentFrame();
         }
+        
+        if (isBlocking) {
+            return block.getCurrentFrame();
+        }
+        
         if (isWalkingLeft) {
             return walk_left.getCurrentFrame();
         } else if (isWalkingRight) {
