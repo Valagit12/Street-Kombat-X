@@ -17,7 +17,7 @@ import streetkombatx.Game;
  */
 public class Kasai extends Player {
 
-    private Animation stance, walk_left, walk_right, block, crouch, jump, jump1, jump2, hit, down1;
+    private Animation stance, walk_left, walk_right, block, crouch, jump, jump1, jump2, hit, down1, down2;
 
     public Kasai(Game game, float x, float y, int width, int height, int playerNum) {
         super(game, x, y, width, height, playerNum);
@@ -33,6 +33,7 @@ public class Kasai extends Player {
             jump2 = new Animation(50.001, Assets.kasai_jump2_player1);
             hit = new Animation(50.001, Assets.kasai_hit_player1);
             down1 = new Animation(50.001, Assets.kasai_down1_player1);
+            down2 = new Animation(50.001, Assets.kasai_down2_player1);
         } else if (playerNum == 2) {
             stance = new Animation(66.668, Assets.kasai_stance_player2);
             walk_left = new Animation(50.001, Assets.kasai_walk_left_player2);
@@ -44,6 +45,7 @@ public class Kasai extends Player {
             jump2 = new Animation(50.001, Assets.kasai_jump2_player2);
             hit = new Animation(50.001, Assets.kasai_hit_player2);
             down1 = new Animation(50.001, Assets.kasai_down1_player2);
+            down2 = new Animation(50.001, Assets.kasai_down2_player2);
         }
         
     }
@@ -152,15 +154,26 @@ public class Kasai extends Player {
                         isDownOne = false;
                     }
                 }
+                else if (isDownTwo){
+                    if (down2.getCurrentIndex() != 8){
+                        down2.tick();
+                    }
+                    else {
+                        down2.setIndex(0);
+                        isDownTwo = false;
+                    }
+                }
             }
             else {
                 if (crouch.getCurrentIndex() != 7) {
                     crouch.tick();
                 }
                 else {
+                    isDownTwo = false;
                     isDownOne = false;
                     crouch.setIndex(0);
                     down1.setIndex(0);
+                    down2.setIndex(0);
                 }
             }
         }
@@ -196,6 +209,9 @@ public class Kasai extends Player {
             if (jumpAttackIndex < 1)
                 isJumpingTwo = true;
         }
+        else if (two && isCrouching){
+            isDownTwo = true;
+        }
        
         
         if (right) {
@@ -226,6 +242,10 @@ public class Kasai extends Player {
     private BufferedImage getCurrentAnimationState() {
         if (isDownOne) {
             return down1.getCurrentFrame();
+        }
+        
+        if (isDownTwo) {
+            return down2.getCurrentFrame();
         }
         
         if (isJumpingTwo){

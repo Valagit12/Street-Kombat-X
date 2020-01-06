@@ -30,6 +30,8 @@ public abstract class Player {
     protected boolean isJumpingOne = false;
     protected boolean isJumpingTwo = false;
     protected boolean isDownOne = false;
+    protected boolean isDownTwo = false;
+    protected boolean isStandingTwo = false;
     
     public Player(Game game, float x, float y, int width, int height, int playerNum) {
         this.playerNum = playerNum;
