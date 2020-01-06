@@ -11,6 +11,7 @@ import input.KeyManager;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import players.Dom;
 import players.Kasai;
 import states.GameState;
 import states.MenuState;
@@ -85,7 +86,7 @@ public class Game implements Runnable{
         frame.getFrame().addKeyListener(keyManager);
         
         //temporary
-        player1 = new Kasai(this, 200, 460, 125, 250, 1);
+        player1 = new Dom(this, 200, 460, 125, 250, 1);
         player2 = new Kasai(this, 1000, 460, 125, 250, 2);
         
         GameState gameState = new GameState(this, player1, player2);

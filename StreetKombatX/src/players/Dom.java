@@ -13,35 +13,34 @@ import streetkombatx.Game;
 
 /**
  *
- * @author h9113
+ * @author Valareza
  */
-public class Kasai extends Player {
-
+public class Dom extends Player{
     private Animation stance, walk_left, walk_right, block, crouch, jump, jump1, jump2, hit;
 
-    public Kasai(Game game, float x, float y, int width, int height, int playerNum) {
+    public Dom(Game game, float x, float y, int width, int height, int playerNum) {
         super(game, x, y, width, height, playerNum);
 
         if (playerNum == 1) {
-            stance = new Animation(66.668, Assets.kasai_stance_player1);
-            walk_left = new Animation(50.001, Assets.kasai_walk_left_player1);
-            walk_right = new Animation(50.001, Assets.kasai_walk_right_player1);
-            block = new Animation(50.001, Assets.kasai_block_player1);
-            crouch = new Animation(20, Assets.kasai_crouch_player1);
-            jump = new Animation(50.001, Assets.kasai_jump_player1);
-            jump1 = new Animation(50.001, Assets.kasai_jump1_player1);
-            jump2 = new Animation(50.001, Assets.kasai_jump2_player1);
-            hit = new Animation(50.001, Assets.kasai_hit_player1);
+            stance = new Animation(66.668, Assets.dom_stance_player1);
+            walk_left = new Animation(50.001, Assets.dom_walk_left_player1);
+            walk_right = new Animation(50.001, Assets.dom_walk_right_player1);
+            block = new Animation(50.001, Assets.dom_block_player1);
+            crouch = new Animation(20, Assets.dom_crouch_player1);
+            jump = new Animation(50.001, Assets.dom_jump_player1);
+            jump1 = new Animation(50.001, Assets.dom_jump1_player1);
+            jump2 = new Animation(50.001, Assets.dom_jump2_player1);
+            hit = new Animation(50.001, Assets.dom_hit_player1);
         } else if (playerNum == 2) {
-            stance = new Animation(66.668, Assets.kasai_stance_player2);
-            walk_left = new Animation(50.001, Assets.kasai_walk_left_player2);
-            walk_right = new Animation(50.001, Assets.kasai_walk_right_player2);
-            block = new Animation(50.001, Assets.kasai_block_player2);
-            crouch = new Animation(20, Assets.kasai_crouch_player2);
-            jump = new Animation(50.001, Assets.kasai_jump_player2);
-            jump1 = new Animation(50.001, Assets.kasai_jump1_player2);
-            jump2 = new Animation(50.001, Assets.kasai_jump2_player2);
-            hit = new Animation(50.001, Assets.kasai_hit_player2);
+            stance = new Animation(66.668, Assets.dom_stance_player2);
+            walk_left = new Animation(50.001, Assets.dom_walk_left_player2);
+            walk_right = new Animation(50.001, Assets.dom_walk_right_player2);
+            block = new Animation(50.001, Assets.dom_block_player2);
+            crouch = new Animation(20, Assets.dom_crouch_player2);
+            jump = new Animation(50.001, Assets.dom_jump_player2);
+            jump1 = new Animation(50.001, Assets.dom_jump1_player2);
+            jump2 = new Animation(50.001, Assets.dom_jump2_player2);
+            hit = new Animation(50.001, Assets.dom_hit_player2);
         }
         
     }
@@ -219,4 +218,5 @@ public class Kasai extends Player {
         }
     }
 
+    
 }
