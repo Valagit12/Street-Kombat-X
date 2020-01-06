@@ -18,15 +18,17 @@ public abstract class Player {
     protected float x, y;
     protected int height, width;
     protected int health = 100;
+    protected int jumpAttackIndex = 0;
     protected Game game;
-    protected boolean left, right, up, down, blocking;
+    protected boolean left, right, up, down, blocking, one, two;
     protected boolean isWalkingLeft = false;
     protected boolean isWalkingRight = false;
     protected boolean isBlocking = false;
     protected boolean isCrouching = false;
     protected boolean isJumping = false;
-    protected boolean isLanding = false;
     protected boolean isAbleToPress = true;
+    protected boolean isJumpingOne = false;
+    protected boolean isJumpingTwo = false;
     
     public Player(Game game, float x, float y, int width, int height, int playerNum) {
         this.playerNum = playerNum;
