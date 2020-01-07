@@ -178,6 +178,10 @@ public class Game implements Runnable{
         return keyManager;
     }
     
+    public State getState() {
+        return state;
+    }
+    
     public int getWidth() {
         return width;
     }
