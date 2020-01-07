@@ -86,8 +86,8 @@ public class Game implements Runnable{
         frame.getFrame().addKeyListener(keyManager);
         
         //temporary
-        player1 = new Kasai(this, 200, 460, 125, 250, 1);
-        player2 = new Kasai(this, 1000, 460, 125, 250, 2);
+        player1 = new Kasai(this, 200, 410, 150, 300, 1);
+        player2 = new Kasai(this, 1000, 410, 150, 300, 2);
         
         GameState gameState = new GameState(this, player1, player2);
         MenuState menuState = new MenuState(this);

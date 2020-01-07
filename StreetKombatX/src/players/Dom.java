@@ -5,6 +5,7 @@
  */
 package players;
 
+import collision.Rectangle;
 import gfx.Animation;
 import gfx.Assets;
 import java.awt.Graphics;
@@ -204,6 +205,18 @@ public class Dom extends Player{
     @Override
     public void render(Graphics g) {
         g.drawImage(getCurrentAnimationState(), (int) x, (int) y, width, height, null);
+    }
+    
+    public Rectangle getHitbox() {
+        return hitbox;
+    }
+    
+    public int getState() {
+        return state;
+    }
+    
+    public void setRecovery(int recovery){
+        
     }
 
     private BufferedImage getCurrentAnimationState() {
