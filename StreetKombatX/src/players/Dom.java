@@ -184,8 +184,8 @@ public class Dom extends Player{
         
         if (right) {
             x += 3;
-            if (x > 1160) {
-                x = 1160;
+            if (x > 1050) {
+                x = 1050;
             }
             isWalkingRight = true;
             isWalkingLeft = false;

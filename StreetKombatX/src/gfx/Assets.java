@@ -15,6 +15,7 @@ public class Assets {
     
     //Backgrounds
     public static BufferedImage[] fireTemple;
+    public static BufferedImage[] kingdom;
     
     //Animations
     public static BufferedImage[] kasai_stance_player1, kasai_walk_left_player1, kasai_walk_right_player1, kasai_block_player1, kasai_crouch_player1, kasai_jump_player1, kasai_hit_player1, kasai_jump2_player1, kasai_jump1_player1;
@@ -32,11 +33,17 @@ public class Assets {
         SpriteSheet dom_sheet_player1 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Dom/Player1/Dom_SpriteSheet.png"), 32, 64, 14);
         //Backgrounds
         SpriteSheet fireTemple_sheet = new SpriteSheet(ImageLoader.loadImage("res/backgrounds/FireTemple.png"), 1280, 720, 3);
+        SpriteSheet kingdom_sheet = new SpriteSheet (ImageLoader.loadImage("res/backgrounds/King Dom's Kingdom.gif"), 1200, 704, 3);
         
         fireTemple = new BufferedImage[8];
+        kingdom = new BufferedImage[8];
         
         for (int i = 0; i < fireTemple.length; i++){
             fireTemple[i] = fireTemple_sheet.crop(i);
+        }
+        
+        for (int i = 0; i < kingdom.length; i++){
+            kingdom[i] = kingdom_sheet.crop(i);
         }
         
         //Kasai Player1

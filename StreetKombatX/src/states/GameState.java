@@ -29,7 +29,7 @@ public class GameState extends State {
         this.player1 = player1;
         this.player2 = player2;
         
-        background = new Animation(60, Assets.fireTemple);
+        background = new Animation(60, Assets.kingdom);
     }
     @Override
     public void tick() {
