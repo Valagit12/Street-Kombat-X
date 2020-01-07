@@ -33,7 +33,7 @@ public abstract class Player {
     protected int standing111Recovery = 2;
     protected int specialMoveRecovery = 10;
     protected Game game;
-    protected boolean left, right, up, down, blocking, one, two;
+    protected boolean left, right, up, down, blocking, one, two, specialButton;
     protected boolean previousOne = false;
     public boolean isWalkingLeft = false;
     public boolean isWalkingRight = false;
@@ -49,6 +49,7 @@ public abstract class Player {
     public boolean isStandingTwo = false;
     public boolean isStandingOneOne = false;
     public boolean isStandingOneOneOne = false;
+    public boolean isSpecial = false;
     public boolean isActive = false;
     public boolean isHit = false;
     public boolean isRecovering = false;

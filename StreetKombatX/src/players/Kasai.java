@@ -82,6 +82,7 @@ public class Kasai extends Player {
             blocking = game.getKeyManager().player1_block;
             one = game.getKeyManager().player1_1;
             two = game.getKeyManager().player1_2;
+            specialButton = game.getKeyManager().player1_special;
         } else if (playerNum == 2) {
             if (isAbleToPress){
                 up = game.getKeyManager().player2_jump;
@@ -92,6 +93,7 @@ public class Kasai extends Player {
             blocking = game.getKeyManager().player2_block;
             one = game.getKeyManager().player2_1;
             two = game.getKeyManager().player2_2;
+            specialButton = game.getKeyManager().player2_special;
         }
         
         if (recovery > 0){
@@ -346,6 +348,28 @@ public class Kasai extends Player {
             }
         }
         
+        if (isSpecial){
+            up = false;
+            left = false;
+            right = false;
+            one = false;
+            two = false;
+            if (special.getCurrentIndex() == 10){
+                special.setIndex(0);
+                isSpecial = false;
+                recovery = specialMoveRecovery;
+                isActive = false;
+            }
+            else if (special.getCurrentIndex() >= 3 && special.getCurrentIndex() <= 5){
+                standing2.tick();
+                isActive = true;
+            }
+            else {
+                standing2.tick();
+                isActive = false;
+            }
+        }
+        
         if (up) {
             isJumping = true;
             isAbleToPress = false;
@@ -406,6 +430,10 @@ public class Kasai extends Player {
             else {
                 isStandingTwo = true;
             }
+        }
+        
+        if (specialButton){
+            isSpecial = true;
         }
        
         
