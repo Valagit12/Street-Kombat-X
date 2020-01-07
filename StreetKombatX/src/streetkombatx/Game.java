@@ -211,6 +211,6 @@ public class Game implements Runnable{
     }
     
     public static void main(String[] args) {
-        new Game (1280, 720, "Street Kombat X"); //creates an instance of the main thread Game and starts the program
+        new Game (1200, 704, "Street Kombat X"); //creates an instance of the main thread Game and starts the program
     }
 }

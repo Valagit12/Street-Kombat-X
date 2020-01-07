@@ -34,20 +34,45 @@ public class CollisionCheck {
         hitbox_player1 = player1.getHitbox();
         hitbox_player2 = player2.getHitbox();
         
+        
         if (player1.getX() + player1.getWidth() > player2.getX() + 10){
             if (player2.isWalkingLeft && !player1.isWalkingRight){
-                player1.setX(player2.getX()+10-player1.getWidth());
+                if (player1.getX() < 0){
+                    player1.setX(0);
+                    player2.setX(player1.getX()+player1.getWidth()-10);
+                }
+                else {
+                    player1.setX(player2.getX()+10-player1.getWidth());
+                }
             }
             else if (!player2.isWalkingLeft && player1.isWalkingRight){
-                player2.setX(player1.getX()+player1.getWidth()-10);
+                if (player2.getX() > 1150){
+                    player2.setX(1150);
+                    player1.setX(player2.getX()+10-player1.getWidth());
+                }
+                else {
+                    player2.setX(player1.getX()+player1.getWidth()-10);
+                }
             }
-            else{
+            else {
                 xPlayer1 = player2.getX()+10-player1.getWidth();
                 xPlayer2 = player1.getX()+player1.getWidth()-10;
                 player1.setX(xPlayer1);
                 player2.setX(xPlayer2);
             }
         }
+        else {
+            if (player1.getX() < 0){
+            player1.setX(0);
+        }
+        
+        if (player2.getX() > 1150){
+            player2.setX(1150);
+        }
+        }
+        
+        System.out.println("Player1 X: " + player1.getX());
+        System.out.println("Player2 X: " + player2.getX());
 
         if(Rectangle.isIntersecting(hitbox_player1, hitbox_player2)){
             if (player1.isJumpingOne && player1.isActive && !player2.isBlocking){

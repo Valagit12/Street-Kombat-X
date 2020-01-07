@@ -27,34 +27,34 @@ public class Kasai extends Player {
 
         if (playerNum == 1) {
             stance = new Animation(66.668, Assets.kasai_stance_player1);
-            walk_left = new Animation(50.001, Assets.kasai_walk_left_player1);
-            walk_right = new Animation(50.001, Assets.kasai_walk_right_player1);
+            walk_left = new Animation(50, Assets.kasai_walk_left_player1);
+            walk_right = new Animation(50, Assets.kasai_walk_right_player1);
             block = new Animation(20, Assets.kasai_block_player1);
             crouch = new Animation(20, Assets.kasai_crouch_player1);
-            jump = new Animation(50.001, Assets.kasai_jump_player1);
-            jump1 = new Animation(50.001, Assets.kasai_jump1_player1);
-            jump2 = new Animation(50.001, Assets.kasai_jump2_player1);
-            hit = new Animation(50.001, Assets.kasai_hit_player1);
-            down1 = new Animation(50.001, Assets.kasai_down1_player1);
-            down2 = new Animation(50.001, Assets.kasai_down2_player1);
-            standing2 = new Animation(50.001, Assets.kasai_2_player1);
-            standing1 = new Animation(50.001, Assets.kasai_1_player1);
-            standing11 = new Animation(50.001, Assets.kasai_11_player1);
+            jump = new Animation(50, Assets.kasai_jump_player1);
+            jump1 = new Animation(50, Assets.kasai_jump1_player1);
+            jump2 = new Animation(50, Assets.kasai_jump2_player1);
+            hit = new Animation(50, Assets.kasai_hit_player1);
+            down1 = new Animation(30, Assets.kasai_down1_player1);
+            down2 = new Animation(70, Assets.kasai_down2_player1);
+            standing2 = new Animation(90, Assets.kasai_2_player1);
+            standing1 = new Animation(50, Assets.kasai_1_player1);
+            standing11 = new Animation(50, Assets.kasai_11_player1);
         } else if (playerNum == 2) {
             stance = new Animation(66.668, Assets.kasai_stance_player2);
-            walk_left = new Animation(50.001, Assets.kasai_walk_left_player2);
-            walk_right = new Animation(50.001, Assets.kasai_walk_right_player2);
+            walk_left = new Animation(50, Assets.kasai_walk_left_player2);
+            walk_right = new Animation(50, Assets.kasai_walk_right_player2);
             block = new Animation(20, Assets.kasai_block_player2);
             crouch = new Animation(20, Assets.kasai_crouch_player2);
-            jump = new Animation(50.001, Assets.kasai_jump_player2);
-            jump1 = new Animation(50.001, Assets.kasai_jump1_player2);
-            jump2 = new Animation(50.001, Assets.kasai_jump2_player2);
-            hit = new Animation(50.001, Assets.kasai_hit_player2);
-            down1 = new Animation(50.001, Assets.kasai_down1_player2);
-            down2 = new Animation(50.001, Assets.kasai_down2_player2);
-            standing2 = new Animation(50.001, Assets.kasai_2_player2);
-            standing1 = new Animation(50.001, Assets.kasai_1_player2);
-            standing11 = new Animation(50.001, Assets.kasai_11_player2);
+            jump = new Animation(50, Assets.kasai_jump_player2);
+            jump1 = new Animation(50, Assets.kasai_jump1_player2);
+            jump2 = new Animation(50, Assets.kasai_jump2_player2);
+            hit = new Animation(50, Assets.kasai_hit_player2);
+            down1 = new Animation(30, Assets.kasai_down1_player2);
+            down2 = new Animation(70, Assets.kasai_down2_player2);
+            standing2 = new Animation(90, Assets.kasai_2_player2);
+            standing1 = new Animation(50, Assets.kasai_1_player2);
+            standing11 = new Animation(50, Assets.kasai_11_player2);
         }
         
         hitbox = new Rectangle ((int)x, (int)y, width, height);
@@ -367,16 +367,10 @@ public class Kasai extends Player {
         
         if (right) {
             x += 3;
-            if (x > 1160) {
-                x = 1160;
-            }
             isWalkingRight = true;
             isWalkingLeft = false;
         } else if (left) {
             x -= 3;
-            if (x < 0) {
-                x = 0;
-            }
             isWalkingLeft = true;
             isWalkingRight = false;
         } else {
