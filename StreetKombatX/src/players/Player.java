@@ -25,7 +25,7 @@ public abstract class Player {
     protected int state = 0;
     protected int recovery = 0;
     protected int standing2Recovery = 5;
-    protected int down1Recovery = 9;
+    protected int down1Recovery = 15;
     protected int down2Recovery = 5;
     protected int jump1Recovery = 2;
     protected int standing1Recovery = 5;
@@ -48,6 +48,7 @@ public abstract class Player {
     public boolean isStandingOne = false;
     public boolean isStandingTwo = false;
     public boolean isStandingOneOne = false;
+    public boolean isStandingOneOneOne = false;
     public boolean isActive = false;
     public boolean isHit = false;
     public boolean isRecovering = false;

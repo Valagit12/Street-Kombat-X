@@ -18,7 +18,7 @@ import streetkombatx.Game;
  * @author Valareza
  */
 public class Dom extends Player{
-    private Animation stance, walk_left, walk_right, block, crouch, jump, jump1, jump2, hit, down1, down2, standing2, standing1, standing11;
+    private Animation stance, walk_left, walk_right, block, crouch, jump, jump1, jump2, hit, down1, down2, standing2, standing1, standing11, standing111, special;
 
     public Dom(Game game, float x, float y, int width, int height, int playerNum) {
         super(game, x, y, width, height, playerNum);
@@ -38,6 +38,8 @@ public class Dom extends Player{
             standing2 = new Animation(90, Assets.dom_2_player1);
             standing1 = new Animation(50, Assets.dom_1_player1);
             standing11 = new Animation(50, Assets.dom_11_player1);
+            standing111 = new Animation(50, Assets.dom_111_player1);
+            special = new Animation(50, Assets.dom_special_player1);
         } else if (playerNum == 2) {
             stance = new Animation(66.668, Assets.dom_stance_player2);
             walk_left = new Animation(50, Assets.dom_walk_left_player2);
@@ -53,6 +55,8 @@ public class Dom extends Player{
             standing2 = new Animation(90, Assets.dom_2_player2);
             standing1 = new Animation(50, Assets.dom_1_player2);
             standing11 = new Animation(50, Assets.dom_11_player2);
+            standing111 = new Animation(50, Assets.dom_111_player2);
+            special = new Animation(50, Assets.dom_special_player2);
         }
         
         hitbox = new Rectangle ((int)x, (int)y, width, height);
@@ -286,6 +290,12 @@ public class Dom extends Player{
             left = false;
             right = false;
             two = false;
+            if (playerNum == 1){
+                x += 1;
+            }
+            else {
+                x -= 1;
+            }
             if(standing11.getCurrentIndex() == 15) {
                 standing11.setIndex(0);
                 standing1.setIndex(0);
@@ -300,6 +310,37 @@ public class Dom extends Player{
             }
             else {
                 standing11.tick();
+                isActive = false;
+            }
+        }
+        
+        if (isStandingOneOneOne){
+            up = false;
+            left = false;
+            right = false;
+            two = false;
+            if (playerNum == 1){
+                x += 1;
+            }
+            else {
+                x -= 1;
+            }
+            
+            if (standing111.getCurrentIndex() == 20){
+                standing111.setIndex(0);
+                standing11.setIndex(0);
+                standing1.setIndex(0);
+                isStandingOneOneOne = false;
+                recovery = standing111Recovery;
+                isActive = false;
+                comboIndex = 0;
+            }
+            else if (standing111.getCurrentIndex() >= 2 && standing11.getCurrentIndex() <= 18){
+                standing111.tick();
+                isActive = true;
+            }
+            else {
+                standing111.tick();
                 isActive = false;
             }
         }
@@ -338,6 +379,11 @@ public class Dom extends Player{
                 isStandingOneOne = true;
                 isStandingOne = false;
                 standing11.setIndex(standing1.getCurrentIndex());
+            }
+            else if (comboIndex == 3 && isStandingOneOne && standing11.getCurrentIndex() <= 12){
+                isStandingOneOneOne = true;
+                isStandingOneOne = false;
+                standing111.setIndex(standing11.getCurrentIndex());
             }
             else{
                 isStandingOne = true;
@@ -418,6 +464,10 @@ public class Dom extends Player{
         
         if (isStandingOneOne){
             return standing11.getCurrentFrame();
+        }
+        
+        if (isStandingOneOneOne){
+            return standing111.getCurrentFrame();
         }
         
         if(isStandingTwo){

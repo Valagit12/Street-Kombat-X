@@ -17,6 +17,7 @@ public class CollisionCheck {
     private int comboIndex_player1 = 0;
     private int hitIndex_player2 = 0;
     private int comboIndex_player2 = 0;
+    private int collisionOffset = 30;
     private float xPlayer1, xPlayer2;
     
     private Player player1;
@@ -35,28 +36,28 @@ public class CollisionCheck {
         hitbox_player2 = player2.getHitbox();
         
         
-        if (player1.getX() + player1.getWidth() > player2.getX() + 10){
+        if (player1.getX() + player1.getWidth() > player2.getX() + collisionOffset){
             if (player2.isWalkingLeft && !player1.isWalkingRight){
                 if (player1.getX() < 0){
                     player1.setX(0);
-                    player2.setX(player1.getX()+player1.getWidth()-10);
+                    player2.setX(player1.getX()+player1.getWidth()-collisionOffset);
                 }
                 else {
-                    player1.setX(player2.getX()+10-player1.getWidth());
+                    player1.setX(player2.getX()+collisionOffset-player1.getWidth());
                 }
             }
             else if (!player2.isWalkingLeft && player1.isWalkingRight){
                 if (player2.getX() > 1150){
                     player2.setX(1150);
-                    player1.setX(player2.getX()+10-player1.getWidth());
+                    player1.setX(player2.getX()+collisionOffset-player1.getWidth());
                 }
                 else {
-                    player2.setX(player1.getX()+player1.getWidth()-10);
+                    player2.setX(player1.getX()+player1.getWidth()-collisionOffset);
                 }
             }
             else {
-                xPlayer1 = player2.getX()+10-player1.getWidth();
-                xPlayer2 = player1.getX()+player1.getWidth()-10;
+                xPlayer1 = player2.getX()+collisionOffset-player1.getWidth();
+                xPlayer2 = player1.getX()+player1.getWidth()-collisionOffset;
                 player1.setX(xPlayer1);
                 player2.setX(xPlayer2);
             }
@@ -71,8 +72,6 @@ public class CollisionCheck {
         }
         }
         
-        System.out.println("Player1 X: " + player1.getX());
-        System.out.println("Player2 X: " + player2.getX());
 
         if(Rectangle.isIntersecting(hitbox_player1, hitbox_player2)){
             if (player1.isJumpingOne && player1.isActive && !player2.isBlocking){
@@ -147,6 +146,28 @@ public class CollisionCheck {
                     if (!player2.isCrouching && !player2.isBlocking){
                         player2.isHit = true;
                         if (comboIndex_player1 < 2){
+                            player2.setHealth(5);
+                            comboIndex_player1++;
+                        }
+                        hitIndex_player1++;
+                    }
+                }
+            }
+            else if (player1.isStandingOneOneOne && player1.isActive){
+                if (player1.charTitle.equals("Kasai")){
+                    if (!player2.isCrouching){
+                        player2.isHit = true;
+                        if (comboIndex_player1 < 3){
+                            player2.setHealth(5);
+                            comboIndex_player1++;
+                        }
+                        hitIndex_player1++;
+                    }
+                }
+                else {
+                    if (!player2.isCrouching && !player2.isBlocking){
+                        player2.isHit = true;
+                        if (comboIndex_player1 < 3){
                             player2.setHealth(5);
                             comboIndex_player1++;
                         }
@@ -232,6 +253,28 @@ public class CollisionCheck {
                     if (!player1.isCrouching && !player1.isBlocking){
                         player1.isHit = true;
                         if (comboIndex_player2 < 2){
+                            player1.setHealth(5);
+                            comboIndex_player2++;
+                        }
+                        hitIndex_player2++;
+                    }
+                }
+            }
+            else if (player2.isStandingOneOneOne && player2.isActive){
+                if (player2.charTitle.equals("Kasai")){
+                    if (!player1.isCrouching){
+                        player1.isHit = true;
+                        if (comboIndex_player2 < 3){
+                            player1.setHealth(5);
+                            comboIndex_player2++;
+                        }
+                        hitIndex_player2++;
+                    }
+                }
+                else {
+                    if (!player1.isCrouching && !player1.isBlocking){
+                        player1.isHit = true;
+                        if (comboIndex_player2 < 3){
                             player1.setHealth(5);
                             comboIndex_player2++;
                         }

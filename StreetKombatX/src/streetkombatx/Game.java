@@ -86,7 +86,7 @@ public class Game implements Runnable{
         frame.getFrame().addKeyListener(keyManager);
         
         //temporary
-        player1 = new Dom(this, 200, 410, 150, 300, 1);
+        player1 = new Kasai(this, 200, 410, 150, 300, 1);
         player2 = new Kasai(this, 1000, 410, 150, 300, 2);
         
         GameState gameState = new GameState(this, player1, player2);
@@ -211,6 +211,6 @@ public class Game implements Runnable{
     }
     
     public static void main(String[] args) {
-        new Game (1200, 704, "Street Kombat X"); //creates an instance of the main thread Game and starts the program
+        new Game (1280, 720, "Street Kombat X"); //creates an instance of the main thread Game and starts the program
     }
 }

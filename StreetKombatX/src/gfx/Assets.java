@@ -28,14 +28,14 @@ public class Assets {
     
     //Animations
     public static BufferedImage[] kasai_stance_player1, kasai_walk_left_player1, kasai_walk_right_player1, kasai_block_player1, kasai_crouch_player1, kasai_jump_player1, kasai_hit_player1, kasai_jump2_player1, kasai_jump1_player1;
-    public static BufferedImage[] kasai_down1_player1, kasai_down2_player1, kasai_2_player1, kasai_1_player1, kasai_11_player1;
+    public static BufferedImage[] kasai_down1_player1, kasai_down2_player1, kasai_2_player1, kasai_1_player1, kasai_11_player1, kasai_111_player1, kasai_special_player1;
     public static BufferedImage[] kasai_stance_player2, kasai_walk_left_player2, kasai_walk_right_player2, kasai_block_player2, kasai_crouch_player2, kasai_jump_player2, kasai_hit_player2, kasai_jump2_player2, kasai_jump1_player2;
-    public static BufferedImage[] kasai_down1_player2, kasai_down2_player2, kasai_2_player2, kasai_1_player2, kasai_11_player2;
+    public static BufferedImage[] kasai_down1_player2, kasai_down2_player2, kasai_2_player2, kasai_1_player2, kasai_11_player2, kasai_111_player2, kasai_special_player2;
     
     public static BufferedImage[] dom_stance_player1, dom_walk_left_player1, dom_walk_right_player1, dom_block_player1, dom_crouch_player1, dom_jump_player1, dom_hit_player1, dom_jump2_player1, dom_jump1_player1;
-    public static BufferedImage[] dom_down1_player1, dom_down2_player1, dom_2_player1, dom_1_player1, dom_11_player1;
+    public static BufferedImage[] dom_down1_player1, dom_down2_player1, dom_2_player1, dom_1_player1, dom_11_player1, dom_111_player1, dom_special_player1;
     public static BufferedImage[] dom_stance_player2, dom_walk_left_player2, dom_walk_right_player2, dom_block_player2, dom_crouch_player2, dom_jump_player2, dom_hit_player2, dom_jump2_player2, dom_jump1_player2;
-    public static BufferedImage[] dom_down1_player2, dom_down2_player2, dom_2_player2, dom_1_player2, dom_11_player2;
+    public static BufferedImage[] dom_down1_player2, dom_down2_player2, dom_2_player2, dom_1_player2, dom_11_player2, dom_111_player2, dom_special_player2;
     
     public static void init() {
         try{
@@ -52,13 +52,13 @@ public class Assets {
             System.out.println("hi");
         }
         
-        SpriteSheet kasai_sheet_player1 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Kasai/Player1/Kasai_SpriteSheet.png"), 32, 64, 14);
-        SpriteSheet kasai_sheet_player2 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Kasai/Player2/Kasai_SpriteSheet.png"), 32, 64, 14);
-        SpriteSheet dom_sheet_player2 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Dom/Player2/Dom_SpriteSheet.png"), 32, 64, 14);
-        SpriteSheet dom_sheet_player1 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Dom/Player1/Dom_SpriteSheet.png"), 32, 64, 14);
+        SpriteSheet kasai_sheet_player1 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Kasai/Player1/Kasai_SpriteSheet.png"), 32, 64, 21);
+        SpriteSheet kasai_sheet_player2 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Kasai/Player2/Kasai_SpriteSheet.png"), 32, 64, 21);
+        SpriteSheet dom_sheet_player2 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Dom/Player2/Dom_SpriteSheet.png"), 32, 64, 21);
+        SpriteSheet dom_sheet_player1 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Dom/Player1/Dom_SpriteSheet.png"), 32, 64, 21);
         //Backgrounds
         SpriteSheet fireTemple_sheet = new SpriteSheet(ImageLoader.loadImage("res/backgrounds/FireTemple.png"), 1280, 720, 3);
-        SpriteSheet kingdom_sheet = new SpriteSheet (ImageLoader.loadImage("res/backgrounds/King Dom's Kingdom.gif"), 1200, 704, 3);
+        SpriteSheet kingdom_sheet = new SpriteSheet (ImageLoader.loadImage("res/backgrounds/King Dom's Kingdom.gif"), 1280, 720, 3);
         
         fireTemple = new BufferedImage[8];
         kingdom = new BufferedImage[8];
@@ -86,56 +86,66 @@ public class Assets {
         kasai_2_player1 = new BufferedImage[8];
         kasai_1_player1 = new BufferedImage[10];
         kasai_11_player1 = new BufferedImage[16];
+        kasai_111_player1 = new BufferedImage[21];
+        kasai_special_player1 = new BufferedImage[11];
         
         for (int i = 0; i < kasai_stance_player1.length; i++){
             kasai_stance_player1[i] = kasai_sheet_player1.crop(i);
         }
         
         for (int i = 0; i < kasai_walk_left_player1.length; i++){
-            kasai_walk_right_player1[i] = kasai_sheet_player1.crop(i+14);
+            kasai_walk_right_player1[i] = kasai_sheet_player1.crop(i+21);
             kasai_walk_left_player1[kasai_walk_left_player1.length - 1 - i] = kasai_walk_right_player1[i];
         }
         
         for (int i = 0; i < kasai_block_player1.length; i++){
-            kasai_block_player1[i] = kasai_sheet_player1.crop(i+14*2);
+            kasai_block_player1[i] = kasai_sheet_player1.crop(i+21*2);
         }
         
         for (int i = 0; i < kasai_crouch_player1.length; i++){
-            kasai_crouch_player1[i] = kasai_sheet_player1.crop(i+14*3);
+            kasai_crouch_player1[i] = kasai_sheet_player1.crop(i+21*3);
         }
         
         for (int i = 0; i < kasai_jump_player1.length; i++){
-            kasai_jump_player1[i] = kasai_sheet_player1.crop(i + 14*5);
+            kasai_jump_player1[i] = kasai_sheet_player1.crop(i + 21*5);
         }
         
         for (int i = 0; i < kasai_hit_player1.length; i++) {
-            kasai_hit_player1[i] = kasai_sheet_player1.crop(i + 14*4);
+            kasai_hit_player1[i] = kasai_sheet_player1.crop(i + 21*4);
         }
         
-        kasai_jump2_player1[0] = kasai_sheet_player1.crop(84);
+        kasai_jump2_player1[0] = kasai_sheet_player1.crop(126);
         
         for (int i = 0; i < kasai_jump1_player1.length; i++) {
-            kasai_jump1_player1[i] = kasai_sheet_player1.crop(i + 2 + 14*6);
+            kasai_jump1_player1[i] = kasai_sheet_player1.crop(i + 2 + 21*6);
         }
         
         for (int i = 0; i < kasai_down1_player1.length; i++){
-            kasai_down1_player1[i] = kasai_sheet_player1.crop(i + 14*7);
+            kasai_down1_player1[i] = kasai_sheet_player1.crop(i + 21*7);
         }
         
         for (int i = 0; i < kasai_down2_player1.length; i++){
-            kasai_down2_player1[i] = kasai_sheet_player1.crop(i + 14*8);
+            kasai_down2_player1[i] = kasai_sheet_player1.crop(i + 21*8);
         }
         
         for (int i = 0; i < kasai_2_player1.length; i++){
-            kasai_2_player1[i] = kasai_sheet_player1.crop(i + 14*9);
+            kasai_2_player1[i] = kasai_sheet_player1.crop(i + 21*9);
         }
         
         for(int i = 0; i < kasai_1_player1.length; i++){
-            kasai_1_player1[i] = kasai_sheet_player1.crop(i + 14*10);
+            kasai_1_player1[i] = kasai_sheet_player1.crop(i + 21*10);
         }
         
         for(int i = 0; i < kasai_11_player1.length; i++){
-            kasai_11_player1[i] = kasai_sheet_player1.crop(i + 14*11);
+            kasai_11_player1[i] = kasai_sheet_player1.crop(i + 21*11);
+        }
+        
+        for(int i = 0; i < kasai_111_player1.length; i++){
+            kasai_111_player1[i] = kasai_sheet_player1.crop(i + 21*12);
+        }
+        
+        for(int i = 0; i < kasai_special_player1.length; i++){
+            kasai_special_player1[i] = kasai_sheet_player1.crop(i + 21*13);
         }
         
         //Kasai Player2
@@ -153,56 +163,66 @@ public class Assets {
         kasai_2_player2 = new BufferedImage[8];
         kasai_1_player2 = new BufferedImage[10];
         kasai_11_player2 = new BufferedImage[16];
+        kasai_111_player2 = new BufferedImage[21];
+        kasai_special_player2 = new BufferedImage[11];
         
         for (int i = 0; i < kasai_stance_player2.length; i++){
             kasai_stance_player2[i] = kasai_sheet_player2.crop(i);
         }
         
         for (int i = 0; i < kasai_walk_left_player2.length; i++){
-            kasai_walk_left_player2[i] = kasai_sheet_player2.crop(i+14);
+            kasai_walk_left_player2[i] = kasai_sheet_player2.crop(i+21);
             kasai_walk_right_player2[kasai_walk_right_player2.length - 1 - i] = kasai_walk_left_player2[i];
         }
         
         for (int i = 0; i < kasai_block_player2.length; i++){
-            kasai_block_player2[i] = kasai_sheet_player2.crop(i+14*2);
+            kasai_block_player2[i] = kasai_sheet_player2.crop(i+21*2);
         }
         
         for (int i = 0; i < kasai_crouch_player2.length; i++){
-            kasai_crouch_player2[i] = kasai_sheet_player2.crop(i+14*3);
+            kasai_crouch_player2[i] = kasai_sheet_player2.crop(i+21*3);
         }
         
         for (int i = 0; i < kasai_jump_player2.length; i++){
-            kasai_jump_player2[i] = kasai_sheet_player2.crop(i + 14*5);
+            kasai_jump_player2[i] = kasai_sheet_player2.crop(i + 21*5);
         }
         
         for(int i = 0; i < kasai_hit_player2.length; i++) {
-            kasai_hit_player2[i] = kasai_sheet_player2.crop(i + 14*4);
+            kasai_hit_player2[i] = kasai_sheet_player2.crop(i + 21*4);
         }
         
-        kasai_jump2_player2[0] = kasai_sheet_player2.crop(84);
+        kasai_jump2_player2[0] = kasai_sheet_player2.crop(126);
         
         for (int i = 0; i < kasai_jump1_player2.length; i++) {
-            kasai_jump1_player2[i] = kasai_sheet_player2.crop(i + 2 + 14*6);
+            kasai_jump1_player2[i] = kasai_sheet_player2.crop(i + 2 + 21*6);
         }
         
         for (int i = 0; i < kasai_down1_player2.length; i++){
-            kasai_down1_player2[i] = kasai_sheet_player2.crop(i + 14*7);
+            kasai_down1_player2[i] = kasai_sheet_player2.crop(i + 21*7);
         }
         
         for (int i = 0; i < kasai_down2_player2.length; i++){
-            kasai_down2_player2[i] = kasai_sheet_player2.crop(i + 14*8);
+            kasai_down2_player2[i] = kasai_sheet_player2.crop(i + 21*8);
         }
         
         for (int i = 0; i < kasai_2_player2.length; i++){
-            kasai_2_player2[i] = kasai_sheet_player2.crop(i + 14*9);
+            kasai_2_player2[i] = kasai_sheet_player2.crop(i + 21*9);
         }
         
         for(int i = 0; i < kasai_1_player2.length; i++){
-            kasai_1_player2[i] = kasai_sheet_player2.crop(i + 14*10);
+            kasai_1_player2[i] = kasai_sheet_player2.crop(i + 21*10);
         }
         
         for(int i = 0; i < kasai_11_player2.length; i++){
-            kasai_11_player2[i] = kasai_sheet_player2.crop(i + 14*11);
+            kasai_11_player2[i] = kasai_sheet_player2.crop(i + 21*11);
+        }
+        
+        for(int i = 0; i < kasai_111_player2.length; i++){
+            kasai_111_player2[i] = kasai_sheet_player2.crop(i + 21*12);
+        }
+        
+        for(int i = 0; i < kasai_special_player2.length; i++){
+            kasai_special_player2[i] = kasai_sheet_player2.crop(i + 21*13);
         }
         
         
@@ -221,6 +241,8 @@ public class Assets {
         dom_2_player1 = new BufferedImage[8];
         dom_1_player1 = new BufferedImage[10];
         dom_11_player1 = new BufferedImage[16];
+        dom_111_player1 = new BufferedImage[21];
+        dom_special_player1 = new BufferedImage[11];
         
         
         for (int i = 0; i < dom_stance_player1.length; i++){
@@ -228,50 +250,58 @@ public class Assets {
         }
         
         for (int i = 0; i < dom_walk_left_player1.length; i++){
-            dom_walk_right_player1[i] = dom_sheet_player1.crop(i+14);
+            dom_walk_right_player1[i] = dom_sheet_player1.crop(i+21);
             dom_walk_left_player1[dom_walk_left_player1.length - 1 - i] = dom_walk_right_player1[i];
         }
         
         for (int i = 0; i < dom_block_player1.length; i++){
-            dom_block_player1[i] = dom_sheet_player1.crop(i+14*2);
+            dom_block_player1[i] = dom_sheet_player1.crop(i+21*2);
         }
         
         for (int i = 0; i < dom_crouch_player1.length; i++){
-            dom_crouch_player1[i] = dom_sheet_player1.crop(i+14*3);
+            dom_crouch_player1[i] = dom_sheet_player1.crop(i+21*3);
         }
         
         for (int i = 0; i < dom_jump_player1.length; i++){
-            dom_jump_player1[i] = dom_sheet_player1.crop(i + 14*5);
+            dom_jump_player1[i] = dom_sheet_player1.crop(i + 21*5);
         }
         
         for (int i = 0; i < dom_hit_player1.length; i++) {
-            dom_hit_player1[i] = dom_sheet_player1.crop(i + 14*4);
+            dom_hit_player1[i] = dom_sheet_player1.crop(i + 21*4);
         }
         
-        dom_jump2_player1[0] = dom_sheet_player1.crop(84);
+        dom_jump2_player1[0] = dom_sheet_player1.crop(126);
         
         for (int i = 0; i < dom_jump1_player1.length; i++) {
-            dom_jump1_player1[i] = dom_sheet_player1.crop(i + 2 + 14*6);
+            dom_jump1_player1[i] = dom_sheet_player1.crop(i + 2 + 21*6);
         }
         
         for (int i = 0; i < dom_down1_player1.length; i++){
-            dom_down1_player1[i] = dom_sheet_player1.crop(i + 14*7);
+            dom_down1_player1[i] = dom_sheet_player1.crop(i + 21*7);
         }
         
         for (int i = 0; i < dom_down2_player1.length; i++){
-            dom_down2_player1[i] = dom_sheet_player1.crop(i + 14*8);
+            dom_down2_player1[i] = dom_sheet_player1.crop(i + 21*8);
         }
         
         for (int i = 0; i < dom_2_player1.length; i++){
-            dom_2_player1[i] = dom_sheet_player1.crop(i + 14*9);
+            dom_2_player1[i] = dom_sheet_player1.crop(i + 21*9);
         }
         
         for(int i = 0; i < dom_1_player1.length; i++){
-            dom_1_player1[i] = dom_sheet_player1.crop(i + 14*10);
+            dom_1_player1[i] = dom_sheet_player1.crop(i + 21*10);
         }
         
         for(int i = 0; i < dom_11_player1.length; i++){
-            dom_11_player1[i] = dom_sheet_player1.crop(i + 14*11);
+            dom_11_player1[i] = dom_sheet_player1.crop(i + 21*11);
+        }
+        
+        for(int i = 0; i < dom_111_player1.length; i++){
+            dom_111_player1[i] = dom_sheet_player1.crop(i + 21*12);
+        }
+        
+        for(int i = 0; i < dom_special_player1.length; i++){
+            dom_special_player1[i] = dom_sheet_player1.crop(i + 21*13);
         }
         
         //Dom Player 2
@@ -289,6 +319,8 @@ public class Assets {
         dom_2_player2 = new BufferedImage[8];
         dom_1_player2 = new BufferedImage[10];
         dom_11_player2 = new BufferedImage[16];
+        dom_111_player2 = new BufferedImage[21];
+        dom_special_player2 = new BufferedImage[11];
         
         
         for (int i = 0; i < dom_stance_player2.length; i++){
@@ -296,50 +328,58 @@ public class Assets {
         }
         
         for (int i = 0; i < dom_walk_left_player2.length; i++){
-            dom_walk_right_player2[i] = dom_sheet_player2.crop(i+14);
+            dom_walk_right_player2[i] = dom_sheet_player2.crop(i+21);
             dom_walk_left_player2[dom_walk_left_player2.length - 1 - i] = dom_walk_right_player2[i];
         }
         
         for (int i = 0; i < dom_block_player2.length; i++){
-            dom_block_player2[i] = dom_sheet_player2.crop(i+14*2);
+            dom_block_player2[i] = dom_sheet_player2.crop(i+21*2);
         }
         
         for (int i = 0; i < dom_crouch_player2.length; i++){
-            dom_crouch_player2[i] = dom_sheet_player2.crop(i+14*3);
+            dom_crouch_player2[i] = dom_sheet_player2.crop(i+21*3);
         }
         
         for (int i = 0; i < dom_jump_player2.length; i++){
-            dom_jump_player2[i] = dom_sheet_player2.crop(i + 14*5);
+            dom_jump_player2[i] = dom_sheet_player2.crop(i + 21*5);
         }
         
         for (int i = 0; i < dom_hit_player2.length; i++) {
-            dom_hit_player2[i] = dom_sheet_player2.crop(i + 14*4);
+            dom_hit_player2[i] = dom_sheet_player2.crop(i + 21*4);
         }
         
-        dom_jump2_player2[0] = dom_sheet_player2.crop(84);
+        dom_jump2_player2[0] = dom_sheet_player2.crop(126);
         
         for (int i = 0; i < dom_jump1_player2.length; i++) {
-            dom_jump1_player2[i] = dom_sheet_player2.crop(i + 2 + 14*6);
+            dom_jump1_player2[i] = dom_sheet_player2.crop(i + 2 + 21*6);
         }
         
         for (int i = 0; i < dom_down1_player2.length; i++){
-            dom_down1_player2[i] = dom_sheet_player2.crop(i + 14*7);
+            dom_down1_player2[i] = dom_sheet_player2.crop(i + 21*7);
         }
         
         for (int i = 0; i < dom_down2_player2.length; i++){
-            dom_down2_player2[i] = dom_sheet_player2.crop(i + 14*8);
+            dom_down2_player2[i] = dom_sheet_player2.crop(i + 21*8);
         }
         
         for (int i = 0; i < dom_2_player2.length; i++){
-            dom_2_player2[i] = dom_sheet_player2.crop(i + 14*9);
+            dom_2_player2[i] = dom_sheet_player2.crop(i + 21*9);
         }
         
         for(int i = 0; i < dom_1_player2.length; i++){
-            dom_1_player2[i] = dom_sheet_player2.crop(i + 14*10);
+            dom_1_player2[i] = dom_sheet_player2.crop(i + 21*10);
         }
         
         for(int i = 0; i< dom_11_player2.length; i++){
-            dom_11_player2[i] = dom_sheet_player2.crop(i + 14*11);
+            dom_11_player2[i] = dom_sheet_player2.crop(i + 21*11);
+        }
+        
+        for(int i = 0; i < dom_111_player2.length; i++){
+            dom_111_player2[i] = dom_sheet_player2.crop(i + 21*12);
+        }
+        
+        for(int i = 0; i < dom_special_player2.length; i++){
+            dom_special_player2[i] = dom_sheet_player2.crop(i + 21*13);
         }
     }
     
