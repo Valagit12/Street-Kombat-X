@@ -20,6 +20,7 @@ import streetkombatx.Game;
 public class Kasai extends Player {
 
     private Animation stance, walk_left, walk_right, block, crouch, jump, jump1, jump2, hit, down1, down2, standing2;
+    private Animation standing1, standing11;
 
     public Kasai(Game game, float x, float y, int width, int height, int playerNum) {
         super(game, x, y, width, height, playerNum);
@@ -37,6 +38,8 @@ public class Kasai extends Player {
             down1 = new Animation(50.001, Assets.kasai_down1_player1);
             down2 = new Animation(50.001, Assets.kasai_down2_player1);
             standing2 = new Animation(50.001, Assets.kasai_2_player1);
+            standing1 = new Animation(50.001, Assets.kasai_1_player1);
+            standing11 = new Animation(50.001, Assets.kasai_11_player1);
         } else if (playerNum == 2) {
             stance = new Animation(66.668, Assets.kasai_stance_player2);
             walk_left = new Animation(50.001, Assets.kasai_walk_left_player2);
@@ -50,9 +53,11 @@ public class Kasai extends Player {
             down1 = new Animation(50.001, Assets.kasai_down1_player2);
             down2 = new Animation(50.001, Assets.kasai_down2_player2);
             standing2 = new Animation(50.001, Assets.kasai_2_player2);
+            standing1 = new Animation(50.001, Assets.kasai_1_player2);
+            standing11 = new Animation(50.001, Assets.kasai_11_player2);
         }
         
-        hitbox = new Rectangle ((int)x, (int)y + height, width, height);
+        hitbox = new Rectangle ((int)x, (int)y, width, height);
         charTitle = "Kasai";
     }
 
@@ -107,8 +112,23 @@ public class Kasai extends Player {
             isAbleToPress = true;
             isJumpingOne = false;
             isJumpingTwo = false;
+            isActive = false;
             jump1.setIndex(0);
             jumpAttackIndex = 0;
+        }
+        
+        if (isHit){
+            if(hit.getCurrentIndex() < 3){
+                hit.tick();
+            }
+        }
+        else if (hit.getCurrentIndex() != 0){
+            isRecovering = true;
+            hit.tick();
+        }
+        else {
+            hit.setIndex(0);
+            isRecovering = false;
         }
         
         if (isJumping) {
@@ -117,7 +137,6 @@ public class Kasai extends Player {
             }
             else if (jump.getCurrentIndex() == 6){
                 isJumping = false;
-                isJumpingOne = false;
                 jump.setIndex(0);
             }
             jump.tick();
@@ -130,9 +149,15 @@ public class Kasai extends Player {
                     jump1.setIndex(0);
                     jumpAttackIndex++;
                     recovery = jump1Recovery;
+                    isActive = false;
+                }
+                else if (jump1.getCurrentIndex() == 2 || jump1.getCurrentIndex() == 3 || jump1.getCurrentIndex() == 4){
+                    isActive = true;
+                    jump1.tick();
                 }
                 else {
                     jump1.tick();
+                    isActive = false;
                 }
             }
         }
@@ -176,34 +201,108 @@ public class Kasai extends Player {
         }
         
         if (isDownOne){
-            if (down1.getCurrentIndex() != 7){
-                down1.tick();
-            }
-            else {
+            up = false;
+            one = false;
+            two = false;
+            if (down1.getCurrentIndex() == 7){
                 down1.setIndex(0);
                 isDownOne = false;
                 recovery = down1Recovery;
+                isActive = false;
+            }
+            else if (down1.getCurrentIndex() >= 3 && down1.getCurrentIndex() <= 5){
+                isActive = true;
+                down1.tick();
+            }
+            else {
+                down1.tick();
+                isActive = false;
             }
         }
         else if (isDownTwo){
-            if (down2.getCurrentIndex() != 8){
-                down2.tick();
-            }
-            else {
+            up = false;
+            one = false;
+            two = false;
+            if (down2.getCurrentIndex() == 8){
                 down2.setIndex(0);
                 isDownTwo = false;
                 recovery = down2Recovery;
+                isActive = false;
+            }
+            else if (down2.getCurrentIndex() == 4 || down2.getCurrentIndex() == 5){
+                isActive = true;
+                down2.tick();
+            }
+            else {
+                down2.tick();
+                isActive = false;
             }
         }
         
         if (isStandingTwo){
-            if(standing2.getCurrentIndex() != 7) {
-                standing2.tick();
-            }
-            else {
+            up = false;
+            left = false;
+            right = false;
+            one = false;
+            two = false;
+            if(standing2.getCurrentIndex() == 7) {
                 standing2.setIndex(0);
                 isStandingTwo = false;
                 recovery = standing2Recovery;
+                isActive = false;
+            }
+            else if (standing2.getCurrentIndex() >= 3 && standing2.getCurrentIndex() <= 5){
+                standing2.tick();
+                isActive = true;
+            }
+            else {
+                standing2.tick();
+                isActive = false;
+            }
+        }
+        
+        if (isStandingOne){
+            up = false;
+            left = false;
+            right = false;
+            two = false;
+            if(standing1.getCurrentIndex() == 9) {
+                standing1.setIndex(0);
+                isStandingOne = false;
+                recovery = standing1Recovery;
+                isActive = false;
+                comboIndex = 0;
+            }
+            else if (standing1.getCurrentIndex() >= 2 && standing1.getCurrentIndex() <= 4){
+                standing1.tick();
+                isActive = true;
+            }
+            else {
+                standing1.tick();
+                isActive = false;
+            }
+        }
+        
+        if (isStandingOneOne){
+            up = false;
+            left = false;
+            right = false;
+            two = false;
+            if(standing11.getCurrentIndex() == 15) {
+                standing11.setIndex(0);
+                standing1.setIndex(0);
+                isStandingOneOne = false;
+                recovery = standing11Recovery;
+                isActive = false;
+                comboIndex = 0;
+            }
+            else if (standing11.getCurrentIndex() >= 2 && standing11.getCurrentIndex() <= 13){
+                standing11.tick();
+                isActive = true;
+            }
+            else {
+                standing11.tick();
+                isActive = false;
             }
         }
         
@@ -228,20 +327,34 @@ public class Kasai extends Player {
         }
         
         if (one) {
+            if (!previousOne){
+                comboIndex++;
+            }
             if (!isAbleToPress && jumpAttackIndex < 1){
                 isJumpingOne = true;
             }
             else if (isCrouching){
                 isDownOne = true;
             }
-            else{
-                
+            else if (comboIndex == 2 && isStandingOne && standing1.getCurrentIndex() <= 6){
+                isStandingOneOne = true;
+                isStandingOne = false;
+                standing11.setIndex(standing1.getCurrentIndex());
             }
+            else{
+                isStandingOne = true;
+            }
+            previousOne = true;
         }
+        else {
+            previousOne = false;
+        }
+        System.out.println(comboIndex);
         
         if (two){
             if (!isAbleToPress && jumpAttackIndex < 1){
                 isJumpingTwo = true;
+                isActive = true;
             }
             else if (isCrouching){
                 isDownTwo = true;
@@ -298,8 +411,24 @@ public class Kasai extends Player {
     public void setRecovery(int recovery) {
         this.recovery = recovery;
     }
+    
+    public void setHealth(int healthDecrease){
+        this.health -= healthDecrease;
+    }
 
     private BufferedImage getCurrentAnimationState() {
+        if (isHit || isRecovering){
+            return hit.getCurrentFrame();
+        }
+        
+        if(isStandingOne){
+            return standing1.getCurrentFrame();
+        }
+        
+        if (isStandingOneOne){
+            return standing11.getCurrentFrame();
+        }
+        
         if(isStandingTwo){
             return standing2.getCurrentFrame();
         }
@@ -343,7 +472,7 @@ public class Kasai extends Player {
     
     private void setHitbox() {
         hitbox.setLeft((int)x);
-        hitbox.setBottom((int)y + height);
+        hitbox.setBottom((int)y);
     }
     
     private void drawHealth(Graphics g) {
@@ -351,10 +480,21 @@ public class Kasai extends Player {
             g.setColor(Color.black);
             g.fillPolygon(xNameTag_Player1,yNameTag_Player1, 4);
             g.setColor(Color.red);
-            g.drawString(charTitle, 100, 200);
+            g.setFont(Assets.dragonForce);
+            g.drawString(charTitle, 120, 150);
             g.fillRoundRect(80,60, 450, 50, 25, 25);
             g.setColor(Color.yellow);
             g.fillRoundRect(80, 60, (450*health)/100, 50, 25, 25);
+        }
+        else {
+            g.setColor(Color.black);
+            g.fillPolygon(xNameTag_Player2,yNameTag_Player2, 4);
+            g.setColor(Color.red);
+            g.setFont(Assets.dragonForce);
+            g.drawString(charTitle, 1080, 150);
+            g.fillRoundRect(750,60, 450, 50, 25, 25);
+            g.setColor(Color.yellow);
+            g.fillRoundRect(750+ (450-(450*health)/100), 60, (450*health)/100, 50, 25, 25);
         }
     }
 

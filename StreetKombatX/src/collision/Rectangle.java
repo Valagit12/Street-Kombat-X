@@ -142,6 +142,23 @@ public class Rectangle {
         Rectangle intersect = new Rectangle(l,b,w,h);
         return intersect;
     }
+    
+    public static boolean isIntersecting (Rectangle r, Rectangle e){
+        int l = 0;
+        int b = 0;
+        int w = 0;
+        int h = 0;
+
+        w = min((r.left + r.width), (e.left + e.width)) - max(r.left, e.left); //determines the width of the intersecting Rectangle
+        h = min((r.bottom + r.height), (e.bottom + e.height)) - max(r.bottom, e.bottom); //determines the height of the intersecting Rectangle
+
+        if (w > 0 && h > 0 || w == 0 || h == 0){ //if the two Rectangles intersect
+            return true;
+        }
+        else { //if the two Rectangle do not intersect
+            return false;
+        }
+    }
 
     /**
      * Calculates the total perimeter of two Rectangles

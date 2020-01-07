@@ -21,6 +21,7 @@ public abstract class Player {
     protected int height, width;
     protected int health = 100;
     protected int jumpAttackIndex = 0;
+    protected int comboIndex = 0;
     protected int state = 0;
     protected int recovery = 0;
     protected int standing2Recovery = 5;
@@ -33,21 +34,29 @@ public abstract class Player {
     protected int specialMoveRecovery = 10;
     protected Game game;
     protected boolean left, right, up, down, blocking, one, two;
-    protected boolean isWalkingLeft = false;
-    protected boolean isWalkingRight = false;
-    protected boolean isBlocking = false;
-    protected boolean isCrouching = false;
-    protected boolean isJumping = false;
-    protected boolean isAbleToPress = true;
-    protected boolean isJumpingOne = false;
-    protected boolean isJumpingTwo = false;
-    protected boolean isDownOne = false;
-    protected boolean isDownTwo = false;
-    protected boolean isStandingTwo = false;
+    protected boolean previousOne = false;
+    public boolean isWalkingLeft = false;
+    public boolean isWalkingRight = false;
+    public boolean isBlocking = false;
+    public boolean isCrouching = false;
+    public boolean isJumping = false;
+    public boolean isAbleToPress = true;
+    public boolean isJumpingOne = false;
+    public boolean isJumpingTwo = false;
+    public boolean isDownOne = false;
+    public boolean isDownTwo = false;
+    public boolean isStandingOne = false;
+    public boolean isStandingTwo = false;
+    public boolean isStandingOneOne = false;
+    public boolean isActive = false;
+    public boolean isHit = false;
+    public boolean isRecovering = false;
     protected Rectangle hitbox;
-    protected String charTitle;
+    public String charTitle;
     protected int[] xNameTag_Player1 = {90,260,240,110};
     protected int[] yNameTag_Player1 = {110,110,160,160};
+    protected int[] xNameTag_Player2 = {1020,1190,1170,1040};
+    protected int[] yNameTag_Player2 = {110,110,160,160};
     
     public Player(Game game, float x, float y, int width, int height, int playerNum) {
         this.playerNum = playerNum;
@@ -59,8 +68,16 @@ public abstract class Player {
         this.height = height;
     }
     
+    public int getWidth(){
+        return width;
+    }
+    
     public float getX(){
         return x;
+    }
+    
+    public void setX(float x) {
+        this.x = x;
     }
     
     public abstract Rectangle getHitbox();
@@ -68,6 +85,8 @@ public abstract class Player {
     public abstract int getState();
     
     public abstract void setRecovery(int recovery);
+    
+    public abstract void setHealth(int healthDecrease);
     
     public abstract void tick();
     

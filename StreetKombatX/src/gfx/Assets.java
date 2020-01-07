@@ -5,7 +5,12 @@
  */
 package gfx;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 /**
  *
@@ -13,19 +18,39 @@ import java.awt.image.BufferedImage;
  */
 public class Assets {
     
+    //Font
+    public static Font dragonForce;
+    public static Font dragonForceNum;
+    
     //Backgrounds
     public static BufferedImage[] fireTemple;
     
     //Animations
     public static BufferedImage[] kasai_stance_player1, kasai_walk_left_player1, kasai_walk_right_player1, kasai_block_player1, kasai_crouch_player1, kasai_jump_player1, kasai_hit_player1, kasai_jump2_player1, kasai_jump1_player1;
-    public static BufferedImage[] kasai_down1_player1, kasai_down2_player1, kasai_2_player1;
+    public static BufferedImage[] kasai_down1_player1, kasai_down2_player1, kasai_2_player1, kasai_1_player1, kasai_11_player1;
     public static BufferedImage[] kasai_stance_player2, kasai_walk_left_player2, kasai_walk_right_player2, kasai_block_player2, kasai_crouch_player2, kasai_jump_player2, kasai_hit_player2, kasai_jump2_player2, kasai_jump1_player2;
-    public static BufferedImage[] kasai_down1_player2, kasai_down2_player2, kasai_2_player2;
+    public static BufferedImage[] kasai_down1_player2, kasai_down2_player2, kasai_2_player2, kasai_1_player2, kasai_11_player2;
     
     public static BufferedImage[] dom_stance_player1, dom_walk_left_player1, dom_walk_right_player1, dom_block_player1, dom_crouch_player1, dom_jump_player1, dom_hit_player1, dom_jump2_player1, dom_jump1_player1;
+    public static BufferedImage[] dom_down1_player1, dom_down2_player1, dom_2_player1, dom_1_player1, dom_11_player1;
     public static BufferedImage[] dom_stance_player2, dom_walk_left_player2, dom_walk_right_player2, dom_block_player2, dom_crouch_player2, dom_jump_player2, dom_hit_player2, dom_jump2_player2, dom_jump1_player2;
+    public static BufferedImage[] dom_down1_player2, dom_down2_player2, dom_2_player2, dom_1_player2, dom_11_player2;
     
     public static void init() {
+        try{
+            dragonForce = Font.createFont(Font.TRUETYPE_FONT, new File("res/font/DragonForcE.ttf")).deriveFont(Font.PLAIN, 50f);
+            dragonForceNum = Font.createFont(Font.TRUETYPE_FONT, new File("res/font/DragonForcE.ttf")).deriveFont(Font.PLAIN, 80f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(dragonForce);
+            ge.registerFont(dragonForceNum);
+        } catch (IOException e){
+            e.printStackTrace();
+            System.out.println("hi");
+        } catch (FontFormatException ex) {
+            ex.printStackTrace();
+            System.out.println("hi");
+        }
+        
         SpriteSheet kasai_sheet_player1 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Kasai/Player1/Kasai_SpriteSheet.png"), 32, 64, 14);
         SpriteSheet kasai_sheet_player2 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Kasai/Player2/Kasai_SpriteSheet.png"), 32, 64, 14);
         SpriteSheet dom_sheet_player2 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Dom/Player2/Dom_SpriteSheet.png"), 32, 64, 14);
@@ -52,6 +77,8 @@ public class Assets {
         kasai_down1_player1 = new BufferedImage[8];
         kasai_down2_player1 = new BufferedImage[9];
         kasai_2_player1 = new BufferedImage[8];
+        kasai_1_player1 = new BufferedImage[10];
+        kasai_11_player1 = new BufferedImage[16];
         
         for (int i = 0; i < kasai_stance_player1.length; i++){
             kasai_stance_player1[i] = kasai_sheet_player1.crop(i);
@@ -96,6 +123,14 @@ public class Assets {
             kasai_2_player1[i] = kasai_sheet_player1.crop(i + 14*9);
         }
         
+        for(int i = 0; i < kasai_1_player1.length; i++){
+            kasai_1_player1[i] = kasai_sheet_player1.crop(i + 14*10);
+        }
+        
+        for(int i = 0; i < kasai_11_player1.length; i++){
+            kasai_11_player1[i] = kasai_sheet_player1.crop(i + 14*11);
+        }
+        
         //Kasai Player2
         kasai_stance_player2 = new BufferedImage[8];
         kasai_walk_left_player2 = new BufferedImage[10];
@@ -109,6 +144,8 @@ public class Assets {
         kasai_down1_player2 = new BufferedImage[8];
         kasai_down2_player2 = new BufferedImage[9];
         kasai_2_player2 = new BufferedImage[8];
+        kasai_1_player2 = new BufferedImage[10];
+        kasai_11_player2 = new BufferedImage[16];
         
         for (int i = 0; i < kasai_stance_player2.length; i++){
             kasai_stance_player2[i] = kasai_sheet_player2.crop(i);
@@ -153,6 +190,14 @@ public class Assets {
             kasai_2_player2[i] = kasai_sheet_player2.crop(i + 14*9);
         }
         
+        for(int i = 0; i < kasai_1_player2.length; i++){
+            kasai_1_player2[i] = kasai_sheet_player2.crop(i + 14*10);
+        }
+        
+        for(int i = 0; i < kasai_11_player2.length; i++){
+            kasai_11_player2[i] = kasai_sheet_player2.crop(i + 14*11);
+        }
+        
         
         //Dom player 1
         dom_stance_player1 = new BufferedImage[8];
@@ -164,6 +209,11 @@ public class Assets {
         dom_hit_player1 = new BufferedImage[7];
         dom_jump2_player1 = new BufferedImage[1];
         dom_jump1_player1 = new BufferedImage[6];
+        dom_down1_player1 = new BufferedImage[8];
+        dom_down2_player1 = new BufferedImage[9];
+        dom_2_player1 = new BufferedImage[8];
+        dom_1_player1 = new BufferedImage[10];
+        dom_11_player1 = new BufferedImage[16];
         
         
         for (int i = 0; i < dom_stance_player1.length; i++){
@@ -195,6 +245,94 @@ public class Assets {
         
         for (int i = 0; i < dom_jump1_player1.length; i++) {
             dom_jump1_player1[i] = dom_sheet_player1.crop(i + 2 + 14*6);
+        }
+        
+        for (int i = 0; i < dom_down1_player1.length; i++){
+            dom_down1_player1[i] = dom_sheet_player1.crop(i + 14*7);
+        }
+        
+        for (int i = 0; i < dom_down2_player1.length; i++){
+            dom_down2_player1[i] = dom_sheet_player1.crop(i + 14*8);
+        }
+        
+        for (int i = 0; i < dom_2_player1.length; i++){
+            dom_2_player1[i] = dom_sheet_player1.crop(i + 14*9);
+        }
+        
+        for(int i = 0; i < dom_1_player1.length; i++){
+            dom_1_player1[i] = dom_sheet_player1.crop(i + 14*10);
+        }
+        
+        for(int i = 0; i < dom_11_player1.length; i++){
+            dom_11_player1[i] = dom_sheet_player1.crop(i + 14*11);
+        }
+        
+        //Dom Player 2
+        dom_stance_player2 = new BufferedImage[8];
+        dom_walk_left_player2 = new BufferedImage[10];
+        dom_walk_right_player2 = new BufferedImage[10];
+        dom_block_player2 = new BufferedImage[7];
+        dom_crouch_player2 = new BufferedImage[8];
+        dom_jump_player2 = new BufferedImage[7];
+        dom_hit_player2 = new BufferedImage[7];
+        dom_jump2_player2 = new BufferedImage[1];
+        dom_jump1_player2 = new BufferedImage[6];
+        dom_down1_player2 = new BufferedImage[8];
+        dom_down2_player2 = new BufferedImage[9];
+        dom_2_player2 = new BufferedImage[8];
+        dom_1_player2 = new BufferedImage[10];
+        dom_11_player2 = new BufferedImage[16];
+        
+        
+        for (int i = 0; i < dom_stance_player2.length; i++){
+            dom_stance_player2[i] = dom_sheet_player2.crop(i);
+        }
+        
+        for (int i = 0; i < dom_walk_left_player2.length; i++){
+            dom_walk_right_player2[i] = dom_sheet_player2.crop(i+14);
+            dom_walk_left_player2[dom_walk_left_player2.length - 1 - i] = dom_walk_right_player2[i];
+        }
+        
+        for (int i = 0; i < dom_block_player2.length; i++){
+            dom_block_player2[i] = dom_sheet_player2.crop(i+14*2);
+        }
+        
+        for (int i = 0; i < dom_crouch_player2.length; i++){
+            dom_crouch_player2[i] = dom_sheet_player2.crop(i+14*3);
+        }
+        
+        for (int i = 0; i < dom_jump_player2.length; i++){
+            dom_jump_player2[i] = dom_sheet_player2.crop(i + 14*5);
+        }
+        
+        for (int i = 0; i < dom_hit_player2.length; i++) {
+            dom_hit_player2[i] = dom_sheet_player2.crop(i + 14*4);
+        }
+        
+        dom_jump2_player2[0] = dom_sheet_player2.crop(84);
+        
+        for (int i = 0; i < dom_jump1_player2.length; i++) {
+            dom_jump1_player2[i] = dom_sheet_player2.crop(i + 2 + 14*6);
+        }
+        
+        for (int i = 0; i < dom_down1_player2.length; i++){
+            dom_down1_player2[i] = dom_sheet_player2.crop(i + 14*7);
+        }
+        
+        for (int i = 0; i < dom_down2_player2.length; i++){
+            dom_down2_player2[i] = dom_sheet_player2.crop(i + 14*8);
+        }
+        
+        for (int i = 0; i < dom_2_player2.length; i++){
+            dom_2_player2[i] = dom_sheet_player2.crop(i + 14*9);
+        }
+        
+        for(int i = 0; i < dom_1_player2.length; i++){
+            dom_1_player2[i] = dom_sheet_player2.crop(i + 14*10);
+        }
+        
+        for(int i = 0; i< dom_11_player2.length; i++){
+            dom_11_player2[i] = dom_sheet_player2.crop(i + 14*11);
         }
     }
     
