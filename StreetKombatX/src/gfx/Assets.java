@@ -33,9 +33,9 @@ public class Assets {
     public static BufferedImage[] kasai_down1_player2, kasai_down2_player2, kasai_2_player2, kasai_1_player2, kasai_11_player2, kasai_111_player2, kasai_special_player2;
     
     public static BufferedImage[] dom_stance_player1, dom_walk_left_player1, dom_walk_right_player1, dom_block_player1, dom_crouch_player1, dom_jump_player1, dom_hit_player1, dom_jump2_player1, dom_jump1_player1;
-    public static BufferedImage[] dom_down1_player1, dom_down2_player1, dom_2_player1, dom_1_player1, dom_11_player1, dom_111_player1, dom_special_player1;
+    public static BufferedImage[] dom_down1_player1, dom_down2_player1, dom_2_player1, dom_1_player1, dom_11_player1, dom_111_player1, dom_special_player1, dom_special_cancel_player1;
     public static BufferedImage[] dom_stance_player2, dom_walk_left_player2, dom_walk_right_player2, dom_block_player2, dom_crouch_player2, dom_jump_player2, dom_hit_player2, dom_jump2_player2, dom_jump1_player2;
-    public static BufferedImage[] dom_down1_player2, dom_down2_player2, dom_2_player2, dom_1_player2, dom_11_player2, dom_111_player2, dom_special_player2;
+    public static BufferedImage[] dom_down1_player2, dom_down2_player2, dom_2_player2, dom_1_player2, dom_11_player2, dom_111_player2, dom_special_player2, dom_special_cancel_player2;
     
     public static void init() {
         try{
@@ -243,6 +243,7 @@ public class Assets {
         dom_11_player1 = new BufferedImage[16];
         dom_111_player1 = new BufferedImage[21];
         dom_special_player1 = new BufferedImage[11];
+        dom_special_cancel_player1 = new BufferedImage[24];
         
         
         for (int i = 0; i < dom_stance_player1.length; i++){
@@ -304,6 +305,14 @@ public class Assets {
             dom_special_player1[i] = dom_sheet_player1.crop(i + 21*13);
         }
         
+        for (int i = 0; i < 14; i++){
+            dom_special_cancel_player1[i] = dom_sheet_player1.crop(i+21*12);
+        }
+        
+        for (int i = 14; i < dom_special_cancel_player1.length; i++){
+            dom_special_cancel_player1[i] = dom_sheet_player1.crop(i+21*13 -14);
+        }
+        
         //Dom Player 2
         dom_stance_player2 = new BufferedImage[8];
         dom_walk_left_player2 = new BufferedImage[10];
@@ -321,6 +330,7 @@ public class Assets {
         dom_11_player2 = new BufferedImage[16];
         dom_111_player2 = new BufferedImage[21];
         dom_special_player2 = new BufferedImage[11];
+        dom_special_cancel_player2 = new BufferedImage[24];
         
         
         for (int i = 0; i < dom_stance_player2.length; i++){
@@ -380,6 +390,14 @@ public class Assets {
         
         for(int i = 0; i < dom_special_player2.length; i++){
             dom_special_player2[i] = dom_sheet_player2.crop(i + 21*13);
+        }
+        
+        for (int i = 0; i < 14; i++){
+            dom_special_cancel_player2[i] = dom_sheet_player2.crop(i+21*12);
+        }
+        
+        for (int i = 14; i < dom_special_cancel_player1.length; i++){
+            dom_special_cancel_player2[i] = dom_sheet_player2.crop(i+21*13-14);
         }
     }
     

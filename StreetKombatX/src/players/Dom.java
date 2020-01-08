@@ -18,7 +18,6 @@ import streetkombatx.Game;
  * @author Valareza
  */
 public class Dom extends Player{
-    private Animation stance, walk_left, walk_right, block, crouch, jump, jump1, jump2, hit, down1, down2, standing2, standing1, standing11, standing111, special;
 
     public Dom(Game game, float x, float y, int width, int height, int playerNum) {
         super(game, x, y, width, height, playerNum);
@@ -39,7 +38,8 @@ public class Dom extends Player{
             standing1 = new Animation(50, Assets.dom_1_player1);
             standing11 = new Animation(50, Assets.dom_11_player1);
             standing111 = new Animation(50, Assets.dom_111_player1);
-            special = new Animation(50, Assets.dom_special_player1);
+            special = new Animation(100, Assets.dom_special_player1);
+            specialCancel = new Animation(50, Assets.dom_special_cancel_player1);
         } else if (playerNum == 2) {
             stance = new Animation(66.668, Assets.dom_stance_player2);
             walk_left = new Animation(50, Assets.dom_walk_left_player2);
@@ -56,14 +56,15 @@ public class Dom extends Player{
             standing1 = new Animation(50, Assets.dom_1_player2);
             standing11 = new Animation(50, Assets.dom_11_player2);
             standing111 = new Animation(50, Assets.dom_111_player2);
-            special = new Animation(50, Assets.dom_special_player2);
+            special = new Animation(100, Assets.dom_special_player2);
+            specialCancel = new Animation(50, Assets.dom_special_cancel_player2);
         }
         
         hitbox = new Rectangle ((int)x, (int)y, width, height);
         charTitle = "Dom";
     }
 
- @Override
+@Override
     public void tick() {
         setHitbox();
         stance.tick();
@@ -80,6 +81,7 @@ public class Dom extends Player{
             blocking = game.getKeyManager().player1_block;
             one = game.getKeyManager().player1_1;
             two = game.getKeyManager().player1_2;
+            specialButton = game.getKeyManager().player1_special;
         } else if (playerNum == 2) {
             if (isAbleToPress){
                 up = game.getKeyManager().player2_jump;
@@ -90,6 +92,7 @@ public class Dom extends Player{
             blocking = game.getKeyManager().player2_block;
             one = game.getKeyManager().player2_1;
             two = game.getKeyManager().player2_2;
+            specialButton = game.getKeyManager().player2_special;
         }
         
         if (recovery > 0){
@@ -101,6 +104,28 @@ public class Dom extends Player{
             one = false;
             two = false;
             recovery--;
+        }
+        
+        if (stun > 0){
+            up = false;
+            down = false;
+            right = false;
+            left = false;
+            blocking = false;
+            one = false;
+            two = false;
+            stun--;
+        }
+        
+        if (knockBack > 0){
+            if (playerNum == 1){
+                x -= 10;
+                knockBack--;
+            }
+            else {
+                x += 10;
+                knockBack--;
+            }
         }
             
         if (y < yInitial){
@@ -268,6 +293,7 @@ public class Dom extends Player{
             left = false;
             right = false;
             two = false;
+            specialButton = false;
             if(standing1.getCurrentIndex() == 9) {
                 standing1.setIndex(0);
                 isStandingOne = false;
@@ -319,13 +345,13 @@ public class Dom extends Player{
             left = false;
             right = false;
             two = false;
+            specialButton = false;
             if (playerNum == 1){
                 x += 1;
             }
             else {
                 x -= 1;
             }
-            
             if (standing111.getCurrentIndex() == 20){
                 standing111.setIndex(0);
                 standing11.setIndex(0);
@@ -341,6 +367,52 @@ public class Dom extends Player{
             }
             else {
                 standing111.tick();
+                isActive = false;
+            }
+        }
+        
+        if (isSpecial){
+            up = false;
+            left = false;
+            right = false;
+            one = false;
+            two = false;
+            specialButton = false;
+            if (special.getCurrentIndex() == 10){
+                special.setIndex(0);
+                isSpecial = false;
+                recovery = specialMoveRecovery;
+                isActive = false;
+            }
+            else if (special.getCurrentIndex() >= 4 && special.getCurrentIndex() <= 6){
+                special.tick();
+                isActive = true;
+            }
+            else {
+                special.tick();
+                isActive = false;
+            }
+        }
+        
+        if (isCancel){
+            up = false;
+            left = false;
+            right = false;
+            one = false;
+            two = false;
+            specialButton = false;
+            if (specialCancel.getCurrentIndex() == 23){
+                specialCancel.setIndex(0);
+                isCancel = false;
+                recovery = specialMoveRecovery;
+                isActive = false;
+            }
+            else if (specialCancel.getCurrentIndex() >= 2 && specialCancel.getCurrentIndex() <= 20){
+                specialCancel.tick();
+                isActive = true;
+            }
+            else {
+                specialCancel.tick();
                 isActive = false;
             }
         }
@@ -406,6 +478,17 @@ public class Dom extends Player{
                 isStandingTwo = true;
             }
         }
+        
+        if (specialButton){
+            if (comboIndex == 2 && isStandingOneOne && standing11.getCurrentIndex() <= 12){
+                isCancel = true;
+                isStandingOneOne = false;
+                specialCancel.setIndex(standing11.getCurrentIndex());
+            }
+            else {
+                isSpecial = true;
+            }
+        }
        
         
         if (right) {
@@ -420,6 +503,7 @@ public class Dom extends Player{
             isWalkingLeft = false;
             isWalkingRight = false;
         }
+        
     }
 
     @Override
@@ -427,35 +511,22 @@ public class Dom extends Player{
         g.drawImage(getCurrentAnimationState(), (int) x, (int) y, width, height, null);
         drawHealth(g);
     }
-    
-    public Rectangle getHitbox() {
-        return hitbox;
-    }
-    
-    public int getState() {
-        if (isBlocking){
-            state = 1;
-        }
-        else if (isCrouching){
-            state = 2;
-        }
-        else {
-            state = 0;
-        }
-        return state;
-    }
-    
-    public void setRecovery(int recovery) {
-        this.recovery = recovery;
-    }
-    
-    public void setHealth(int healthDecrease){
-        this.health -= healthDecrease;
-    }
 
     private BufferedImage getCurrentAnimationState() {
         if (isHit || isRecovering){
             return hit.getCurrentFrame();
+        }
+        
+        if (stun > 0){
+            return hit.getFrame(hit.getCurrentIndex());
+        }
+        
+        if (isSpecial){
+            return special.getCurrentFrame();
+        }
+        
+        if (isCancel){
+            return specialCancel.getCurrentFrame();
         }
         
         if(isStandingOne){
@@ -514,29 +585,6 @@ public class Dom extends Player{
     private void setHitbox() {
         hitbox.setLeft((int)x);
         hitbox.setBottom((int)y);
-    }
-    
-    private void drawHealth(Graphics g) {
-        if (playerNum == 1){
-            g.setColor(Color.black);
-            g.fillPolygon(xNameTag_Player1,yNameTag_Player1, 4);
-            g.setColor(Color.red);
-            g.setFont(Assets.dragonForce);
-            g.drawString(charTitle, 120, 150);
-            g.fillRoundRect(80,60, 450, 50, 25, 25);
-            g.setColor(Color.yellow);
-            g.fillRoundRect(80, 60, (450*health)/100, 50, 25, 25);
-        }
-        else {
-            g.setColor(Color.black);
-            g.fillPolygon(xNameTag_Player2,yNameTag_Player2, 4);
-            g.setColor(Color.red);
-            g.setFont(Assets.dragonForce);
-            g.drawString(charTitle, 1080, 150);
-            g.fillRoundRect(750,60, 450, 50, 25, 25);
-            g.setColor(Color.yellow);
-            g.fillRoundRect(750+ (450-(450*health)/100), 60, (450*health)/100, 50, 25, 25);
-        }
     }
 
 }

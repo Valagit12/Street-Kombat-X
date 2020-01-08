@@ -109,6 +109,28 @@ public class CollisionCheck {
                 }
                 hitIndex_player1++;
             }
+            else if (player1.isSpecial && player1.isActive){
+                if (player1.charTitle.equals("Kasai")){
+                    if (!player2.isBlocking && !player2.isStun()){
+                        player2.isHit = true;
+                        if (hitIndex_player1 < 1){
+                            player2.setHealth(7);
+                            player2.setStun(100);
+                        }
+                        hitIndex_player1++;
+                    }
+                }
+                else {
+                    if (!player2.isCrouching && !player2.isBlocking && !player2.isStun()){
+                        player2.isHit = true;
+                        if (hitIndex_player1 < 1){
+                            player2.setHealth(7);
+                            player2.setStun(100);
+                        }
+                        hitIndex_player1++;
+                    }
+                }
+            }
             else if (player1.isStandingOne && player1.isActive){
                 if (player1.charTitle.equals("Kasai")){
                     if (!player2.isCrouching){
@@ -162,6 +184,9 @@ public class CollisionCheck {
                             comboIndex_player1++;
                         }
                         hitIndex_player1++;
+                        if (player1.getComboFrame() == 15){
+                            player2.setKnockBack(20);
+                        }
                     }
                 }
                 else {
@@ -172,6 +197,9 @@ public class CollisionCheck {
                             comboIndex_player1++;
                         }
                         hitIndex_player1++;
+                        if (player1.getComboFrame() == 15){
+                            player2.setKnockBack(20);
+                        }
                     }
                 }
             }
@@ -215,6 +243,28 @@ public class CollisionCheck {
                     player1.setHealth(8);
                 }
                 hitIndex_player2++;
+            }
+            else if (player2.isSpecial && player2.isActive){
+                if (player2.charTitle.equals("Kasai")){
+                    if (!player1.isBlocking && !player1.isStun()){
+                        player1.isHit = true;
+                        if (hitIndex_player2 < 1){
+                            player1.setHealth(7);
+                            player1.setStun(100);
+                        }
+                        hitIndex_player2++;
+                    }
+                }
+                else {
+                    if (!player1.isCrouching && !player1.isBlocking && !player1.isStun()){
+                        player1.isHit = true;
+                        if (hitIndex_player2 < 1){
+                            player1.setHealth(7);
+                            player1.setStun(100);
+                        }
+                        hitIndex_player2++;
+                    }
+                }
             }
             else if (player2.isStandingOne && player2.isActive){
                 if (player2.charTitle.equals("Kasai")){
@@ -269,6 +319,9 @@ public class CollisionCheck {
                             comboIndex_player2++;
                         }
                         hitIndex_player2++;
+                        if (player2.getComboFrame() == 15){
+                            player1.setKnockBack(20);
+                        }
                     }
                 }
                 else {
@@ -277,8 +330,12 @@ public class CollisionCheck {
                         if (comboIndex_player2 < 3){
                             player1.setHealth(5);
                             comboIndex_player2++;
+                            player1.setKnockBack(20);
                         }
                         hitIndex_player2++;
+                        if (player2.getComboFrame() == 15){
+                            player1.setKnockBack(20);
+                        }
                     }
                 }
             }

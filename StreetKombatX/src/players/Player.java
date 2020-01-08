@@ -6,6 +6,9 @@
 package players;
 
 import collision.Rectangle;
+import gfx.Animation;
+import gfx.Assets;
+import java.awt.Color;
 import java.awt.Graphics;
 import streetkombatx.Game;
 
@@ -24,14 +27,16 @@ public abstract class Player {
     protected int comboIndex = 0;
     protected int state = 0;
     protected int recovery = 0;
-    protected int standing2Recovery = 5;
+    protected int stun = 0;
+    protected int knockBack;
+    protected int standing2Recovery = 10;
     protected int down1Recovery = 15;
-    protected int down2Recovery = 5;
-    protected int jump1Recovery = 2;
-    protected int standing1Recovery = 5;
-    protected int standing11Recovery = 8;
-    protected int standing111Recovery = 2;
-    protected int specialMoveRecovery = 10;
+    protected int down2Recovery = 9;
+    protected int jump1Recovery = 5;
+    protected int standing1Recovery = 9;
+    protected int standing11Recovery = 12;
+    protected int standing111Recovery = 5;
+    protected int specialMoveRecovery = 18;
     protected Game game;
     protected boolean left, right, up, down, blocking, one, two, specialButton;
     protected boolean previousOne = false;
@@ -53,12 +58,15 @@ public abstract class Player {
     public boolean isActive = false;
     public boolean isHit = false;
     public boolean isRecovering = false;
+    public boolean isCancel = false;
     protected Rectangle hitbox;
     public String charTitle;
     protected int[] xNameTag_Player1 = {90,260,240,110};
     protected int[] yNameTag_Player1 = {110,110,160,160};
     protected int[] xNameTag_Player2 = {1020,1190,1170,1040};
     protected int[] yNameTag_Player2 = {110,110,160,160};
+    protected Animation stance, walk_left, walk_right, block, crouch, jump, jump1, jump2, hit, down1, down2, standing2;
+    protected Animation standing1, standing11, standing111, special, specialCancel;
     
     public Player(Game game, float x, float y, int width, int height, int playerNum) {
         this.playerNum = playerNum;
@@ -82,13 +90,57 @@ public abstract class Player {
         this.x = x;
     }
     
-    public abstract Rectangle getHitbox();
+    public void setKnockBack(int knockBack){
+        this.knockBack = knockBack;
+    }
     
-    public abstract int getState();
+    public Rectangle getHitbox() {
+        return hitbox;
+    }
     
-    public abstract void setRecovery(int recovery);
+    public void setStun(int stun){
+        this.stun = stun;
+    }
     
-    public abstract void setHealth(int healthDecrease);
+    public void setHealth(int healthDecrease){
+        this.health -= healthDecrease;
+    }
+    
+    public void drawHealth(Graphics g) {
+        if (playerNum == 1){
+            g.setColor(Color.black);
+            g.fillPolygon(xNameTag_Player1,yNameTag_Player1, 4);
+            g.setColor(Color.red);
+            g.setFont(Assets.dragonForce);
+            g.drawString(charTitle, 120, 150);
+            g.fillRoundRect(80,60, 450, 50, 25, 25);
+            g.setColor(Color.yellow);
+            g.fillRoundRect(80, 60, (450*health)/100, 50, 25, 25);
+        }
+        else {
+            g.setColor(Color.black);
+            g.fillPolygon(xNameTag_Player2,yNameTag_Player2, 4);
+            g.setColor(Color.red);
+            g.setFont(Assets.dragonForce);
+            g.drawString(charTitle, 1080, 150);
+            g.fillRoundRect(750,60, 450, 50, 25, 25);
+            g.setColor(Color.yellow);
+            g.fillRoundRect(750+ (450-(450*health)/100), 60, (450*health)/100, 50, 25, 25);
+        }
+    }
+    
+    public int getComboFrame() {
+        return standing111.getCurrentIndex();
+    }
+    
+    public boolean isStun() {
+        if (stun > 0){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
     
     public abstract void tick();
     

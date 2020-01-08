@@ -19,9 +19,6 @@ import streetkombatx.Game;
  */
 public class Kasai extends Player {
 
-    private Animation stance, walk_left, walk_right, block, crouch, jump, jump1, jump2, hit, down1, down2, standing2;
-    private Animation standing1, standing11, standing111, special;
-
     public Kasai(Game game, float x, float y, int width, int height, int playerNum) {
         super(game, x, y, width, height, playerNum);
 
@@ -41,7 +38,7 @@ public class Kasai extends Player {
             standing1 = new Animation(50, Assets.kasai_1_player1);
             standing11 = new Animation(50, Assets.kasai_11_player1);
             standing111 = new Animation(50, Assets.kasai_111_player1);
-            special = new Animation(50, Assets.kasai_special_player1);
+            special = new Animation(100, Assets.kasai_special_player1);
         } else if (playerNum == 2) {
             stance = new Animation(66.668, Assets.kasai_stance_player2);
             walk_left = new Animation(50, Assets.kasai_walk_left_player2);
@@ -58,7 +55,7 @@ public class Kasai extends Player {
             standing1 = new Animation(50, Assets.kasai_1_player2);
             standing11 = new Animation(50, Assets.kasai_11_player2);
             standing111 = new Animation(50, Assets.kasai_111_player2);
-            special = new Animation(50, Assets.kasai_special_player2);
+            special = new Animation(100, Assets.kasai_special_player2);
         }
         
         hitbox = new Rectangle ((int)x, (int)y, width, height);
@@ -105,6 +102,28 @@ public class Kasai extends Player {
             one = false;
             two = false;
             recovery--;
+        }
+        
+        if (stun > 0){
+            up = false;
+            down = false;
+            right = false;
+            left = false;
+            blocking = false;
+            one = false;
+            two = false;
+            stun--;
+        }
+        
+        if (knockBack > 0){
+            if (playerNum == 1){
+                x -= 10;
+                knockBack--;
+            }
+            else {
+                x += 10;
+                knockBack--;
+            }
         }
             
         if (y < yInitial){
@@ -172,6 +191,9 @@ public class Kasai extends Player {
             right = false;
             left = false;
             up = false;
+            one = false;
+            two = false;
+            specialButton = false;
             if (blocking){
                 if (block.getCurrentIndex() < 4) {
                     block.tick();
@@ -191,6 +213,7 @@ public class Kasai extends Player {
             right = false;
             left = false;
             up = false;
+            specialButton = false;
             if (down) {
                 if (crouch.getCurrentIndex() < 5){
                     crouch.tick();
@@ -208,8 +231,11 @@ public class Kasai extends Player {
         
         if (isDownOne){
             up = false;
+            left = false;
+            right = false;
             one = false;
             two = false;
+            specialButton = false;
             if (down1.getCurrentIndex() == 7){
                 down1.setIndex(0);
                 isDownOne = false;
@@ -227,8 +253,11 @@ public class Kasai extends Player {
         }
         else if (isDownTwo){
             up = false;
+            left = false;
+            right = false;
             one = false;
             two = false;
+            specialButton = false;
             if (down2.getCurrentIndex() == 8){
                 down2.setIndex(0);
                 isDownTwo = false;
@@ -251,6 +280,7 @@ public class Kasai extends Player {
             right = false;
             one = false;
             two = false;
+            specialButton = false;
             if(standing2.getCurrentIndex() == 7) {
                 standing2.setIndex(0);
                 isStandingTwo = false;
@@ -272,6 +302,7 @@ public class Kasai extends Player {
             left = false;
             right = false;
             two = false;
+            specialButton = false;
             if(standing1.getCurrentIndex() == 9) {
                 standing1.setIndex(0);
                 isStandingOne = false;
@@ -294,6 +325,7 @@ public class Kasai extends Player {
             left = false;
             right = false;
             two = false;
+            specialButton = false;
             if (playerNum == 1){
                 x += 1;
             }
@@ -323,6 +355,7 @@ public class Kasai extends Player {
             left = false;
             right = false;
             two = false;
+            specialButton = false;
             if (playerNum == 1){
                 x += 1;
             }
@@ -360,12 +393,12 @@ public class Kasai extends Player {
                 recovery = specialMoveRecovery;
                 isActive = false;
             }
-            else if (special.getCurrentIndex() >= 3 && special.getCurrentIndex() <= 5){
-                standing2.tick();
+            else if (special.getCurrentIndex() >= 4 && special.getCurrentIndex() <= 6){
+                special.tick();
                 isActive = true;
             }
             else {
-                standing2.tick();
+                special.tick();
                 isActive = false;
             }
         }
@@ -457,34 +490,17 @@ public class Kasai extends Player {
         drawHealth(g);
     }
     
-    public Rectangle getHitbox() {
-        return hitbox;
-    }
-    
-    public int getState() {
-        if (isBlocking){
-            state = 1;
-        }
-        else if (isCrouching){
-            state = 2;
-        }
-        else {
-            state = 0;
-        }
-        return state;
-    }
-    
-    public void setRecovery(int recovery) {
-        this.recovery = recovery;
-    }
-    
-    public void setHealth(int healthDecrease){
-        this.health -= healthDecrease;
-    }
-
     private BufferedImage getCurrentAnimationState() {
         if (isHit || isRecovering){
             return hit.getCurrentFrame();
+        }
+        
+        if (stun > 0){
+            return hit.getFrame(hit.getCurrentIndex());
+        }
+        
+        if (isSpecial){
+            return special.getCurrentFrame();
         }
         
         if(isStandingOne){
@@ -512,7 +528,6 @@ public class Kasai extends Player {
         }
         
         if (isJumpingTwo){
-            System.out.println("hi");
             return jump2.getCurrentFrame();
         }
         
@@ -544,29 +559,6 @@ public class Kasai extends Player {
     private void setHitbox() {
         hitbox.setLeft((int)x);
         hitbox.setBottom((int)y);
-    }
-    
-    private void drawHealth(Graphics g) {
-        if (playerNum == 1){
-            g.setColor(Color.black);
-            g.fillPolygon(xNameTag_Player1,yNameTag_Player1, 4);
-            g.setColor(Color.red);
-            g.setFont(Assets.dragonForce);
-            g.drawString(charTitle, 120, 150);
-            g.fillRoundRect(80,60, 450, 50, 25, 25);
-            g.setColor(Color.yellow);
-            g.fillRoundRect(80, 60, (450*health)/100, 50, 25, 25);
-        }
-        else {
-            g.setColor(Color.black);
-            g.fillPolygon(xNameTag_Player2,yNameTag_Player2, 4);
-            g.setColor(Color.red);
-            g.setFont(Assets.dragonForce);
-            g.drawString(charTitle, 1080, 150);
-            g.fillRoundRect(750,60, 450, 50, 25, 25);
-            g.setColor(Color.yellow);
-            g.fillRoundRect(750+ (450-(450*health)/100), 60, (450*health)/100, 50, 25, 25);
-        }
     }
 
 }
