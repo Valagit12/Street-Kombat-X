@@ -58,7 +58,6 @@ public abstract class Player {
     public boolean isActive = false;
     public boolean isHit = false;
     public boolean isRecovering = false;
-    public boolean isCancel = false;
     protected Rectangle hitbox;
     public String charTitle;
     protected int[] xNameTag_Player1 = {90,260,240,110};
@@ -66,7 +65,7 @@ public abstract class Player {
     protected int[] xNameTag_Player2 = {1020,1190,1170,1040};
     protected int[] yNameTag_Player2 = {110,110,160,160};
     protected Animation stance, walk_left, walk_right, block, crouch, jump, jump1, jump2, hit, down1, down2, standing2;
-    protected Animation standing1, standing11, standing111, special, specialCancel;
+    protected Animation standing1, standing11, standing111, special;
     
     public Player(Game game, float x, float y, int width, int height, int playerNum) {
         this.playerNum = playerNum;
@@ -104,6 +103,10 @@ public abstract class Player {
     
     public void setHealth(int healthDecrease){
         this.health -= healthDecrease;
+    }
+    
+    public int getHealth(){
+        return health;
     }
     
     public void drawHealth(Graphics g) {

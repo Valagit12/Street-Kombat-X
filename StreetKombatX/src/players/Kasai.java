@@ -93,6 +93,10 @@ public class Kasai extends Player {
             specialButton = game.getKeyManager().player2_special;
         }
         
+        if (health <= 0){
+            setKnockBack(2000);
+        }
+        
         if (recovery > 0){
             up = false;
             down = false;

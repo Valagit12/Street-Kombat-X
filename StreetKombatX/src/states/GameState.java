@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import streetkombatx.Game;
 import players.Player;
+import states.EndState;
 /**
  *
  * @author Valareza
@@ -22,17 +23,20 @@ public class GameState extends State {
     
     private Animation background;
     private CollisionCheck collisionCheck;
+    private EndState endState;
+    private State state;
     
     private int time = 90;
     private int ticks = 0;
-    float posOne;
-    float posTwo;
+    private String winner;
     
-    public GameState(Game game, Player player1, Player player2){
+    public GameState(Game game, Player player1, Player player2, EndState endState, State state){
         super(game);
         this.player1 = player1;
         this.player2 = player2;
-
+        this.endState = endState;
+        this.state = state;
+        
         background = new Animation(60, Assets.fireTemple);
         collisionCheck = new CollisionCheck(player1, player2);
     }
@@ -45,11 +49,22 @@ public class GameState extends State {
         background.tick();
         player1.tick();
         player2.tick();
-        collisionCheck.checkCollision();
+        collisionCheck.checkCollision(time);
         
-        posOne = player1.getX();
-        posTwo = player2.getX();
         ticks++;
+        
+        
+        if (time <= 0 || player1.getHealth() <= 0 || player2.getHealth() <= 0){
+            if (player1.getHealth() < player2.getHealth()){
+                winner = player2.charTitle;
+            }
+            else if (player2.getHealth() < player1.getHealth()){
+                winner = player1.charTitle;
+            }
+            if (ticks >= 300){
+                state.setState(endState);
+            }
+        }
     }
 
     @Override
@@ -60,13 +75,16 @@ public class GameState extends State {
         g.setFont(Assets.dragonForceNum);
         g.setColor(Color.red);
         g.drawString(Integer.toString(time), 615, 113);
+        if (player1.getHealth() <= 0 || player2.getHealth() <= 0 || time <= 0){
+            endScreen(g, winner);
+        }
     }
     
-    public float getPositionOne(){
-        return posOne;
+    public void endScreen(Graphics g, String charTitle) {
+        g.setFont(Assets.dragonForceEndScreen);
+        g.setColor(Color.red);
+        g.drawString(charTitle + " WINS", 415, 350);
     }
     
-    public float getPositionTwo(){
-        return posTwo;
-    }
+
 }

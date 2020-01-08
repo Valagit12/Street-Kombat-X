@@ -21,6 +21,7 @@ public class Assets {
     //Font
     public static Font dragonForce;
     public static Font dragonForceNum;
+    public static Font dragonForceEndScreen;
     
     //Backgrounds
     public static BufferedImage[] fireTemple;
@@ -41,9 +42,11 @@ public class Assets {
         try{
             dragonForce = Font.createFont(Font.TRUETYPE_FONT, new File("res/font/DragonForcE.ttf")).deriveFont(Font.PLAIN, 50f);
             dragonForceNum = Font.createFont(Font.TRUETYPE_FONT, new File("res/font/DragonForcE.ttf")).deriveFont(Font.PLAIN, 80f);
+            dragonForceEndScreen = Font.createFont(Font.TRUETYPE_FONT, new File("res/font/DragonForcE.ttf")).deriveFont(Font.PLAIN, 120f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(dragonForce);
             ge.registerFont(dragonForceNum);
+            ge.registerFont(dragonForceEndScreen);
         } catch (IOException e){
             e.printStackTrace();
             System.out.println("hi");

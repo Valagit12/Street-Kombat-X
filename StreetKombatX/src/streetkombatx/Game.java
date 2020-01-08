@@ -21,6 +21,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import music.Music;
 import players.Dom;
 import players.Kasai;
+import states.EndState;
 import states.GameState;
 import states.MenuState;
 import states.State;
@@ -103,8 +104,9 @@ public class Game implements Runnable {
         //temporary
         player1 = new Dom(this, 200, 410, 150, 300, 1);
         player2 = new Kasai(this, 1000, 410, 150, 300, 2);
-
-        GameState gameState = new GameState(this, player1, player2);
+        
+        EndState endState = new EndState(this);
+        GameState gameState = new GameState(this, player1, player2, endState, state);
         MenuState menuState = new MenuState(this);
         state.setState(gameState);
 

@@ -39,7 +39,6 @@ public class Dom extends Player{
             standing11 = new Animation(50, Assets.dom_11_player1);
             standing111 = new Animation(50, Assets.dom_111_player1);
             special = new Animation(100, Assets.dom_special_player1);
-            specialCancel = new Animation(50, Assets.dom_special_cancel_player1);
         } else if (playerNum == 2) {
             stance = new Animation(66.668, Assets.dom_stance_player2);
             walk_left = new Animation(50, Assets.dom_walk_left_player2);
@@ -57,7 +56,6 @@ public class Dom extends Player{
             standing11 = new Animation(50, Assets.dom_11_player2);
             standing111 = new Animation(50, Assets.dom_111_player2);
             special = new Animation(100, Assets.dom_special_player2);
-            specialCancel = new Animation(50, Assets.dom_special_cancel_player2);
         }
         
         hitbox = new Rectangle ((int)x, (int)y, width, height);
@@ -93,6 +91,10 @@ public class Dom extends Player{
             one = game.getKeyManager().player2_1;
             two = game.getKeyManager().player2_2;
             specialButton = game.getKeyManager().player2_special;
+        }
+        
+        if (health <= 0){
+            setKnockBack(2000);
         }
         
         if (recovery > 0){
@@ -394,29 +396,6 @@ public class Dom extends Player{
             }
         }
         
-        if (isCancel){
-            up = false;
-            left = false;
-            right = false;
-            one = false;
-            two = false;
-            specialButton = false;
-            if (specialCancel.getCurrentIndex() == 23){
-                specialCancel.setIndex(0);
-                isCancel = false;
-                recovery = specialMoveRecovery;
-                isActive = false;
-            }
-            else if (specialCancel.getCurrentIndex() >= 2 && specialCancel.getCurrentIndex() <= 20){
-                specialCancel.tick();
-                isActive = true;
-            }
-            else {
-                specialCancel.tick();
-                isActive = false;
-            }
-        }
-        
         if (up) {
             isJumping = true;
             isAbleToPress = false;
@@ -480,14 +459,7 @@ public class Dom extends Player{
         }
         
         if (specialButton){
-            if (comboIndex == 2 && isStandingOneOne && standing11.getCurrentIndex() <= 13){
-                isCancel = true;
-                isStandingOneOne = false;
-                specialCancel.setIndex(standing11.getCurrentIndex());
-            }
-            else {
-                isSpecial = true;
-            }
+            isSpecial = true;
         }
        
         
@@ -523,10 +495,6 @@ public class Dom extends Player{
         
         if (isSpecial){
             return special.getCurrentFrame();
-        }
-        
-        if (isCancel){
-            return specialCancel.getCurrentFrame();
         }
         
         if(isStandingOne){

@@ -31,47 +31,56 @@ public class CollisionCheck {
         this.player2 = player2;
     }
     
-    public void checkCollision() {
+    public void checkCollision(int time) {
         hitbox_player1 = player1.getHitbox();
         hitbox_player2 = player2.getHitbox();
         
-        
-        if (player1.getX() + player1.getWidth() > player2.getX() + collisionOffset){
-            if (player2.isWalkingLeft && !player1.isWalkingRight){
-                if (player1.getX() < 0){
-                    player1.setX(0);
-                    player2.setX(player1.getX()+player1.getWidth()-collisionOffset);
+        if (player1.getHealth() > 0 && player2.getHealth() > 0 && time > 0) {
+            if (player1.getX() + player1.getWidth() > player2.getX() + collisionOffset){
+                if (player2.isWalkingLeft && !player1.isWalkingRight){
+                    if (player1.getX() < 0){
+                        player1.setX(0);
+                        player2.setX(player1.getX()+player1.getWidth()-collisionOffset);
+                    }
+                    else {
+                        player1.setX(player2.getX()+collisionOffset-player1.getWidth());
+                    }
+                }
+                else if (!player2.isWalkingLeft && player1.isWalkingRight){
+                    if (player2.getX() > 1150){
+                        player2.setX(1150);
+                        player1.setX(player2.getX()+collisionOffset-player1.getWidth());
+                    }
+                    else {
+                        player2.setX(player1.getX()+player1.getWidth()-collisionOffset);
+                    }
                 }
                 else {
-                    player1.setX(player2.getX()+collisionOffset-player1.getWidth());
-                }
-            }
-            else if (!player2.isWalkingLeft && player1.isWalkingRight){
-                if (player2.getX() > 1150){
-                    player2.setX(1150);
-                    player1.setX(player2.getX()+collisionOffset-player1.getWidth());
-                }
-                else {
-                    player2.setX(player1.getX()+player1.getWidth()-collisionOffset);
+                    xPlayer1 = player2.getX()+collisionOffset-player1.getWidth();
+                    xPlayer2 = player1.getX()+player1.getWidth()-collisionOffset;
+                    player1.setX(xPlayer1);
+                    player2.setX(xPlayer2);
                 }
             }
             else {
-                xPlayer1 = player2.getX()+collisionOffset-player1.getWidth();
-                xPlayer2 = player1.getX()+player1.getWidth()-collisionOffset;
-                player1.setX(xPlayer1);
-                player2.setX(xPlayer2);
+                if (player1.getX() < 0){
+                    player1.setX(0);
+                }
+        
+                if (player2.getX() > 1150){
+                    player2.setX(1150);
+                }
             }
         }
-        else {
-            if (player1.getX() < 0){
-            player1.setX(0);
-        }
         
-        if (player2.getX() > 1150){
-            player2.setX(1150);
+        if (time <= 0){
+            if (player1.getHealth() < player2.getHealth()){
+                player1.setKnockBack(2000);
+            }
+            else if (player2.getHealth() < player1.getHealth()){
+                player2.setKnockBack(2000);
+            }
         }
-        }
-        
 
         if(Rectangle.isIntersecting(hitbox_player1, hitbox_player2)){
             if (player1.isJumpingOne && player1.isActive && !player2.isBlocking){
@@ -115,7 +124,7 @@ public class CollisionCheck {
                         player2.isHit = true;
                         if (hitIndex_player1 < 1){
                             player2.setHealth(7);
-                            player2.setStun(100);
+                            player2.setStun(120);
                         }
                         hitIndex_player1++;
                     }
@@ -125,7 +134,7 @@ public class CollisionCheck {
                         player2.isHit = true;
                         if (hitIndex_player1 < 1){
                             player2.setHealth(7);
-                            player2.setStun(100);
+                            player2.setStun(120);
                         }
                         hitIndex_player1++;
                     }
@@ -170,12 +179,13 @@ public class CollisionCheck {
                         if (comboIndex_player1 < 2){
                             player2.setHealth(5);
                             comboIndex_player1++;
+                            player2.setStun(80);
                         }
                         hitIndex_player1++;
                     }
                 }
             }
-            else if (player1.isCancel || player1.isStandingOneOneOne && player1.isActive){
+            else if (player1.isStandingOneOneOne && player1.isActive){
                 if (player1.charTitle.equals("Kasai")){
                     if (!player2.isCrouching){
                         player2.isHit = true;
@@ -250,7 +260,7 @@ public class CollisionCheck {
                         player1.isHit = true;
                         if (hitIndex_player2 < 1){
                             player1.setHealth(7);
-                            player1.setStun(100);
+                            player1.setStun(120);
                         }
                         hitIndex_player2++;
                     }
@@ -260,7 +270,7 @@ public class CollisionCheck {
                         player1.isHit = true;
                         if (hitIndex_player2 < 1){
                             player1.setHealth(7);
-                            player1.setStun(100);
+                            player1.setStun(120);
                         }
                         hitIndex_player2++;
                     }
@@ -305,6 +315,7 @@ public class CollisionCheck {
                         if (comboIndex_player2 < 2){
                             player1.setHealth(5);
                             comboIndex_player2++;
+                            player1.setStun(80);
                         }
                         hitIndex_player2++;
                     }
