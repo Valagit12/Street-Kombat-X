@@ -175,7 +175,7 @@ public class CollisionCheck {
                     }
                 }
             }
-            else if (player1.isStandingOneOneOne && player1.isActive){
+            else if (player1.isCancel || player1.isStandingOneOneOne && player1.isActive){
                 if (player1.charTitle.equals("Kasai")){
                     if (!player2.isCrouching){
                         player2.isHit = true;

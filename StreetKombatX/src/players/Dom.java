@@ -480,7 +480,7 @@ public class Dom extends Player{
         }
         
         if (specialButton){
-            if (comboIndex == 2 && isStandingOneOne && standing11.getCurrentIndex() <= 12){
+            if (comboIndex == 2 && isStandingOneOne && standing11.getCurrentIndex() <= 13){
                 isCancel = true;
                 isStandingOneOne = false;
                 specialCancel.setIndex(standing11.getCurrentIndex());
