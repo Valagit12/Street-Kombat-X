@@ -12,6 +12,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import states.State;
 
 /**
  *
@@ -22,17 +23,19 @@ public class Music {
     Clip clip;
     String Status;
     AudioInputStream audioInputStream;
-    String filePath = "Runnin.WAV";
-
-    public Music() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        
+    String filePath;
+    
+    public Music(int whichSong) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        if (whichSong == 1){
+            filePath = "Kingdom OST.wav";
+        } else if (whichSong == 2){
+            filePath = "FireTemple OST.wav";
+        } else if (whichSong == 3){
+            filePath = "Menu OST.wav";
+        }
         audioInputStream = AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
-        // create clip reference 
-        clip = AudioSystem.getClip();
-
-        // open audioInputStream to the clip 
+        clip = AudioSystem.getClip(); 
         clip.open(audioInputStream);
-
         clip.loop(Clip.LOOP_CONTINUOUSLY);
         while (true) {
             int c = 1 + 1;

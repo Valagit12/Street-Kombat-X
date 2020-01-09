@@ -236,6 +236,7 @@ public class Game implements Runnable {
 
     public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         new Game(1280, 720, "Street Kombat X"); //creates an instance of the main thread Game and starts the program
-        new Music();
+        int currentState = 2;
+        new Music(currentState);
     }
 }
