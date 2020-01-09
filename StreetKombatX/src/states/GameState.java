@@ -28,6 +28,7 @@ public class GameState extends State {
     
     private int time = 90;
     private int ticks = 0;
+    private int endTimer = 0;
     private String winner;
     
     public GameState(Game game, Player player1, Player player2, EndState endState, State state){
@@ -56,13 +57,18 @@ public class GameState extends State {
         
         if (time <= 0 || player1.getHealth() <= 0 || player2.getHealth() <= 0){
             if (player1.getHealth() < player2.getHealth()){
-                winner = player2.charTitle;
+                winner = player2.getCharTitle();
             }
             else if (player2.getHealth() < player1.getHealth()){
-                winner = player1.charTitle;
+                winner = player1.getCharTitle();
             }
-            if (ticks >= 300){
+            
+            if (endTimer >= 7){
                 state.setState(endState);
+            }
+            
+            if (ticks == 60){
+                endTimer++;
             }
         }
     }

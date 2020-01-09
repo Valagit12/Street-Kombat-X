@@ -40,26 +40,26 @@ public abstract class Player {
     protected Game game;
     protected boolean left, right, up, down, blocking, one, two, specialButton;
     protected boolean previousOne = false;
-    public boolean isWalkingLeft = false;
-    public boolean isWalkingRight = false;
-    public boolean isBlocking = false;
-    public boolean isCrouching = false;
-    public boolean isJumping = false;
-    public boolean isAbleToPress = true;
-    public boolean isJumpingOne = false;
-    public boolean isJumpingTwo = false;
-    public boolean isDownOne = false;
-    public boolean isDownTwo = false;
-    public boolean isStandingOne = false;
-    public boolean isStandingTwo = false;
-    public boolean isStandingOneOne = false;
-    public boolean isStandingOneOneOne = false;
-    public boolean isSpecial = false;
-    public boolean isActive = false;
-    public boolean isHit = false;
-    public boolean isRecovering = false;
+    protected boolean isWalkingLeft = false;
+    protected boolean isWalkingRight = false;
+    protected boolean isBlocking = false;
+    protected boolean isCrouching = false;
+    protected boolean isJumping = false;
+    protected boolean isAbleToPress = true;
+    protected boolean isJumpingOne = false;
+    protected boolean isJumpingTwo = false;
+    protected boolean isDownOne = false;
+    protected boolean isDownTwo = false;
+    protected boolean isStandingOne = false;
+    protected boolean isStandingTwo = false;
+    protected boolean isStandingOneOne = false;
+    protected boolean isStandingOneOneOne = false;
+    protected boolean isSpecial = false;
+    protected boolean isActive = false;
+    protected boolean isHit = false;
+    protected boolean isRecovering = false;
     protected Rectangle hitbox;
-    public String charTitle;
+    protected String charTitle;
     protected int[] xNameTag_Player1 = {90,260,240,110};
     protected int[] yNameTag_Player1 = {110,110,160,160};
     protected int[] xNameTag_Player2 = {1020,1190,1170,1040};
@@ -109,6 +109,10 @@ public abstract class Player {
         return health;
     }
     
+    public String getCharTitle() {
+        return charTitle;
+    }
+    
     public void drawHealth(Graphics g) {
         if (playerNum == 1){
             g.setColor(Color.black);
@@ -143,6 +147,150 @@ public abstract class Player {
         else {
             return false;
         }
+    }
+    
+    public boolean getIsWalkingLeft() {
+        return isWalkingLeft;
+    }
+
+    public void setIsWalkingLeft(boolean isWalkingLeft) {
+        this.isWalkingLeft = isWalkingLeft;
+    }
+
+    public boolean getIsWalkingRight() {
+        return isWalkingRight;
+    }
+
+    public void setIsWalkingRight(boolean isWalkingRight) {
+        this.isWalkingRight = isWalkingRight;
+    }
+
+    public boolean getIsBlocking() {
+        return isBlocking;
+    }
+
+    public void setIsBlocking(boolean isBlocking) {
+        this.isBlocking = isBlocking;
+    }
+
+    public boolean getIsCrouching() {
+        return isCrouching;
+    }
+
+    public void setIsCrouching(boolean isCrouching) {
+        this.isCrouching = isCrouching;
+    }
+
+    public boolean getIsJumping() {
+        return isJumping;
+    }
+
+    public void setIsJumping(boolean isJumping) {
+        this.isJumping = isJumping;
+    }
+
+    public boolean getIsAbleToPress() {
+        return isAbleToPress;
+    }
+
+    public void setIsAbleToPress(boolean isAbleToPress) {
+        this.isAbleToPress = isAbleToPress;
+    }
+
+    public boolean getIsJumpingOne() {
+        return isJumpingOne;
+    }
+
+    public void setIsJumpingOne(boolean isJumpingOne) {
+        this.isJumpingOne = isJumpingOne;
+    }
+
+    public boolean getIsJumpingTwo() {
+        return isJumpingTwo;
+    }
+
+    public void setIsJumpingTwo(boolean isJumpingTwo) {
+        this.isJumpingTwo = isJumpingTwo;
+    }
+
+    public boolean getIsDownOne() {
+        return isDownOne;
+    }
+
+    public void setIsDownOne(boolean isDownOne) {
+        this.isDownOne = isDownOne;
+    }
+
+    public boolean getIsDownTwo() {
+        return isDownTwo;
+    }
+
+    public void setIsDownTwo(boolean isDownTwo) {
+        this.isDownTwo = isDownTwo;
+    }
+
+    public boolean getIsStandingOne() {
+        return isStandingOne;
+    }
+
+    public void setIsStandingOne(boolean isStandingOne) {
+        this.isStandingOne = isStandingOne;
+    }
+
+    public boolean getIsStandingTwo() {
+        return isStandingTwo;
+    }
+
+    public void setIsStandingTwo(boolean isStandingTwo) {
+        this.isStandingTwo = isStandingTwo;
+    }
+
+    public boolean getIsStandingOneOne() {
+        return isStandingOneOne;
+    }
+
+    public void setIsStandingOneOne(boolean isStandingOneOne) {
+        this.isStandingOneOne = isStandingOneOne;
+    }
+
+    public boolean getIsStandingOneOneOne() {
+        return isStandingOneOneOne;
+    }
+
+    public void setIsStandingOneOneOne(boolean isStandingOneOneOne) {
+        this.isStandingOneOneOne = isStandingOneOneOne;
+    }
+
+    public boolean getIsSpecial() {
+        return isSpecial;
+    }
+
+    public void setIsSpecial(boolean isSpecial) {
+        this.isSpecial = isSpecial;
+    }
+
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public boolean getIsHit() {
+        return isHit;
+    }
+
+    public void setIsHit(boolean isHit) {
+        this.isHit = isHit;
+    }
+
+    public boolean getIsRecovering() {
+        return isRecovering;
+    }
+
+    public void setIsRecovering(boolean isRecovering) {
+        this.isRecovering = isRecovering;
     }
     
     public abstract void tick();

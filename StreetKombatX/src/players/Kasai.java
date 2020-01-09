@@ -198,6 +198,7 @@ public class Kasai extends Player {
             one = false;
             two = false;
             specialButton = false;
+            isCrouching = false;
             if (blocking){
                 if (block.getCurrentIndex() < 4) {
                     block.tick();
@@ -218,6 +219,7 @@ public class Kasai extends Player {
             left = false;
             up = false;
             specialButton = false;
+            isBlocking = false;
             if (down) {
                 if (crouch.getCurrentIndex() < 5){
                     crouch.tick();
@@ -420,7 +422,7 @@ public class Kasai extends Player {
             isBlocking = false;
         }
         
-        if (down || crouch.getCurrentIndex() != 0) {
+        if ((down || crouch.getCurrentIndex() != 0) && !isBlocking) {
             isCrouching = true;
         }
         else {

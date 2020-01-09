@@ -11,12 +11,20 @@ import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
  * @author h9113
  */
 public class Assets {
+    
+    //IntroImage
+    public static BufferedImage loading1;
+    public static BufferedImage loading2;
+    
+    //Menu Screen
+    public static ArrayList<BufferedImage> menu;
     
     //Font
     public static Font dragonForce;
@@ -39,6 +47,17 @@ public class Assets {
     public static BufferedImage[] dom_down1_player2, dom_down2_player2, dom_2_player2, dom_1_player2, dom_11_player2, dom_111_player2, dom_special_player2, dom_special_cancel_player2;
     
     public static void init() {
+        //Intro
+        
+        loading1 = ImageLoader.loadImage("res/IntroScreen/loading1.png");
+        loading2 = ImageLoader.loadImage("res/IntroScreen/loading2.png");
+        
+        //Menu
+        menu = new ArrayList<BufferedImage>();
+        menu.add(ImageLoader.loadImage("res/MenuScreen/loading1.png"));
+        menu.add(ImageLoader.loadImage("res/MenuScreen/loading2.png"));
+        menu.add(ImageLoader.loadImage("res/MenuScreen/loading3.png"));
+        
         try{
             dragonForce = Font.createFont(Font.TRUETYPE_FONT, new File("res/font/DragonForcE.ttf")).deriveFont(Font.PLAIN, 50f);
             dragonForceNum = Font.createFont(Font.TRUETYPE_FONT, new File("res/font/DragonForcE.ttf")).deriveFont(Font.PLAIN, 80f);
@@ -59,6 +78,7 @@ public class Assets {
         SpriteSheet kasai_sheet_player2 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Kasai/Player2/Kasai_SpriteSheet.png"), 32, 64, 21);
         SpriteSheet dom_sheet_player2 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Dom/Player2/Dom_SpriteSheet.png"), 32, 64, 21);
         SpriteSheet dom_sheet_player1 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Dom/Player1/Dom_SpriteSheet.png"), 32, 64, 21);
+        
         //Backgrounds
         SpriteSheet fireTemple_sheet = new SpriteSheet(ImageLoader.loadImage("res/backgrounds/FireTemple.png"), 1280, 720, 3);
         SpriteSheet kingdom_sheet = new SpriteSheet (ImageLoader.loadImage("res/backgrounds/King Dom's Kingdom.gif"), 1280, 720, 3);

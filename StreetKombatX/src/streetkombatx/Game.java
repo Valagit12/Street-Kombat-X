@@ -23,6 +23,7 @@ import players.Dom;
 import players.Kasai;
 import states.EndState;
 import states.GameState;
+import states.IntroState;
 import states.MenuState;
 import states.State;
 
@@ -107,8 +108,9 @@ public class Game implements Runnable {
         
         EndState endState = new EndState(this);
         GameState gameState = new GameState(this, player1, player2, endState, state);
-        MenuState menuState = new MenuState(this);
-        state.setState(gameState);
+        MenuState menuState = new MenuState(this, gameState, state);
+        IntroState introState = new IntroState(this, state, menuState);
+        state.setState(introState);
 
     }
 

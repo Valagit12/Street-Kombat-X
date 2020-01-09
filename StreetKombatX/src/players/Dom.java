@@ -195,6 +195,9 @@ public class Dom extends Player{
             right = false;
             left = false;
             up = false;
+            one = false; 
+            two = false;
+            isCrouching = false;
             if (blocking){
                 if (block.getCurrentIndex() < 4) {
                     block.tick();
@@ -214,6 +217,7 @@ public class Dom extends Player{
             right = false;
             left = false;
             up = false;
+            isBlocking = false;
             if (down) {
                 if (crouch.getCurrentIndex() < 5){
                     crouch.tick();
@@ -409,7 +413,7 @@ public class Dom extends Player{
             isBlocking = false;
         }
         
-        if (down || crouch.getCurrentIndex() != 0) {
+        if ((down || crouch.getCurrentIndex() != 0) && !isBlocking) {
             isCrouching = true;
         }
         else {
