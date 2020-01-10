@@ -5,6 +5,7 @@
  */
 package states;
 
+import gfx.Animation;
 import gfx.Assets;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -29,16 +30,26 @@ public class CharSelectState extends State{
     public BufferedImage charSelectScreen;
     public State state;
     public StageSelectState stageSelectState;
+    public Animation dom_stance_player1, kasai_stance_player1, dom_stance_player2, kasai_stance_player2;
     
     public CharSelectState(Game game, StageSelectState stageSelectState, State state) {
         super(game);
         this.state = state;
         this.stageSelectState = stageSelectState;
         charSelectScreen = Assets.charSelectScreen;
+        dom_stance_player1 = new Animation(66.668, Assets.dom_stance_player1);
+        dom_stance_player2 = new Animation(66.668, Assets.dom_stance_player2);
+        kasai_stance_player1 = new Animation(66.668, Assets.kasai_stance_player1);
+        kasai_stance_player2 = new Animation(66.668, Assets.kasai_stance_player2);
     }
 
     @Override
     public void tick() {
+        dom_stance_player1.tick();
+        dom_stance_player2.tick();
+        kasai_stance_player1.tick();
+        kasai_stance_player2.tick();
+        
         player1Right = game.getKeyManager().player1_right;
         player1Left = game.getKeyManager().player1_left;
         player1Up = game.getKeyManager().player1_jump;
@@ -113,5 +124,59 @@ public class CharSelectState extends State{
         gState.fillRect(xPlayer1, yPlayer1, 20,20);
         gState.setColor(Color.blue);
         gState.fillRect(xPlayer2, yPlayer2, 20,20);
+        gState.drawImage(getCurrentAnimationState_Player1(), 29, 161, 411, 822, null);
+        gState.drawImage(getCurrentAnimationState_Player2(), 861, 161, 411, 822, null);
+        gState.setFont(Assets.dragonForceNum);
+        gState.setColor(Color.red);
+        gState.drawString(getCharTitle_Player1(), 77, 81);
+        gState.drawString(getCharTitle_Player2(), 1020, 81);
+    }
+    
+    private BufferedImage getCurrentAnimationState_Player1() {
+        if (player1SelectionHorizontal == 0 && player1SelectionVertical == 0){
+            return dom_stance_player1.getCurrentFrame();
+        }
+        else if (player1SelectionHorizontal == 1 && player1SelectionVertical == 0){
+            return kasai_stance_player1.getCurrentFrame();
+        }
+        else {
+            return null;
+        }
+    }
+    
+    private BufferedImage getCurrentAnimationState_Player2() {
+        if (player2SelectionHorizontal == 0 && player2SelectionVertical == 0){
+            return dom_stance_player2.getCurrentFrame();
+        }
+        else if (player2SelectionHorizontal == 1 && player2SelectionVertical == 0){
+            return kasai_stance_player2.getCurrentFrame();
+        }
+        else {
+            return null;
+        }
+    }
+    
+    private String getCharTitle_Player1() {
+        if (player1SelectionHorizontal == 0 && player1SelectionVertical == 0){
+            return "Dom";
+        }
+        else if (player1SelectionHorizontal == 1 && player1SelectionVertical == 0){
+            return "Kasai";
+        }
+        else {
+            return "";
+        }
+    }
+    
+    private String getCharTitle_Player2() {
+        if (player2SelectionHorizontal == 0 && player2SelectionVertical == 0){
+            return "Dom";
+        }
+        else if (player2SelectionHorizontal == 1 && player2SelectionVertical == 0){
+            return "Kasai";
+        }
+        else {
+            return "";
+        }
     }
 }
