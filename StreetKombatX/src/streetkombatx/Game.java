@@ -114,12 +114,10 @@ public class Game implements Runnable {
         HelpState helpState = new HelpState(this);
         EndState endState = new EndState(this);
         GameState gameState = new GameState(this, player1, player2, endState, state);
-        StageSelectState stageSelectState = new StageSelectState();
-        CharSelectState charSelectState = new CharSelectState(this, stageSelectState, state);
+        CharSelectState charSelectState = new CharSelectState(this, state);
         MenuState menuState = new MenuState(this, charSelectState, helpState, state);
         IntroState introState = new IntroState(this, state, menuState);
         state.setState(introState);
-
     }
 
     public void tick() {

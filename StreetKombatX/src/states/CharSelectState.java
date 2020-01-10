@@ -10,6 +10,9 @@ import gfx.Assets;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import players.Dom;
+import players.Kasai;
+import players.Player;
 import streetkombatx.Game;
 
 /**
@@ -26,16 +29,18 @@ public class CharSelectState extends State{
     
     public boolean player1Right, player1Left, player1Up, player1Down;
     public boolean player2Right, player2Left, player2Up, player2Down;
+    public boolean enter;
+    public boolean previousEnter= true;
     
+    public Player player1, player2;
     public BufferedImage charSelectScreen;
     public State state;
     public StageSelectState stageSelectState;
     public Animation dom_stance_player1, kasai_stance_player1, dom_stance_player2, kasai_stance_player2;
     
-    public CharSelectState(Game game, StageSelectState stageSelectState, State state) {
+    public CharSelectState(Game game, State state) {
         super(game);
         this.state = state;
-        this.stageSelectState = stageSelectState;
         charSelectScreen = Assets.charSelectScreen;
         dom_stance_player1 = new Animation(66.668, Assets.dom_stance_player1);
         dom_stance_player2 = new Animation(66.668, Assets.dom_stance_player2);
@@ -59,6 +64,8 @@ public class CharSelectState extends State{
         player2Left = game.getKeyManager().player2_left;
         player2Up = game.getKeyManager().player2_jump;
         player2Down = game.getKeyManager().player2_crouch;
+        
+        enter = game.getKeyManager().enter;
         
         if (player1Right && player1SelectionHorizontal == 0){
             player1SelectionHorizontal++;
@@ -115,6 +122,9 @@ public class CharSelectState extends State{
         else if (player2SelectionVertical == 1){
             yPlayer2 = 316;
         }
+        
+        confirmSelection();
+        previousEnter = enter;
     }
 
     @Override
@@ -177,6 +187,26 @@ public class CharSelectState extends State{
         }
         else {
             return "";
+        }
+    }
+    
+    private void confirmSelection() {
+        if (player1SelectionVertical != 1 && player2SelectionVertical != 1 && enter && !previousEnter){
+            if (player1SelectionHorizontal == 0 && player1SelectionVertical == 0){
+                player1 = new Dom(game, 200, 410, 150, 300, 1);
+            }
+            else if (player1SelectionHorizontal == 1 && player1SelectionVertical == 0){
+                player1 = new Kasai(game, 200, 410, 150, 300, 1);
+            }
+            
+            if (player2SelectionHorizontal == 0 && player2SelectionVertical == 0){
+                player2 = new Dom(game, 1000, 410, 150, 300, 2); 
+            }
+            else if (player2SelectionHorizontal == 1 && player2SelectionVertical == 0){
+                player2 = new Kasai(game, 1000, 410, 150, 300, 2);
+            }
+            StageSelectState stageSelectState = new StageSelectState(game, player1, player2);
+            state.setState(stageSelectState);
         }
     }
 }

@@ -62,7 +62,6 @@ public class MenuState extends State {
         previousUp = up;
         previousDown = down;
 
-        System.out.println(selection);
     }
 
     @Override

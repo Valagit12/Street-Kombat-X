@@ -5,10 +5,30 @@
  */
 package states;
 
+import java.awt.Graphics;
+import players.Player;
+import streetkombatx.Game;
+
 /**
  *
  * @author h9113
  */
-public class StageSelectState {
+public class StageSelectState extends State{
+    
+    
+    
+    public StageSelectState(Game game, Player player1, Player player2){
+        super(game);
+    }
+
+    @Override
+    public void tick() {
+        
+    }
+
+    @Override
+    public void render(Graphics gState) {
+        
+    }
     
 }
