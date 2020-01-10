@@ -26,6 +26,9 @@ public class Assets {
     //Menu Screen
     public static ArrayList<BufferedImage> menu;
     
+    //Character Select Screen
+    public static BufferedImage charSelectScreen;
+    
     //Font
     public static Font dragonForce;
     public static Font dragonForceNum;
@@ -57,6 +60,9 @@ public class Assets {
         menu.add(ImageLoader.loadImage("res/MenuScreen/loading1.png"));
         menu.add(ImageLoader.loadImage("res/MenuScreen/loading2.png"));
         menu.add(ImageLoader.loadImage("res/MenuScreen/loading3.png"));
+        
+        //Character Select
+        charSelectScreen = ImageLoader.loadImage("res/CharScreen/charSelect.png");
         
         try{
             dragonForce = Font.createFont(Font.TRUETYPE_FONT, new File("res/font/DragonForcE.ttf")).deriveFont(Font.PLAIN, 50f);
