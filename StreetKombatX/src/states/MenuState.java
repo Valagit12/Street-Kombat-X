@@ -22,15 +22,16 @@ public class MenuState extends State {
 
     private State state;
     private CharSelectState charSelectState;
+    private HelpState helpState;
     private BufferedImage menu1;
     private BufferedImage menu2;
     private BufferedImage menu3;
 
-    public MenuState(Game game, CharSelectState charSelectState, State state) {
+    public MenuState(Game game, CharSelectState charSelectState, HelpState helpState, State state) {
         super(game);
         this.state = state;
         this.charSelectState = charSelectState;
-
+        this.helpState = helpState;
         this.menu1 = Assets.menu.get(0);
         this.menu2 = Assets.menu.get(1);
         this.menu3 = Assets.menu.get(2);
@@ -52,7 +53,7 @@ public class MenuState extends State {
             if (selection == 0) {
                 state.setState(charSelectState);
             } else if (selection == 1) {
-
+                state.setState(helpState);
             } else {
 
             }

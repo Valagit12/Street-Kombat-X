@@ -26,6 +26,7 @@ import players.Kasai;
 import states.CharSelectState;
 import states.EndState;
 import states.GameState;
+import states.HelpState;
 import states.IntroState;
 import states.MenuState;
 import states.StageSelectState;
@@ -36,8 +37,6 @@ import states.State;
  * @author h9113
  */
 public class Game implements Runnable {
-
-    private static Music music;
 
     private int width, height; //width and height of the JFrame
     private String title; //title of the JFrame
@@ -111,12 +110,13 @@ public class Game implements Runnable {
         //temporary
         player1 = new Dom(this, 200, 410, 150, 300, 1);
         player2 = new Kasai(this, 1000, 410, 150, 300, 2);
-
+        
+        HelpState helpState = new HelpState(this);
         EndState endState = new EndState(this);
         GameState gameState = new GameState(this, player1, player2, endState, state);
         StageSelectState stageSelectState = new StageSelectState();
         CharSelectState charSelectState = new CharSelectState(this, stageSelectState, state);
-        MenuState menuState = new MenuState(this, charSelectState, state);
+        MenuState menuState = new MenuState(this, charSelectState, helpState, state);
         IntroState introState = new IntroState(this, state, menuState);
         state.setState(introState);
 
@@ -244,7 +244,7 @@ public class Game implements Runnable {
 
     public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         new Game(1280, 720, "Street Kombat X"); //creates an instance of the main thread Game and starts the program
-        music = new Music();
+        new Music();
     }
 
 }
