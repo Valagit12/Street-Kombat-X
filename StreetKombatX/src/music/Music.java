@@ -19,26 +19,19 @@ import states.State;
  * @author Valareza
  */
 public class Music {
+
     private Long currentFrame;
     Clip clip;
     String Status;
     AudioInputStream audioInputStream;
     String filePath;
-    
-    public Music(int whichSong) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        if (whichSong == 1){
-            filePath = "Kingdom OST.wav";
-        } else if (whichSong == 2){
-            filePath = "FireTemple OST.wav";
-        } else if (whichSong == 3){
+
+    public Music() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
             filePath = "Menu OST.wav";
-        }
-        audioInputStream = AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
-        clip = AudioSystem.getClip(); 
-        clip.open(audioInputStream);
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
-        while (true) {
-            int c = 1 + 1;
-        }
+        
+         audioInputStream = AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 }

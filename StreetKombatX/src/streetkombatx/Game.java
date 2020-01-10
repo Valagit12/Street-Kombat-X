@@ -13,6 +13,8 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -32,6 +34,8 @@ import states.State;
  * @author h9113
  */
 public class Game implements Runnable {
+
+    private static Music music;
 
     private int width, height; //width and height of the JFrame
     private String title; //title of the JFrame
@@ -105,7 +109,7 @@ public class Game implements Runnable {
         //temporary
         player1 = new Dom(this, 200, 410, 150, 300, 1);
         player2 = new Kasai(this, 1000, 410, 150, 300, 2);
-        
+
         EndState endState = new EndState(this);
         GameState gameState = new GameState(this, player1, player2, endState, state);
         MenuState menuState = new MenuState(this, gameState, state);
@@ -197,11 +201,11 @@ public class Game implements Runnable {
     public KeyManager getKeyManager() {
         return keyManager;
     }
-    
+
     public State getState() {
         return state;
     }
-    
+
     public int getWidth() {
         return width;
     }
@@ -236,7 +240,7 @@ public class Game implements Runnable {
 
     public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         new Game(1280, 720, "Street Kombat X"); //creates an instance of the main thread Game and starts the program
-        int currentState = 2;
-        new Music(currentState);
+        music = new Music();
     }
+
 }

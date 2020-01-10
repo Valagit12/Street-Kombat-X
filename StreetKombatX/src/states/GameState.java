@@ -25,7 +25,6 @@ public class GameState extends State {
     private CollisionCheck collisionCheck;
     private EndState endState;
     private State state;
-    
     private int time = 90;
     private int ticks = 0;
     private int endTimer = 0;
@@ -43,6 +42,7 @@ public class GameState extends State {
     }
     @Override
     public void tick() {
+        
         if (time > 0 && ticks == 60){
             time--;
             ticks = 0;
@@ -63,14 +63,16 @@ public class GameState extends State {
                 winner = player1.getCharTitle();
             }
             
-            if (endTimer >= 7){
+            if (endTimer >= 5){
                 state.setState(endState);
+                
             }
             
-            if (ticks == 60){
+            if (ticks >= 60){
                 endTimer++;
             }
         }
+        
     }
 
     @Override
