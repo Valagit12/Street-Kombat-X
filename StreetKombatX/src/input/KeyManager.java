@@ -19,7 +19,7 @@ public class KeyManager implements KeyListener{
     public boolean player1_block, player1_1, player1_2, player1_special;
     public boolean player2_jump, player2_crouch, player2_left, player2_right;
     public boolean player2_block, player2_1, player2_2, player2_special;
-    public boolean enter;
+    public boolean enter, escape;
     
     public KeyManager() {
         keys = new boolean[256];
@@ -28,6 +28,7 @@ public class KeyManager implements KeyListener{
     public void tick() {
         //Enter
         enter = keys[KeyEvent.VK_ENTER];
+        escape = keys[KeyEvent.VK_ESCAPE];
         
         //player 1 input
         player1_jump = keys[KeyEvent.VK_W];

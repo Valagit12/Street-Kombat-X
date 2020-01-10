@@ -110,12 +110,11 @@ public class Game implements Runnable {
         //temporary
         player1 = new Dom(this, 200, 410, 150, 300, 1);
         player2 = new Kasai(this, 1000, 410, 150, 300, 2);
-        
-        HelpState helpState = new HelpState(this);
+         
         EndState endState = new EndState(this);
         GameState gameState = new GameState(this, player1, player2, endState, state);
         CharSelectState charSelectState = new CharSelectState(this, state);
-        MenuState menuState = new MenuState(this, charSelectState, helpState, state);
+        MenuState menuState = new MenuState(this, charSelectState,state);
         IntroState introState = new IntroState(this, state, menuState);
         state.setState(introState);
     }

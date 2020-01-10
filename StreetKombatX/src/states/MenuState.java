@@ -27,10 +27,11 @@ public class MenuState extends State {
     private BufferedImage menu2;
     private BufferedImage menu3;
 
-    public MenuState(Game game, CharSelectState charSelectState, HelpState helpState, State state) {
+    public MenuState(Game game, CharSelectState charSelectState, State state) {
         super(game);
         this.state = state;
         this.charSelectState = charSelectState;
+        helpState = new HelpState(game, this);
         this.helpState = helpState;
         this.menu1 = Assets.menu.get(0);
         this.menu2 = Assets.menu.get(1);

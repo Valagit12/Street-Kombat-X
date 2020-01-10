@@ -25,6 +25,7 @@ public class Assets {
     
     //Menu Screen
     public static ArrayList<BufferedImage> menu;
+    public static ArrayList<BufferedImage> help;
     
     //Character Select Screen
     public static BufferedImage charSelectScreen;
@@ -60,6 +61,13 @@ public class Assets {
         menu.add(ImageLoader.loadImage("res/MenuScreen/loading1.png"));
         menu.add(ImageLoader.loadImage("res/MenuScreen/loading2.png"));
         menu.add(ImageLoader.loadImage("res/MenuScreen/loading3.png"));
+        
+        //Help Screens
+        help = new ArrayList<BufferedImage>();
+        help.add(ImageLoader.loadImage("res/HelpScreen/How To Play pt1.png"));
+        help.add(ImageLoader.loadImage("res/HelpScreen/How To Play Screen2.png"));
+        help.add(ImageLoader.loadImage("res/HelpScreen/How To Play Screen3.png"));
+        help.add(ImageLoader.loadImage("res/HelpScreen/How To Play ScreenControl.png"));
         
         //Character Select
         charSelectScreen = ImageLoader.loadImage("res/CharScreen/charSelect.png");

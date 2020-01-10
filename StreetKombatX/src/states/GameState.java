@@ -65,7 +65,6 @@ public class GameState extends State {
             
             if (endTimer >= 5){
                 state.setState(endState);
-                
             }
             
             if (ticks >= 60){
