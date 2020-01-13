@@ -30,6 +30,15 @@ public class Assets {
     //Character Select Screen
     public static BufferedImage charSelectScreen;
     
+    //Stage Select
+    public static BufferedImage stageSelectScreen;
+    
+    //Pause Screen
+    public static ArrayList<BufferedImage> pause;
+    
+    //End Screen
+    public static ArrayList<BufferedImage> endScreen;
+    
     //Font
     public static Font dragonForce;
     public static Font dragonForceNum;
@@ -51,8 +60,7 @@ public class Assets {
     public static BufferedImage[] dom_down1_player2, dom_down2_player2, dom_2_player2, dom_1_player2, dom_11_player2, dom_111_player2, dom_special_player2, dom_special_cancel_player2;
     
     public static void init() {
-        //Intro
-        
+        //Intro  
         loading1 = ImageLoader.loadImage("res/IntroScreen/loading1.png");
         loading2 = ImageLoader.loadImage("res/IntroScreen/loading2.png");
         
@@ -71,6 +79,21 @@ public class Assets {
         
         //Character Select
         charSelectScreen = ImageLoader.loadImage("res/CharScreen/charSelect.png");
+        
+        //Stage Select
+        stageSelectScreen = ImageLoader.loadImage("res/StageScreen/StageSelectScreen.png");
+        
+        //End Screen
+        endScreen = new ArrayList<BufferedImage>();
+        endScreen.add(ImageLoader.loadImage("res/EndScreen/endScreen1.png"));
+        endScreen.add(ImageLoader.loadImage("res/EndScreen/endScreen2.png"));
+        endScreen.add(ImageLoader.loadImage("res/EndScreen/endScreen3.png"));
+        
+        //Pause Screen
+        pause = new ArrayList<BufferedImage>();
+        pause.add(ImageLoader.loadImage("res/PauseScreen/pause1.png"));
+        pause.add(ImageLoader.loadImage("res/PauseScreen/pause2.png"));
+        pause.add(ImageLoader.loadImage("res/PauseScreen/pause3.png"));
         
         try{
             dragonForce = Font.createFont(Font.TRUETYPE_FONT, new File("res/font/DragonForcE.ttf")).deriveFont(Font.PLAIN, 50f);
@@ -95,7 +118,7 @@ public class Assets {
         
         //Backgrounds
         SpriteSheet fireTemple_sheet = new SpriteSheet(ImageLoader.loadImage("res/backgrounds/FireTemple.png"), 1280, 720, 3);
-        SpriteSheet kingdom_sheet = new SpriteSheet (ImageLoader.loadImage("res/backgrounds/King Dom's Kingdom.gif"), 1280, 720, 3);
+        SpriteSheet kingdom_sheet = new SpriteSheet (ImageLoader.loadImage("res/backgrounds/KingDomsKingdom.png"), 1280, 720, 3);
         
         fireTemple = new BufferedImage[8];
         kingdom = new BufferedImage[8];

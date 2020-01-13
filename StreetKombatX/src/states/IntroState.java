@@ -23,13 +23,8 @@ public class IntroState extends State{
     private BufferedImage loading1;
     private BufferedImage loading2;
     
-    private State state;
-    private MenuState menuState;
-    
-    public IntroState(Game game, State state, MenuState menuState) {
+    public IntroState(Game game) {
         super(game);
-        this.state = state;
-        this.menuState = menuState;
         loading1 = Assets.loading1;
         loading2 = Assets.loading2;
     }
@@ -42,7 +37,7 @@ public class IntroState extends State{
         }
         tick++;
         if (timer >= 5){
-            state.setState(menuState);
+            State.setState(new MenuState(game));
         }
     }
 

@@ -21,26 +21,25 @@ import streetkombatx.Game;
  */
 public class CharSelectState extends State{
     
-    public int player1SelectionHorizontal = 0;
-    public int player1SelectionVertical = 0;
-    public int player2SelectionHorizontal = 0;
-    public int player2SelectionVertical = 0;
-    public int xPlayer1, xPlayer2, yPlayer1, yPlayer2;
+    private int player1SelectionHorizontal = 0;
+    private int player1SelectionVertical = 0;
+    private int player2SelectionHorizontal = 0;
+    private int player2SelectionVertical = 0;
+    private int xPlayer1, xPlayer2, yPlayer1, yPlayer2;
     
-    public boolean player1Right, player1Left, player1Up, player1Down;
-    public boolean player2Right, player2Left, player2Up, player2Down;
-    public boolean enter;
-    public boolean previousEnter= true;
+    private boolean player1Right, player1Left, player1Up, player1Down;
+    private boolean player2Right, player2Left, player2Up, player2Down;
+    private boolean enter, escape;
+    private boolean previousEnter = true;
+    private boolean previousEscape = true;
     
     public Player player1, player2;
     public BufferedImage charSelectScreen;
-    public State state;
     public StageSelectState stageSelectState;
     public Animation dom_stance_player1, kasai_stance_player1, dom_stance_player2, kasai_stance_player2;
     
-    public CharSelectState(Game game, State state) {
+    public CharSelectState(Game game) {
         super(game);
-        this.state = state;
         charSelectScreen = Assets.charSelectScreen;
         dom_stance_player1 = new Animation(66.668, Assets.dom_stance_player1);
         dom_stance_player2 = new Animation(66.668, Assets.dom_stance_player2);
@@ -66,6 +65,8 @@ public class CharSelectState extends State{
         player2Down = game.getKeyManager().player2_crouch;
         
         enter = game.getKeyManager().enter;
+        
+        escape = game.getKeyManager().escape;
         
         if (player1Right && player1SelectionHorizontal == 0){
             player1SelectionHorizontal++;
@@ -125,6 +126,7 @@ public class CharSelectState extends State{
         
         confirmSelection();
         previousEnter = enter;
+        previousEscape = escape;
     }
 
     @Override
@@ -205,8 +207,11 @@ public class CharSelectState extends State{
             else if (player2SelectionHorizontal == 1 && player2SelectionVertical == 0){
                 player2 = new Kasai(game, 1000, 410, 150, 300, 2);
             }
-            StageSelectState stageSelectState = new StageSelectState(game, player1, player2);
-            state.setState(stageSelectState);
+            State.setState(new StageSelectState(game, player1, player2));
+        }
+        
+        if (escape && !previousEscape){
+            State.setState(new MenuState(game));
         }
     }
 }

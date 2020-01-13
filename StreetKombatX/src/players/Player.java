@@ -113,6 +113,10 @@ public abstract class Player {
         return charTitle;
     }
     
+    public Animation getStance() {
+        return stance;
+    }
+    
     public void drawHealth(Graphics g) {
         if (playerNum == 1){
             g.setColor(Color.black);

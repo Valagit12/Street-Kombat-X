@@ -21,19 +21,15 @@ public class HelpState extends State {
     private int pagelvl = 0;
     private boolean previousLeft, previousRight;
 
-    private State state;
-    private GameState gameState;
-    private MenuState menuState;
+    private State previousState;
     private BufferedImage hlpScr1;
     private BufferedImage hlpScr2;
     private BufferedImage hlpScr3;
     private BufferedImage hlpScrCtrl;
 
-    public HelpState(Game game, MenuState menuState) {
+    public HelpState(Game game, State previousState) {
         super(game);
-        this.state = state;
-        this.gameState = gameState;
-        this.menuState = menuState;
+        this.previousState = previousState;
         this.hlpScr1 = Assets.help.get(0);
         this.hlpScr2 = Assets.help.get(1);
         this.hlpScr3 = Assets.help.get(2);
@@ -54,7 +50,7 @@ public class HelpState extends State {
             pagelvl--;
         }
         if (escape){
-            State.setState(menuState);
+            State.setState(previousState);
         }
         previousRight = right;
         previousLeft = left;

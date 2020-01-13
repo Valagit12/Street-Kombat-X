@@ -19,20 +19,14 @@ public class MenuState extends State {
     private int timer = 0;
     private int selection = 0;
     private boolean up, down, enter, previousUp, previousDown;
-
-    private State state;
-    private CharSelectState charSelectState;
-    private HelpState helpState;
+    private boolean previousEnter = true;
+    
     private BufferedImage menu1;
     private BufferedImage menu2;
     private BufferedImage menu3;
 
-    public MenuState(Game game, CharSelectState charSelectState, State state) {
+    public MenuState(Game game) {
         super(game);
-        this.state = state;
-        this.charSelectState = charSelectState;
-        helpState = new HelpState(game, this);
-        this.helpState = helpState;
         this.menu1 = Assets.menu.get(0);
         this.menu2 = Assets.menu.get(1);
         this.menu3 = Assets.menu.get(2);
@@ -50,19 +44,19 @@ public class MenuState extends State {
             selection--;
         }
 
-        if (enter) {
+        if (enter && !previousEnter) {
             if (selection == 0) {
-                state.setState(charSelectState);
+                State.setState(new CharSelectState(game));
             } else if (selection == 1) {
-                state.setState(helpState);
+                State.setState(new HelpState(game, this));
             } else {
-
+                new NameEnterState();
             }
         }
 
         previousUp = up;
         previousDown = down;
-
+        previousEnter = enter;
     }
 
     @Override

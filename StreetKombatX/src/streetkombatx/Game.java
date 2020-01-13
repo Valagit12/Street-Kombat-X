@@ -106,17 +106,9 @@ public class Game implements Runnable {
         Assets.init();
         keyManager = new KeyManager();
         frame.getFrame().addKeyListener(keyManager);
-
-        //temporary
-        player1 = new Dom(this, 200, 410, 150, 300, 1);
-        player2 = new Kasai(this, 1000, 410, 150, 300, 2);
          
-        EndState endState = new EndState(this);
-        GameState gameState = new GameState(this, player1, player2, endState, state);
-        CharSelectState charSelectState = new CharSelectState(this, state);
-        MenuState menuState = new MenuState(this, charSelectState,state);
-        IntroState introState = new IntroState(this, state, menuState);
-        state.setState(introState);
+        IntroState introState = new IntroState(this);
+        State.setState(introState);
     }
 
     public void tick() {
@@ -201,6 +193,10 @@ public class Game implements Runnable {
 
     public KeyManager getKeyManager() {
         return keyManager;
+    }
+    
+    public Display getFrame() {
+        return frame;
     }
 
     public State getState() {
