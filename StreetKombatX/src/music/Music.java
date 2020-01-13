@@ -21,10 +21,10 @@ import states.State;
 public class Music {
 
     private Long currentFrame;
-    Clip clip;
-    String Status;
-    AudioInputStream audioInputStream;
-    String filePath;
+    private Clip clip;
+    private String Status;
+    private AudioInputStream audioInputStream;
+    private String filePath;
 
     public Music() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
             filePath = "Menu OST.wav";
