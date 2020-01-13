@@ -52,9 +52,9 @@ public class EndState extends State{
     
     @Override
     public void tick(){
-        up = game.getKeyManager().player2_jump;
-        down = game.getKeyManager().player2_crouch;
-        enter = game.getKeyManager().enter;
+        up = game.getKeyManager().isPlayer2_jump();
+        down = game.getKeyManager().isPlayer2_crouch();
+        enter = game.getKeyManager().isEnter();
             
         if (selection < 2 && down && !previousDown) {
             selection++;

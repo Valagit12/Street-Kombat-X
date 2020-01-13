@@ -71,26 +71,26 @@ public class Kasai extends Player {
         
         if (playerNum == 1) {
             if (isAbleToPress){
-                up = game.getKeyManager().player1_jump;
-                down = game.getKeyManager().player1_crouch;
+                up = game.getKeyManager().isPlayer1_jump();
+                down = game.getKeyManager().isPlayer1_crouch();
             }
-            right = game.getKeyManager().player1_right;
-            left = game.getKeyManager().player1_left;
-            blocking = game.getKeyManager().player1_block;
-            one = game.getKeyManager().player1_1;
-            two = game.getKeyManager().player1_2;
-            specialButton = game.getKeyManager().player1_special;
+            right = game.getKeyManager().isPlayer1_right();
+            left = game.getKeyManager().isPlayer1_left();
+            blocking = game.getKeyManager().isPlayer1_block();
+            one = game.getKeyManager().isPlayer1_1();
+            two = game.getKeyManager().isPlayer1_2();
+            specialButton = game.getKeyManager().isPlayer1_special();
         } else if (playerNum == 2) {
             if (isAbleToPress){
-                up = game.getKeyManager().player2_jump;
-                down = game.getKeyManager().player2_crouch;
+                up = game.getKeyManager().isPlayer2_jump();
+                down = game.getKeyManager().isPlayer2_crouch();
             }
-            right = game.getKeyManager().player2_right;
-            left = game.getKeyManager().player2_left;
-            blocking = game.getKeyManager().player2_block;
-            one = game.getKeyManager().player2_1;
-            two = game.getKeyManager().player2_2;
-            specialButton = game.getKeyManager().player2_special;
+            right = game.getKeyManager().isPlayer2_right();
+            left = game.getKeyManager().isPlayer2_left();
+            blocking = game.getKeyManager().isPlayer2_block();
+            one = game.getKeyManager().isPlayer2_1();
+            two = game.getKeyManager().isPlayer2_2();
+            specialButton = game.getKeyManager().isPlayer2_special();
         }
         
         if (health <= 0){

@@ -54,19 +54,19 @@ public class CharSelectState extends State{
         kasai_stance_player1.tick();
         kasai_stance_player2.tick();
         
-        player1Right = game.getKeyManager().player1_right;
-        player1Left = game.getKeyManager().player1_left;
-        player1Up = game.getKeyManager().player1_jump;
-        player1Down = game.getKeyManager().player1_crouch;
+        player1Right = game.getKeyManager().isPlayer1_right();
+        player1Left = game.getKeyManager().isPlayer1_left();
+        player1Up = game.getKeyManager().isPlayer1_jump();
+        player1Down = game.getKeyManager().isPlayer1_crouch();
         
-        player2Right = game.getKeyManager().player2_right;
-        player2Left = game.getKeyManager().player2_left;
-        player2Up = game.getKeyManager().player2_jump;
-        player2Down = game.getKeyManager().player2_crouch;
+        player2Right = game.getKeyManager().isPlayer2_right();
+        player2Left = game.getKeyManager().isPlayer2_left();
+        player2Up = game.getKeyManager().isPlayer2_jump();
+        player2Down = game.getKeyManager().isPlayer2_crouch();
         
-        enter = game.getKeyManager().enter;
+        enter = game.getKeyManager().isEnter();
         
-        escape = game.getKeyManager().escape;
+        escape = game.getKeyManager().isEscape();
         
         if (player1Right && player1SelectionHorizontal == 0){
             player1SelectionHorizontal++;

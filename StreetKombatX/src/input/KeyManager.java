@@ -15,11 +15,11 @@ import java.awt.event.KeyListener;
 public class KeyManager implements KeyListener{
     
     private boolean[] keys;
-    public boolean player1_jump, player1_crouch, player1_left, player1_right;
-    public boolean player1_block, player1_1, player1_2, player1_special;
-    public boolean player2_jump, player2_crouch, player2_left, player2_right;
-    public boolean player2_block, player2_1, player2_2, player2_special;
-    public boolean enter, escape;
+    private boolean player1_jump, player1_crouch, player1_left, player1_right;
+    private boolean player1_block, player1_1, player1_2, player1_special;
+    private boolean player2_jump, player2_crouch, player2_left, player2_right;
+    private boolean player2_block, player2_1, player2_2, player2_special;
+    private boolean enter, escape;
     
     public KeyManager() {
         keys = new boolean[256];
@@ -65,5 +65,78 @@ public class KeyManager implements KeyListener{
     public void keyReleased(KeyEvent e) {
         keys[e.getKeyCode()] = false;
     }
+
+    public boolean isPlayer1_jump() {
+        return player1_jump;
+    }
+
+    public boolean isPlayer1_crouch() {
+        return player1_crouch;
+    }
+
+    public boolean isPlayer1_left() {
+        return player1_left;
+    }
+
+    public boolean isPlayer1_right() {
+        return player1_right;
+    }
+
+    public boolean isPlayer1_block() {
+        return player1_block;
+    }
+
+    public boolean isPlayer1_1() {
+        return player1_1;
+    }
+
+    public boolean isPlayer1_2() {
+        return player1_2;
+    }
+
+    public boolean isPlayer1_special() {
+        return player1_special;
+    }
+
+    public boolean isPlayer2_jump() {
+        return player2_jump;
+    }
+
+    public boolean isPlayer2_crouch() {
+        return player2_crouch;
+    }
+
+    public boolean isPlayer2_left() {
+        return player2_left;
+    }
+
+    public boolean isPlayer2_right() {
+        return player2_right;
+    }
+
+    public boolean isPlayer2_block() {
+        return player2_block;
+    }
+
+    public boolean isPlayer2_1() {
+        return player2_1;
+    }
+
+    public boolean isPlayer2_2() {
+        return player2_2;
+    }
+
+    public boolean isPlayer2_special() {
+        return player2_special;
+    }
+
+    public boolean isEnter() {
+        return enter;
+    }
+
+    public boolean isEscape() {
+        return escape;
+    }
+    
     
 }

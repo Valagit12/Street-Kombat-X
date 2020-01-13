@@ -39,9 +39,9 @@ public class HelpState extends State {
     @Override
     public void tick() {
         
-        right = game.getKeyManager().player2_right;
-        left = game.getKeyManager().player2_left;
-        escape = game.getKeyManager().escape;
+        right = game.getKeyManager().isPlayer2_right();
+        left = game.getKeyManager().isPlayer2_left();
+        escape = game.getKeyManager().isEscape();
         
         
         if (pagelvl < 3 && right && !previousRight) {

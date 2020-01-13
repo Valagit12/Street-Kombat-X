@@ -51,16 +51,16 @@ public class GameState extends State {
     @Override
     public void tick() {
         
-        escape = game.getKeyManager().escape;
+        escape = game.getKeyManager().isEscape();
         
         if (escape && !(player1.getHealth() <= 0 || player2.getHealth() <= 0 || time <= 0)){
             pause = true;
         }
         
         if (pause){
-            up = game.getKeyManager().player2_jump;
-            down = game.getKeyManager().player2_crouch;
-            enter = game.getKeyManager().enter;
+            up = game.getKeyManager().isPlayer2_jump();
+            down = game.getKeyManager().isPlayer2_crouch();
+            enter = game.getKeyManager().isEnter();
             
             if (selection < 2 && down && !previousDown) {
                 selection++;

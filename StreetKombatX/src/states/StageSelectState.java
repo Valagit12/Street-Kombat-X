@@ -46,13 +46,13 @@ public class StageSelectState extends State{
         player1.getStance().tick();
         player2.getStance().tick();
         
-        right = game.getKeyManager().player2_right;
-        left = game.getKeyManager().player2_left;
-        up = game.getKeyManager().player2_jump;
-        down = game.getKeyManager().player2_crouch;
+        right = game.getKeyManager().isPlayer2_right();
+        left = game.getKeyManager().isPlayer2_left();
+        up = game.getKeyManager().isPlayer2_jump();
+        down = game.getKeyManager().isPlayer2_crouch();
         
-        enter = game.getKeyManager().enter;
-        escape = game.getKeyManager().escape;
+        enter = game.getKeyManager().isEnter();
+        escape = game.getKeyManager().isEscape();
         
         if (right && stageSelectionHorizontal == 0){
             stageSelectionHorizontal++;
