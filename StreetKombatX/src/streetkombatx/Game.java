@@ -31,8 +31,6 @@ public class Game implements Runnable {
     private Display frame;
     private BufferStrategy bs;
     private Graphics g;
-    private Player player1;
-    private Player player2;
     private State state;
     private KeyManager keyManager;
 
