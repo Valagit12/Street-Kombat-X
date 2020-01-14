@@ -2,7 +2,7 @@
  * Name: Valareza Arezehgar and Brian Cho (Pack Studios)
  * Date: January 13, 2020
  * Version: 1
- * Description: This class, subclass of State, allows users to input their name, so that the game can remember them, and keep track of how much they've played. This implements runnable so that it can work concurrently with the actual game, as an alternate thread
+ * Description: This class allows users to input their name, so that the game can remember them, and keep track of how much they've played. This implements runnable so that it can work concurrently with the actual game, as an alternate thread
  */
 package states;
 
