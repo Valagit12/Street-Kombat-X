@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Name: Valareza Arezehgar and Brian Cho (Pack Studios)
+ * Date: January 13, 2020
+ * Version: 1
+ * Description: This class is responsible for loading in all of the pictures and animations required for the game
  */
 package gfx;
 
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author h9113
+ * @author Pack Studios
  */
 public class Assets {
     
@@ -59,6 +60,11 @@ public class Assets {
     public static BufferedImage[] dom_stance_player2, dom_walk_left_player2, dom_walk_right_player2, dom_block_player2, dom_crouch_player2, dom_jump_player2, dom_hit_player2, dom_jump2_player2, dom_jump1_player2;
     public static BufferedImage[] dom_down1_player2, dom_down2_player2, dom_2_player2, dom_1_player2, dom_11_player2, dom_111_player2, dom_special_player2, dom_special_cancel_player2;
     
+    /**
+     * Method: This method initializes all of the fields of this class, which are images for the menus, as well as animations based off of the sprite sheets
+     * Precondition: All variables must be of their proper type that they are trying to access, the addresses given must be correct(filepaths)
+     * Post condition: All of the animations and pictures have been loaded into the game
+     */
     public static void init() {
         //Intro  
         loading1 = ImageLoader.loadImage("res/IntroScreen/loading1.png");
@@ -75,6 +81,7 @@ public class Assets {
         help.add(ImageLoader.loadImage("res/HelpScreen/How To Play pt1.png"));
         help.add(ImageLoader.loadImage("res/HelpScreen/How To Play Screen2.png"));
         help.add(ImageLoader.loadImage("res/HelpScreen/How To Play Screen3.png"));
+        help.add(ImageLoader.loadImage("res/HelpScreen/How To Play Screen4.png"));
         help.add(ImageLoader.loadImage("res/HelpScreen/How To Play ScreenControl.png"));
         
         //Character Select

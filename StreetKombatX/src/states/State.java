@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Name: Valareza Arezehgar and Brian Cho (Pack Studios)
+ * Date: January 13, 2020
+ * Version: 1
+ * Description: This is an abstract class that results in a hierarchy, where the other states inherit this class's protected fields. State
+ *  class also keeps track of what point of the game is currently being played.
  */
 package states;
 
@@ -10,10 +12,11 @@ import streetkombatx.Game;
 
 /**
  *
- * @author Valareza
+ * @author Pack Studios
  */
 public abstract class State {
-    private static State currentState = null;
+    private static State currentState = null; //The current state that the game is in, can be any of the other sub-classes
+    protected Game game;
     
     public static void setState(State stateSentIn){
         currentState = stateSentIn;
@@ -23,8 +26,12 @@ public abstract class State {
         return currentState;
     }
     
-    protected Game game;
-    
+    /**
+     * Method: This constructor method uses the game parameter to fill out this classes game field
+     * Precondition: game parameter must have been initialized as a game properly
+     * Post condition: This class's game field has been initialized with the game parameter
+     * @param game 
+     */
     public State(Game game){
         this.game = game;
     }

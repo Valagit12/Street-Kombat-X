@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Name: Valareza Arezehgar and Brian Cho (Pack Studios)
+ * Date: January 13, 2020
+ * Version: 1
+ * Description: This class falls under the State class, and is responsible for the End screen, after a fight.
  */
 package states;
 
@@ -16,19 +17,28 @@ import streetkombatx.Game;
 
 /**
  *
- * @author h9113
+ * @author Pack Studios
  */
 public class EndState extends State{
-    
-    private int selection = 0;
+   
+    private int selection = 0; 
     private boolean up, down, enter, previousDown, previousUp;
     
     private Player player1;
     private Player player2;
     
-    private ArrayList<BufferedImage> endScreen;
-    private BufferedImage[] stage;
+    private ArrayList<BufferedImage> endScreen;// an array list storing the endScreen pictures
+    private BufferedImage[] stage; //an array storing the stage frames
     
+    /**
+     * Method: This constructor method uses the parameters to fill out the fields of this class using the super method, and it initializes new player objects(Dom and Kasai)
+     * Precondition: game must have been initialized properly with appropriate fields, BufferedImage[] stage contains the correct images for the stage, player classes were initialized correctly with appropriate fields
+     * Post condition: The EndState class has initialized its fields and created new Player objects(Kasai and Dom)
+     * @param game: The main game
+     * @param player1: player 1
+     * @param player2: Player 2
+     * @param stage: array containing the frames that the stage consists of
+     */
     public EndState(Game game, Player player1, Player player2, BufferedImage[] stage) {
         super(game);
         
@@ -50,6 +60,11 @@ public class EndState extends State{
         this.endScreen = Assets.endScreen;
     }
     
+    /**
+     * Method: This tick method continuously checks for user input and updates the cursor accordingly
+     * Precondition: the key inputs have to be proper booleans, stage array and player objects must have the correct information stored in their fields
+     * Post condition: The method updates according to user input, and sets a new state depending on the user
+     */
     @Override
     public void tick(){
         up = game.getKeyManager().isPlayer2_jump();
@@ -77,6 +92,12 @@ public class EndState extends State{
         previousUp = up;
     }
 
+    /**
+     * Method: This method is responsible for the visual updates that come according to the tick class
+     * Precondition: The images have been loaded in correctly, as bufferedImages
+     * Post condition: The method updates the canvas with the appropriate images
+     * @param gState : a graphics object used to draw images on the canvas
+     */
     @Override
     public void render(Graphics gState) {
         if (selection == 0){

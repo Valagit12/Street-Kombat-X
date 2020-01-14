@@ -1,18 +1,31 @@
-//Brian Cho
-//Nov. 27, 2019
-//Unit 5 Culminating Assignment Rectangle
-//Create an object class Rectangle that contains encapsulated fields and methods
+/**
+ * Name: Brian Cho, Valareza Arezehgar, (Pack Studios)
+ * Date: January 12, 2020
+ * Version: 1
+ * Description: A class that creates a rectangle object on a specific coordinate grid. The class utilizes various amounts of fields for accessor, 
+ * class and instance methods that are used to return the fields of the rectangles, and find the intersection points between them, or whether or not
+ * they do intersect at all.
+ */
 
 package collision;
-
+/**
+ * 
+ * @author Pack Studios
+ */
 public class Rectangle {
-    private int left;
-    private int bottom;
-    private int width;
-    private int height;
+    private int left;//The coordinate of the bottom left point of the rectangle on the x-axis
+    private int bottom;// The coordinate of the bottom left point of the rectangle on the y-axis
+    private int width;// The width of the rectangle in terms of units on the x-axis
+    private int height;// The height of the rectangle in terms of units on the y-axis
 
 
     //Constructor methods
+    
+    /**
+     * Method: This method overrides java's default constructor method to automatically create the rectangle object in any class where it is called, with default values set to zero
+     * Precondition: The fields must be of type int.
+     * Post condition: The rectangle's fields are populated with the default values.
+     */
     public Rectangle () {
         this.left = 0;
         this.bottom = 0;
@@ -20,6 +33,12 @@ public class Rectangle {
         this.height = 0;
     }
 
+    /**
+     * Method: This method populates a rectangle object with the values stored in the field of another rectangle object sent through in the parameters
+     * Precondition: Rectangle other's fields must all be greater than 0, rectangle r must be declared properly and have proper values as its respective fields
+     * Post condition: this rectangle will be populated with the same data as that of rectangle other
+     * @param other : a rectangle used to populate the fields of this rectangle
+     */
     public Rectangle (Rectangle other) {
         this.left = other.left;
         this.bottom = other.bottom;
@@ -27,6 +46,15 @@ public class Rectangle {
         this.height = other.height;
     }
 
+    /**
+     * Method: This constructor method populates the rectangle's fields with data sent through by the parameter
+     * Precondition: l,b,w and h must all be proper int values
+     * Post condition: the rectangle's fields will be populated with the parameters
+     * @param l - an int value representing the x value of the left corner of the rectangle
+     * @param b - an int value representing the y value of the left corner of the rectangle
+     * @param w - an int value representing the width or length of the rectangle(in terms of x)
+     * @param h - an int value representing the height of the rectangle(in terms of y)
+     */
     public Rectangle (int l, int b, int w, int h) {
         this.left = l;
         this.bottom = b;
@@ -45,75 +73,33 @@ public class Rectangle {
         }
     }
 
-    //Accessor Methods
-    public int getLeft() {
-        return left;
-    }
-
+    //Instance Methods
+    
+    /**
+     * Method: This is an instance method that sets the value of the field left to the the value sent in by the parameter
+     * Precondition: The left variable must be of proper type int
+     * Post condition: The left field is initialized as the left parameter
+     * @param left: An int that is sent as an argument
+     */
     public void setLeft(int left) {
         this.left = left;
     }
 
-    public int getBottom() {
-        return bottom;
-    }
-
+    /**
+     * Method: This is an instance method that sets the value of the field bottom to the value sent in by the parameter
+     * Precondition: The bottom variable must be of proper type int
+     * Post condition: The bottom field is initialized as the bottom parameter
+     * @param bottom: An int that is sent in as an argument
+     */
     public void setBottom(int bottom) {
         this.bottom = bottom;
     }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
+    
+    //Class Methods
+    
     /**
-     * Converts the fields of object Rectangle to a single string
-     * Pre-condition: the fields of Rectangle are valid
-     * Post-condition: the Rectangle fields are returned in a single String
-     * @return dimensions single String 
-     */
-    public String toString() {
-        String dimensions = "base: (" + this.left + "," + this.bottom + ") w:" + this.width + " h:" + this.height;
-        return dimensions;
-    }
-
-    /**
-     * Calculates the area of the Rectangle
-     * Pre-condition: the fields of the Rectangle must be valid
-     * Post-condition: an integer is returned as an area of the Rectangle
-     * @return area the area of the rectangle as an integer value
-     */
-    public int area() {
-        int area = this.width*this.height;
-        return  area;
-    }
-
-    /**
-     * Calculates the perimeter of the Rectangle
-     * Pre-condition: the fields of the Rectangle must be valid
-     * Post-condition: the perimeter of the Rectangle is returned as an integer
-     * @return perimeter the perimeter of the rectangle as an integer value
-     */
-    public int perimeter() {
-        int perimeter = 2*this.width + 2*this.height;
-        return perimeter;
-    }
-
-    /**
-     * Calculates the intersecting Rectangle between two different Rectangle objects
-     * Pre-condition: Two Rectangle objects must be sent through the parameters and its fields must be valid
+     * Method: Calculates the intersecting Rectangle between two different Rectangle objects
+     * Precondition: Two Rectangle objects must be sent through the parameters and its fields must be valid
      * Post-condition: the intersecting Rectangle is returned as an object Rectangle
      * @param r the first Rectangle
      * @param e the second Rectangle
@@ -143,6 +129,14 @@ public class Rectangle {
         return intersect;
     }
     
+    /**
+     * Method: This method uses the parameters sent in to determine if two rectangles sent in are intersecting. If they are, the method returns true, else, it returns false
+     * Precondition: The rectangles r and e must have proper values that correspond with their respective fields
+     * Post condition: The method determines if the two parameter rectangles are intersecting and returns a matching boolean value
+     * @param r: The first rectangle
+     * @param e: The second rectangle
+     * @return: True if the rectangles are intersecting, false if they are not
+     */
     public static boolean isIntersecting (Rectangle r, Rectangle e){
         int l = 0;
         int b = 0;
@@ -160,37 +154,7 @@ public class Rectangle {
         }
     }
 
-    /**
-     * Calculates the total perimeter of two Rectangles
-     * Pre-condition: the two parameter values must be Rectangles and its fields must be valid
-     * Post-condition: the total perimeter is returned as an integer
-     * @param r the first Rectangle
-     * @param e the second Rectangle
-     * @return perimeter the total perimeter of the two Rectangles as an integer
-     */
-    public static int totalPerimeter (Rectangle r, Rectangle e){
-        Rectangle intersect = intersection(r,e);
-        int perimeter = ((r.width*2) + (r.height*2) + (e.width*2) + (e.height*2)) - ((intersect.height*2)+(intersect.width*2)); //subtract the perimeter of the insecting rectangle from the perimeter of the two Rectangles
-        return perimeter;
-    }
-
-    /**
-     * Determines if the Rectangle passed as a parameter is contained within the main Rectangle
-     * Pre-condition: the Rectangle passed as a parameter must be an object Rectangle and its fields must be valid
-     * Post-condition: a boolean that determines whether the Rectangle is contained or not is returned
-     * @param other the second Rectangle
-     * @return a boolean that returns true if the second Rectangle is contained within the main Rectangle
-     */
-    public boolean contains (Rectangle other){
-        Rectangle intersect = intersection(this, other);
-        //if the intersecting Rectangle is equal to the second Rectangle
-        if (intersect.left == other.left && intersect.bottom == other.bottom && intersect.width == other.width && intersect.height == other.height){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
+   
 
     /**
      * Determines the larger value between two numbers

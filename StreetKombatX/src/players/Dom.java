@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Name: Valareza Arezehgar and Brian Cho (Pack Studios)
+ * Date: January 13, 2020
+ * Version: 1
+ * Description: This Class outlines the Dom character's features, such as his animations, hitbox, health, recovery, stun frames,knockback, and jumping
  */
 package players;
 
@@ -15,10 +16,21 @@ import streetkombatx.Game;
 
 /**
  *
- * @author Valareza
+ * @author Pack Studios
  */
 public class Dom extends Player{
 
+    /**
+     * Method: This constructor method will take in parameters to initialize animations, title of Character, the position on the coordinate grid, and player number
+     * Precondition: game must have proper fields, x and y must be proper int values and fit on the coordinate grid, width, height and playerNum must be proper int values
+     * Post condition: The necessary traits of Dom are initialized, including all of his animations
+     * @param game: The main game 
+     * @param x: The location of Dom on the x-xis
+     * @param y: The location of Dom on the y-axis
+     * @param width: The width of the hitbox of Dom
+     * @param height: The height of the hitbox of Dom
+     * @param playerNum: The int value of the player
+     */
     public Dom(Game game, float x, float y, int width, int height, int playerNum) {
         super(game, x, y, width, height, playerNum);
 
@@ -62,6 +74,11 @@ public class Dom extends Player{
         charTitle = "Dom";
     }
 
+    /**
+     * Method: This tick method exists to check which move the player has inputted, and carry out the necessary steps afterwatd. For example, if the player jumps, then the y coordinate and hitbox of Dom will jump as well
+     * Precondition: The different moves have to be boolean, The x and y values must be within the coordinate grid
+     * Post condition: The method has carried out the necessary steps based on user input
+     */
 @Override
     public void tick() {
         setHitbox();
@@ -97,7 +114,7 @@ public class Dom extends Player{
             setKnockBack(2000);
         }
         
-        if (recovery > 0){
+        if (recovery > 0){// If Dom is recovering, he cant move, so all his possible moves are false
             up = false;
             down = false;
             right = false;
@@ -108,7 +125,7 @@ public class Dom extends Player{
             recovery--;
         }
         
-        if (stun > 0){
+        if (stun > 0){// If Dom is stunned, he cant move, so all his possible moves are false
             up = false;
             down = false;
             right = false;
@@ -482,6 +499,12 @@ public class Dom extends Player{
         
     }
 
+    /**
+     * Method: This method runs as many times as the tick method, but it accounts for visual updates, such as drawing the current animation state and healthbar
+     * Precondition: Graphics must have been initialized properly, x,y,width and height must all be proper int values that fit within the coordinate grid
+     * Post condition: The images for the game are updated
+     * @param g: a graphics object to draw images on the canvas
+     */
     @Override
     public void render(Graphics g) {
         g.drawImage(getCurrentAnimationState(), (int) x, (int) y, width, height, null);

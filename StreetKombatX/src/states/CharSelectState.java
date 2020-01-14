@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Name: Valareza Arezehgar and Brian Cho (Pack Studios)
+ * Date: January 13, 2020
+ * Version: 1
+ * Description: This class falls under the State class, and is responsible for the character select stage
  */
 package states;
 
@@ -17,27 +18,34 @@ import streetkombatx.Game;
 
 /**
  *
- * @author h9113
+ * @author Pack Studios
  */
 public class CharSelectState extends State{
-    
+    //Cursors
     private int player1SelectionHorizontal = 0;
     private int player1SelectionVertical = 0;
     private int player2SelectionHorizontal = 0;
     private int player2SelectionVertical = 0;
     private int xPlayer1, xPlayer2, yPlayer1, yPlayer2;
     
+    //Directional Inputs and Confirmation Inputs
     private boolean player1Right, player1Left, player1Up, player1Down;
     private boolean player2Right, player2Left, player2Up, player2Down;
     private boolean enter, escape;
     private boolean previousEnter = true;
     private boolean previousEscape = true;
     
-    public Player player1, player2;
-    public BufferedImage charSelectScreen;
-    public StageSelectState stageSelectState;
-    public Animation dom_stance_player1, kasai_stance_player1, dom_stance_player2, kasai_stance_player2;
+    private Player player1, player2;
+    private BufferedImage charSelectScreen;//images required for charSelectScreen
+    private StageSelectState stageSelectState;
+    private Animation dom_stance_player1, kasai_stance_player1, dom_stance_player2, kasai_stance_player2;
     
+    /**
+     * Method: This is a constructor method that takes in the game object parameter, uses the super method to initialize fields, and initializes the images and animations necessary for this state
+     * Precondition: The game class has been initialized correctly with the correct fields, 
+     * Post Condition: The CharSelectState's fields have been populated and its assets have been initialized
+     * @param game: the main game object
+     */
     public CharSelectState(Game game) {
         super(game);
         charSelectScreen = Assets.charSelectScreen;
@@ -47,6 +55,11 @@ public class CharSelectState extends State{
         kasai_stance_player2 = new Animation(66.668, Assets.kasai_stance_player2);
     }
 
+    /**
+     * Method: This tick method continuously checks for user input and updates the cursor accordingly
+     * Precondition: All key inputs are proper boolean
+     * Post condition: The user's are able to choose their characters or go back, and this leads to a change in state
+     */
     @Override
     public void tick() {
         dom_stance_player1.tick();
@@ -129,6 +142,12 @@ public class CharSelectState extends State{
         previousEscape = escape;
     }
 
+    /**
+     * Method: This render method updates the visuals of the game based off of the tick method
+     * Precondition: The images and animations have been loaded in correctly
+     * Post condition: The game is visually updated every based on data from the tick method
+     * @param gState: A graphics object used to draw images on the canvas
+     */
     @Override
     public void render(Graphics gState) {
         gState.drawImage(charSelectScreen, 0, 0, null);
@@ -144,6 +163,36 @@ public class CharSelectState extends State{
         gState.drawString(getCharTitle_Player2(), 1020, 81);
     }
     
+    /**
+     * Method: This method locks in the choices of the users on the characters
+     * Precondition: The player constructor classes initialize the objects correctly
+     * Post condition: The players select a character(Dom object or Kasai object is constructed) and the game moves on to the stage select state
+     */
+    private void confirmSelection() {
+        if (player1SelectionVertical != 1 && player2SelectionVertical != 1 && enter && !previousEnter){
+            if (player1SelectionHorizontal == 0 && player1SelectionVertical == 0){
+                player1 = new Dom(game, 200, 410, 150, 300, 1);
+            }
+            else if (player1SelectionHorizontal == 1 && player1SelectionVertical == 0){
+                player1 = new Kasai(game, 200, 410, 150, 300, 1);
+            }
+            
+            if (player2SelectionHorizontal == 0 && player2SelectionVertical == 0){
+                player2 = new Dom(game, 1000, 410, 150, 300, 2); 
+            }
+            else if (player2SelectionHorizontal == 1 && player2SelectionVertical == 0){
+                player2 = new Kasai(game, 1000, 410, 150, 300, 2);
+            }   
+            State.setState(new StageSelectState(game, player1, player2));
+        }
+        
+        if (escape && !previousEscape){
+            State.setState(new MenuState(game));
+        }
+    }
+    
+    //Getter Methods
+   
     private BufferedImage getCurrentAnimationState_Player1() {
         if (player1SelectionHorizontal == 0 && player1SelectionVertical == 0){
             return dom_stance_player1.getCurrentFrame();
@@ -183,35 +232,12 @@ public class CharSelectState extends State{
     private String getCharTitle_Player2() {
         if (player2SelectionHorizontal == 0 && player2SelectionVertical == 0){
             return "Dom";
-        }
+       }
         else if (player2SelectionHorizontal == 1 && player2SelectionVertical == 0){
             return "Kasai";
         }
         else {
             return "";
-        }
-    }
-    
-    private void confirmSelection() {
-        if (player1SelectionVertical != 1 && player2SelectionVertical != 1 && enter && !previousEnter){
-            if (player1SelectionHorizontal == 0 && player1SelectionVertical == 0){
-                player1 = new Dom(game, 200, 410, 150, 300, 1);
-            }
-            else if (player1SelectionHorizontal == 1 && player1SelectionVertical == 0){
-                player1 = new Kasai(game, 200, 410, 150, 300, 1);
-            }
-            
-            if (player2SelectionHorizontal == 0 && player2SelectionVertical == 0){
-                player2 = new Dom(game, 1000, 410, 150, 300, 2); 
-            }
-            else if (player2SelectionHorizontal == 1 && player2SelectionVertical == 0){
-                player2 = new Kasai(game, 1000, 410, 150, 300, 2);
-            }
-            State.setState(new StageSelectState(game, player1, player2));
-        }
-        
-        if (escape && !previousEscape){
-            State.setState(new MenuState(game));
         }
     }
 }

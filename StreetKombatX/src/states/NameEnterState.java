@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Name: Valareza Arezehgar and Brian Cho (Pack Studios)
+ * Date: January 13, 2020
+ * Version: 1
+ * Description: This class, subclass of State, allows users to input their name, so that the game can remember them, and keep track of how much they've played. This implements runnable so that it can work concurrently with the actual game, as an alternate thread
  */
 package states;
 
@@ -28,23 +29,33 @@ public class NameEnterState implements Runnable{
     private String text;
     
     private Thread nameEnter;
-    private JFrame frame;
-    private JButton enter;
-    private JLabel enterName, output, output2;
-    private JTextField textfield;
+    private JFrame frame; // new frame
+    private JButton enter;//button
+    private JLabel enterName, output, output2;//output from the JFrame
+    private JTextField textfield;//text field to recieve input
     private FileWriter fw;
     private PrintWriter pw;
     private ArrayList<String> texts;
-    private String[] names;
-    private ArrayList<Integer> nums;
+    private String[] names; // names are stored
+    private ArrayList<Integer> nums;// num of times played are stored
     private int[] numbers;
     
+    /**
+     * Method: This is a constructor method that does not take parameters, but initializes two fields and starts the thread
+     * Precondition: texts and nums should both have been proper type string ArrayLists
+     * Post Condition: The class has a few populated arrayList fields and the thread has started
+     */
     public NameEnterState() {
         texts = new ArrayList<String>();
         nums = new ArrayList<Integer>();
         start();
     }
 
+    /**
+     * Method: This run method calls helper methods to read the file and sort it and relay it back towards the user using the displayFrame method 
+     * Precondition: The helper methods called in this method must return the proper values
+     * Post condition: The names on the files is read stored, sorted and displayed to users
+     */
     @Override
     public void run() {
         readFile();
@@ -58,19 +69,21 @@ public class NameEnterState implements Runnable{
         displayFrame();
     }
     
+    /*
+    Method: This is the actual methd that starts the thread
+    Precondition: thread must have been initialized properly
+    Post condition: The thread will have started the thread
+    */
     public void start() {
         nameEnter = new Thread(this);
         nameEnter.start();
     }
-
-    public void stop() {
-        try {
-            nameEnter.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
     
+    /**
+     * Method: This method creates a new JFrame window for the NameEnterState
+     * Precondition: frame must be a proper Jframe, names must be a proper String array, text must be a proper String array list
+     * Post condition: The name of the user is recorded, searched for, and if the user has played before, a meaningful message appears
+     */
     public void displayFrame() {
         frame = new JFrame("Enter Name"); 
         enter = new JButton("Enter");    
@@ -122,10 +135,28 @@ public class NameEnterState implements Runnable{
 	});
     }
     
+    /**
+     * Method: This method uses method overloading to recursively call another more complicated binary search method
+     * Precondition: list must be a proper string array populated with Strings, searchName must be a proper String
+     * Post condition: binarySearch is recursively called
+     * @param list: a list of names that have played the game
+     * @param searchName: The name being searched for
+     * @return: An instance of another method of the same identifier is called, to use the binary search algorithm
+     */
     private int binarySearch (String[] list, String searchName){
         return binarySearch(list, 0, list.length-1, searchName);
     }
     
+    /**
+     * Method: This method takes in the String array list, a high value and a low value, a desired name, and uses the binary search algorithm to search the array for the specific name
+     * Precondition: list must be a proper String array populated with Strings, low and high int values must match values necessary for binary search and be positive int values
+     * Post condition: The array has been traversed and searched for the desired String
+     * @param list: A string holding the list of names
+     * @param low: An int representing the low value of the index of the array
+     * @param high: An int representing the high value of the index of the array
+     * @param searchName: The desired name 
+     * @return: If the algorithm gets through the whole array, -1 is returned. If it finds the desired String, it's index is returned. It works recursively until those two circumstances
+     */
     private int binarySearch (String[] list, int low, int high, String searchName){
         if (low > high){
             return -1;
@@ -142,6 +173,11 @@ public class NameEnterState implements Runnable{
         }
     }
     
+    /**
+     * Method: This method accesses a txt file, reads it, and stores it in a dynamic array
+     * Precondition: The txt file must be properly organized, and in the right location
+     * Post condition: The file is read through and stored on an array texts
+     */
     private void readFile() {
         try {
             FileReader fr = new FileReader("Names.txt");
@@ -167,10 +203,26 @@ public class NameEnterState implements Runnable{
         }
     }
     
+    /**
+     * Method: This method uses method overloading to call an instance of the actual quickSort method
+     * Preconditions: list must be completely populated with appropriate Strings, nums must be completely populated with positive int values
+     * Post conditions: The quickSort method is called
+     * @param list: an array containing a list of names
+     * @param nums: an array containing a list of numbers
+     */
     private void quickSort (String[] list, int[] nums){
         quickSort(list, nums, 0, list.length - 1);
     }
     
+    /**
+     * Method: Organizes the data sent through as parameters in ascending order
+     * Precondition: list must be populated with appropriate Strings, nums must be populated with appropriate positive int values, low and high must be positive int values
+     * Post condition: The arrays are put in ascending order
+     * @param list: A list of names
+     * @param nums: A list of numbers
+     * @param low: An int representing the low value of the index of the array
+     * @param high: An int representing the high value of the index of the array
+     */
     private void quickSort (String[] list, int[] nums, int low, int high){
         final int MOVING_LEFT = 0;
         final int MOVING_RIGHT = 0;
@@ -204,6 +256,11 @@ public class NameEnterState implements Runnable{
         }
     }
     
+    /**
+     * Method: This method prints the values stored in the arrays texts and nums, on to, (or creates and then prints on to) a txt file
+     * Precondition: The txt file must be in the proper location, Both arrays must be completely populated, nums with positive int values and texts with Strings
+     * Post condition: The data stored in the arrays has been stored on to a txt file
+     */
     private void write() {
         try{
             fw = new FileWriter("Names.txt");

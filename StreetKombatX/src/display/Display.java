@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Name: Valareza Arezehgar, Brian Cho (Pack Studios)
+ * Date: January 13, 2020
+ * Version: 1
+ * Description: This class extends the JFrame class which means it inherits the JFrame data and so, creates a JFrame but as a canvas for the game based on a variety of fields
  */
 package display;
 
@@ -12,14 +13,16 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 /**
  *
- * @author h9113
+ * @author Pack Studios
  */
 public class Display extends JFrame {
     
-    private Canvas canvas;
-    private int width;
-    private int height;
-    private String title;
+    private Canvas canvas;//The canvas that can be drawn on in the JFrame
+    private int width; //Width of the Canvas JFrame
+    private int height;//Height of the Canvas JFrame
+    private String title;// Title of the Canvas JFrame
+    
+    //Constructor Methods
     
     /**
      * Method: This method overrides the default constructor java uses to populate the fields of the Display object, and sets all values to zero and null, and then constructs a Jframe and Canvas using those fields
@@ -61,6 +64,8 @@ public class Display extends JFrame {
         createDisplay();
     }
     
+    //Instance Methods
+    
     /**
      * Method: This instance method creates a canvas with all appropriate features using the fields 
      * Precondition: width and height must be proper int values, title must be a proper string
@@ -86,7 +91,7 @@ public class Display extends JFrame {
     }
     /**
      * Method: This Accessor method returns the canvas that has been initialized in this class
-     * Precondition: canvas must have been created properly to have a proper size
+     * Precondition: canvas must have been created properly to have a proper size 
      * Post condition: canvas is sent back to calling instances of this method
      * @return the canvas is returned
      */
@@ -94,6 +99,12 @@ public class Display extends JFrame {
         return canvas;
     }
     
+    /**
+     * Method: This Accessor method returns the JFrame display of this class itself
+     * Precondition: This must have been created properly with appropriate fields
+     * Post condition: this is sent back to calling instances of this method
+     * @return: this is returned
+     */
     public JFrame getFrame() {
         return this;
     }

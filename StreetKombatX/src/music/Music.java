@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Name: Valareza Arezehgar and Brian Cho (Pack Studios)
+ * Date: January 13, 2020
+ * Version: 1
+ * Description: This class is responsible for playing music throughout the game
  */
 package music;
 
@@ -16,16 +17,22 @@ import states.State;
 
 /**
  *
- * @author Valareza
+ * @author Pack Studios
  */
 public class Music {
 
-    private Long currentFrame;
-    private Clip clip;
-    private String Status;
-    private AudioInputStream audioInputStream;
-    private String filePath;
+    private Clip clip; //This clip will be used to control the audio file
+    private AudioInputStream audioInputStream;// Audio file
+    private String filePath;//the address of the audio file
 
+    /**
+     * Method: This method loads in and plays the game's music continuously 
+     * Precondition: The desired audio file must be a wav file and must be in the right location, so that the address matches the location of the file
+     * Post condition: The audio file loops
+     * @throws UnsupportedAudioFileException: If the audio file is not supported
+     * @throws IOException: Input output exception if the desired file does not match
+     * @throws LineUnavailableException: if the music file is unavailable 
+     */
     public Music() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
             filePath = "Menu OST.wav";
         

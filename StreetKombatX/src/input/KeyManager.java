@@ -1,7 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Name: Valareza Arezehgar and Brian Cho (Pack Studios)
+ * Date: January 13, 2020
+ * Version: 1
+ * Description: This class is responsible for reading key board inputs from the user. All of the controls are initlialized in this class.
  */
 package input;
 
@@ -10,7 +11,7 @@ import java.awt.event.KeyListener;
 
 /**
  *
- * @author h9113
+ * @author Pack Studions
  */
 public class KeyManager implements KeyListener{
     
@@ -20,11 +21,22 @@ public class KeyManager implements KeyListener{
     private boolean player2_jump, player2_crouch, player2_left, player2_right;
     private boolean player2_block, player2_1, player2_2, player2_special;
     private boolean enter, escape;
+    //All of the above booleans are possible inputs
     
+    /**
+     * Method: This is a constructor method that creates the keyManager, with the possibility of 256 booleans stored in the keys array
+     * Precondition: Keys  must be a proper boolean array
+     * Post condition: An array of 256 boolean is initialized
+     */
     public KeyManager() {
         keys = new boolean[256];
     }
     
+    /**
+     * Method: This tick method is responsible for constantly reading user input 60 times per second
+     * Precondition: keys has been initialized with a length of 256 booleans
+     * Post condition: The method checks for one of the specific inputs
+     */
     public void tick() {
         //Enter
         enter = keys[KeyEvent.VK_ENTER];
@@ -53,14 +65,26 @@ public class KeyManager implements KeyListener{
 
     @Override
     public void keyTyped(KeyEvent e) {
-        
+        //This is a necessary class in order to run the other keyPressed method
     }
 
+    /**
+     * Method: This method takes in a KeyEvent as a parameter and sets the key boolean array at that specific key event true
+     * Precondition: keys must be boolean array with a size of 256, KeyEvent must be a possible keyEvent as defined in the previous method
+     * Post condition: The keyEvent has been defined as true
+     * @param e: A Keyboard input 
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         keys[e.getKeyCode()] = true;
     }
 
+    /**
+     * Method: This method takes in a moment when a key is released called keyRelease, and sets the key boolean array at that specific key release false
+     * Precondition: keys must be a boolean array with a size of 256, KeyEvent must be a possible keyEvent as defined in the previous method
+     * Post Condition: The keyEvent has been defined as false
+     * @param e: A Keyboard input
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         keys[e.getKeyCode()] = false;
