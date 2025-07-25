@@ -34,7 +34,7 @@ public class Music {
      * @throws LineUnavailableException: if the music file is unavailable 
      */
     public Music() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-            filePath = "Menu OST.wav";
+            filePath = "StreetKombatX/Menu OST.wav";
         
          audioInputStream = AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
             clip = AudioSystem.getClip();

@@ -67,45 +67,45 @@ public class Assets {
      */
     public static void init() {
         //Intro  
-        loading1 = ImageLoader.loadImage("res/IntroScreen/loading1.png");
-        loading2 = ImageLoader.loadImage("res/IntroScreen/loading2.png");
+        loading1 = ImageLoader.loadImage("StreetKombatX/res/IntroScreen/loading1.png");
+        loading2 = ImageLoader.loadImage("StreetKombatX/res/IntroScreen/loading2.png");
         
         //Menu
         menu = new ArrayList<BufferedImage>();
-        menu.add(ImageLoader.loadImage("res/MenuScreen/loading1.png"));
-        menu.add(ImageLoader.loadImage("res/MenuScreen/loading2.png"));
-        menu.add(ImageLoader.loadImage("res/MenuScreen/loading3.png"));
+        menu.add(ImageLoader.loadImage("StreetKombatX/res/MenuScreen/loading1.png"));
+        menu.add(ImageLoader.loadImage("StreetKombatX/res/MenuScreen/loading2.png"));
+        menu.add(ImageLoader.loadImage("StreetKombatX/res/MenuScreen/loading3.png"));
         
         //Help Screens
         help = new ArrayList<BufferedImage>();
-        help.add(ImageLoader.loadImage("res/HelpScreen/How To Play pt1.png"));
-        help.add(ImageLoader.loadImage("res/HelpScreen/How To Play Screen2.png"));
-        help.add(ImageLoader.loadImage("res/HelpScreen/How To Play Screen3.png"));
-        help.add(ImageLoader.loadImage("res/HelpScreen/How To Play Screen4.png"));
-        help.add(ImageLoader.loadImage("res/HelpScreen/How To Play ScreenControl.png"));
+        help.add(ImageLoader.loadImage("StreetKombatX/res/HelpScreen/How To Play pt1.png"));
+        help.add(ImageLoader.loadImage("StreetKombatX/res/HelpScreen/How To Play Screen2.png"));
+        help.add(ImageLoader.loadImage("StreetKombatX/res/HelpScreen/How To Play Screen3.png"));
+        help.add(ImageLoader.loadImage("StreetKombatX/res/HelpScreen/How To Play Screen4.png"));
+        help.add(ImageLoader.loadImage("StreetKombatX/res/HelpScreen/How To Play ScreenControl.png"));
         
         //Character Select
-        charSelectScreen = ImageLoader.loadImage("res/CharScreen/charSelect.png");
+        charSelectScreen = ImageLoader.loadImage("StreetKombatX/res/CharScreen/charSelect.png");
         
         //Stage Select
-        stageSelectScreen = ImageLoader.loadImage("res/StageScreen/StageSelectScreen.png");
-        
+        stageSelectScreen = ImageLoader.loadImage("StreetKombatX/res/StageScreen/StageSelectScreen.png");
+
         //End Screen
         endScreen = new ArrayList<BufferedImage>();
-        endScreen.add(ImageLoader.loadImage("res/EndScreen/endScreen1.png"));
-        endScreen.add(ImageLoader.loadImage("res/EndScreen/endScreen2.png"));
-        endScreen.add(ImageLoader.loadImage("res/EndScreen/endScreen3.png"));
+        endScreen.add(ImageLoader.loadImage("StreetKombatX/res/EndScreen/endScreen1.png"));
+        endScreen.add(ImageLoader.loadImage("StreetKombatX/res/EndScreen/endScreen2.png"));
+        endScreen.add(ImageLoader.loadImage("StreetKombatX/res/EndScreen/endScreen3.png"));
         
         //Pause Screen
         pause = new ArrayList<BufferedImage>();
-        pause.add(ImageLoader.loadImage("res/PauseScreen/pause1.png"));
-        pause.add(ImageLoader.loadImage("res/PauseScreen/pause2.png"));
-        pause.add(ImageLoader.loadImage("res/PauseScreen/pause3.png"));
+        pause.add(ImageLoader.loadImage("StreetKombatX/res/PauseScreen/pause1.png"));
+        pause.add(ImageLoader.loadImage("StreetKombatX/res/PauseScreen/pause2.png"));
+        pause.add(ImageLoader.loadImage("StreetKombatX/res/PauseScreen/pause3.png"));
         
         try{
-            dragonForce = Font.createFont(Font.TRUETYPE_FONT, new File("res/font/DragonForcE.ttf")).deriveFont(Font.PLAIN, 50f);
-            dragonForceNum = Font.createFont(Font.TRUETYPE_FONT, new File("res/font/DragonForcE.ttf")).deriveFont(Font.PLAIN, 80f);
-            dragonForceEndScreen = Font.createFont(Font.TRUETYPE_FONT, new File("res/font/DragonForcE.ttf")).deriveFont(Font.PLAIN, 120f);
+            dragonForce = Font.createFont(Font.TRUETYPE_FONT, new File("StreetKombatX/res/font/DragonForcE.ttf")).deriveFont(Font.PLAIN, 50f);
+            dragonForceNum = Font.createFont(Font.TRUETYPE_FONT, new File("StreetKombatX/res/font/DragonForcE.ttf")).deriveFont(Font.PLAIN, 80f);
+            dragonForceEndScreen = Font.createFont(Font.TRUETYPE_FONT, new File("StreetKombatX/res/font/DragonForcE.ttf")).deriveFont(Font.PLAIN, 120f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(dragonForce);
             ge.registerFont(dragonForceNum);
@@ -118,14 +118,14 @@ public class Assets {
             System.out.println("hi");
         }
         
-        SpriteSheet kasai_sheet_player1 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Kasai/Player1/Kasai_SpriteSheet.png"), 32, 64, 21);
-        SpriteSheet kasai_sheet_player2 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Kasai/Player2/Kasai_SpriteSheet.png"), 32, 64, 21);
-        SpriteSheet dom_sheet_player2 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Dom/Player2/Dom_SpriteSheet.png"), 32, 64, 21);
-        SpriteSheet dom_sheet_player1 = new SpriteSheet(ImageLoader.loadImage("res/SpriteSheet/Dom/Player1/Dom_SpriteSheet.png"), 32, 64, 21);
+        SpriteSheet kasai_sheet_player1 = new SpriteSheet(ImageLoader.loadImage("StreetKombatX/res/SpriteSheet/Kasai/Player1/Kasai_SpriteSheet.png"), 32, 64, 21);
+        SpriteSheet kasai_sheet_player2 = new SpriteSheet(ImageLoader.loadImage("StreetKombatX/res/SpriteSheet/Kasai/Player2/Kasai_SpriteSheet.png"), 32, 64, 21);
+        SpriteSheet dom_sheet_player2 = new SpriteSheet(ImageLoader.loadImage("StreetKombatX/res/SpriteSheet/Dom/Player2/Dom_SpriteSheet.png"), 32, 64, 21);
+        SpriteSheet dom_sheet_player1 = new SpriteSheet(ImageLoader.loadImage("StreetKombatX/res/SpriteSheet/Dom/Player1/Dom_SpriteSheet.png"), 32, 64, 21);
         
         //Backgrounds
-        SpriteSheet fireTemple_sheet = new SpriteSheet(ImageLoader.loadImage("res/backgrounds/FireTemple.png"), 1280, 720, 3);
-        SpriteSheet kingdom_sheet = new SpriteSheet (ImageLoader.loadImage("res/backgrounds/KingDomsKingdom.png"), 1280, 720, 3);
+        SpriteSheet fireTemple_sheet = new SpriteSheet(ImageLoader.loadImage("StreetKombatX/res/backgrounds/FireTemple.png"), 1280, 720, 3);
+        SpriteSheet kingdom_sheet = new SpriteSheet (ImageLoader.loadImage("StreetKombatX/res/backgrounds/KingDomsKingdom.png"), 1280, 720, 3);
         
         fireTemple = new BufferedImage[8];
         kingdom = new BufferedImage[8];

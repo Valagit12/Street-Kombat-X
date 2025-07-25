@@ -150,45 +150,29 @@ public class Game implements Runnable {
      * Post condition: The game has started running infinitely, until the program is closed.
      */
     public void run() {
-       
         initialize();
 
-        /*
-        int ticks = 0; //counts the numbers of ticks that happened
-        int updates = 0; //counts the number of times the screen updates
-        long endTime; //measure the time when loop begins
-        long startTime = System.nanoTime(); //measure the time when the previous loops has ended
-        long timer = 0; //measures the time passed
-        double nanoConversion = 1000000000 / 60; //converts nanoseconds to 1/60th of a second
-        double changeInTime = 0; //the change in time between each ticks
-        */
-        
-        //The above code was a tool used for testing purposes. The correlating uses of these variables have been commented out below  
-         
-        while (running) {//An infinite loop to keep the game running, until it is stopped properly by the usr, by closing the window
-         /* endTime = System.nanoTime();
-            changeInTime += (endTime - startTime) / nanoConversion;
-            timer += changeInTime;
-            startTime = endTime;
+        final int TICKS_PER_SECOND = 60;
+        final int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
+        final int MAX_FRAMESKIP = 5;
 
-            if (changeInTime >= 1) {
-                ticks++;
-                changeInTime--;
+        long next_game_tick = System.currentTimeMillis();
+        int loops;
+
+        while (running) {
+            loops = 0;
+            while (System.currentTimeMillis() > next_game_tick && loops < MAX_FRAMESKIP) {
+                tick();
+
+                next_game_tick += SKIP_TICKS;
+                loops++;
             }
 
-            if (timer >= 60) {
-                System.out.println("Ticks: " + ticks);
-                System.out.println("FPS: " + updates);
-                ticks = 0;
-                updates = 0;
-                timer = 0;
-            }*/
-         //updates++;
-         tick();
-         render();
+            render();
         }
     }
-    
+
+
     /**
      * Method: This method marks the beginning of the program. It starts off the main thread, and checks if the game is already running. If so, then
      * it returns nothing but if not, then the method would set the field running as true, to begin the program.
